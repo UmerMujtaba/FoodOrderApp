@@ -1,0 +1,61 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Spectral-Bold.ttf",
+      "sha1": "0ac952b795815a2b49a48856324c854524005687"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-BoldItalic.ttf",
+      "sha1": "96b1ce3d89a36dd06c9e5c5bec2f1d5f23d40de4"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-ExtraBold.ttf",
+      "sha1": "82fcf0091005b291b68d85c3c2da68be9808a5e0"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-ExtraBoldItalic.ttf",
+      "sha1": "b751d36dddafd3a3bf27c1cd83648235ea6d3917"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-ExtraLight.ttf",
+      "sha1": "9882abe877cda416a96932d572c89156da37201a"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-ExtraLightItalic.ttf",
+      "sha1": "fa5d4c3e7c58f6eaa4ba19fbb973a6ad37172890"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-Italic.ttf",
+      "sha1": "b7250a9a177397f373c22c4fc47fb9ed64ca2f7f"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-Light.ttf",
+      "sha1": "44f4f5d1d1fd69761cc2071a09775bc5d4272575"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-LightItalic.ttf",
+      "sha1": "2b905c234b003f8b7a7fe39dccdf334ccc736168"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-Medium.ttf",
+      "sha1": "07dd85ad4b7573745e612b88e058d18fcc865704"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-MediumItalic.ttf",
+      "sha1": "5447ed18508900bc03356062d2df8c1f01502bc7"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-Regular.ttf",
+      "sha1": "ce2c8142153f9c2920b7eaafcf2b463499ef8617"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-SemiBold.ttf",
+      "sha1": "1c85477152eaf11a245989e67bc9a495372af8b7"
+    },
+    {
+      "path": "src/assets/fonts/Spectral-SemiBoldItalic.ttf",
+      "sha1": "badb4d0526b2538424ad1bc0a01776ef64d5fc2d"
+    }
+  ]
+}
