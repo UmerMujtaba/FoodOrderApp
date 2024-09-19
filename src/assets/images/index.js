@@ -1,3 +1,22 @@
 export const images = {
     IllustrationImage: require('./illustration1.png'),
+    IllustrationImage2: require('./illustration2.png'),
+    BackgroundImage: require('./backgroundimage.png'),
+    BackgroundImage2: require('./bgimage2.png'),
+
+    appLogo: require('./applogo.png'),
+    fbLogo: require('./fblogo.png'),
+    gmailLogo: require('./gmaillogo.png'),
+    homeIcon: require('./homeicon.png'),
+    profileIcon: require('./usericon.png'),
+    chatIcon: require('./chaticon.png'),
+    cartIcon: require('./carticon.png'),
+    notificationIcon: require('./notificaitonicon.png'),
+    searchIcon: require('./searchicon.png'),
+    filterIcon: require('./filtericon.png'),
+    advertiseImage: require('./advertiseimage.png'),
+    veganImage: require('./vegan.png'),
+    fastFoodImage: require('./fastfood.png'),
+    drinkImage: require('./drink.png'),
+    addOnsImage: require('./addons.png'),
 }

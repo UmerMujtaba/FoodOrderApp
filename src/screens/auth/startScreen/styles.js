@@ -21,7 +21,7 @@ export default StyleSheet.create({
         color: '#333333'
     },
     description: {
-        fontSize: 14,
+        fontSize: 16,
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
         textAlign: 'center',
         marginTop: 20,
@@ -29,7 +29,7 @@ export default StyleSheet.create({
         color: '#333333'
     },
     ctaStart: {
-        marginTop: 15,
+
         width: 157,
         height: 57,
 
