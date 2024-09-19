@@ -1,3 +1,5 @@
+
+
 import React, { useEffect } from 'react';
 import { View, Text, Image, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,14 +9,13 @@ import styles from './styles';
 import { images } from '../../../assets/images';
 
 
-
-const VeganScreen = () => {
+const SidesScreen= ()=> {
   const dispatch = useDispatch();
 
 
-
   const { menuItems, loading, error } = useSelector((state) => state.menu);
-  console.log("🚀 ~ VeganScreen ~ menuItems:", menuItems)
+  console.log("🚀 ~ SidesScreen ~ menuItems:", menuItems)
+ 
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -28,33 +29,30 @@ const VeganScreen = () => {
   if (error) {
     return <Text>Error: {error}</Text>;
   }
-
-  // Render each item in a grid
-
-
-  const salads = menuItems['Salads'] || [];
+  const sides = menuItems['Sides'] || [];
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.itemContainer}
       onPress={() => navigation.navigate('MenuDetail', { item })}
     >
-      <Image source={ images[item.imagePath] } style={styles.image} />
+       <Image source={ images[item.imagePath] } style={styles.image} />
       <Text style={styles.itemName}>{item.name}</Text>
     </TouchableOpacity>
   );
 
   return (
     <FlatList
-      data={salads}
+      data={sides}
       renderItem={renderItem}
       keyExtractor={(item) => item.name}
       numColumns={2} // Grid layout with 2 columns
       columnWrapperStyle={styles.row}
     />
   );
-};
+}
+export default SidesScreen
 
 
 
-export default VeganScreen;
+

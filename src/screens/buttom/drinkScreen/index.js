@@ -1,11 +1,53 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+
+import React, { useEffect } from 'react';
+import { View, Text, Image, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchMenu } from '../../../redux/slices/menuSlice';
+import { useNavigation } from '@react-navigation/native';
+import styles from './styles';
+import { images } from '../../../assets/images';
 
 const DrinkScreen= ()=> {
+  const dispatch = useDispatch();
+  const {menuItems , loading,error} = useSelector((state) => state.menu);
+  console.log("🚀 ~ DrinkScreen ~ menuItems:", menuItems)
+
+  const navigation = useNavigation();
+
+  useEffect(()=> {
+    dispatch(fetchMenu());
+  },[dispatch]);
+
+
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
+
+  if (error) {
+    return <Text>Error: {error}</Text>;
+  }
+
+  const drinks = menuItems['Drinks'] || [];
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.itemContainer}
+      onPress={() => navigation.navigate('MenuDetail', { item })}
+    >
+     <Image source={ images[item.imagePath] } style={styles.image} />
+      <Text style={styles.itemName}>{item.name}</Text>
+    </TouchableOpacity>
+  );
+
+
   return (
-    <View>
-      <Text>Drinks</Text>
-    </View>
-  )
+    <FlatList
+      data={drinks}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.name}
+      numColumns={2} // Grid layout with 2 columns
+      columnWrapperStyle={styles.row}
+    />
+  );
 }
 export default DrinkScreen
+

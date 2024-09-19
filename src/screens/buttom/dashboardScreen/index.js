@@ -17,7 +17,7 @@ const DashboardScreen = () => {
     { id: 1, imageSource: images.veganImage, text: 'Vegetarian Food', screen: 'Vegan' },
     { id: 2, imageSource: images.fastFoodImage, text: 'Fast Food', screen: 'Fastfood' },
     { id: 3, imageSource: images.drinkImage, text: 'Drinks', screen: 'Drink' },
-    { id: 4, imageSource: images.addOnsImage, text: 'Add Ons', screen: 'Addons' },
+    { id: 4, imageSource: images.addOnsImage, text: 'Sides', screen: 'Sides' },
   ];
 
   return (
