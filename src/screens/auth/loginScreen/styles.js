@@ -39,21 +39,21 @@ export default StyleSheet.create({
         width: 'auto',
         marginLeft: 18,
         marginRight: 18,
-        marginTop: 18
+        marginTop: 15
     },
     optText: {
         alignSelf: 'center',
         color: '#000000',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
         fontSize: 16,
-        marginBottom: 10,
+        marginBottom: 5,
         marginTop: 5
     },
     socialLoginContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         height: 60,
-        marginTop: 10
+        marginTop: 5
     },
 
     forgotPswrdText: {
@@ -62,7 +62,7 @@ export default StyleSheet.create({
         fontSize: 14,
         marginTop: 15,
         color: '#15BE77',
-        marginBottom: 20,
+        marginBottom: 5,
         textDecorationLine: 'underline',
     },
 

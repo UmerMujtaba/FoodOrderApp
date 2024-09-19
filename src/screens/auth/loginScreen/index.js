@@ -22,7 +22,7 @@ const LoginScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            <StatusBar translucent backgroundColor="transparent" />
+            {/* <StatusBar translucent backgroundColor="transparent" /> */}
             <ImageBackground source={images.BackgroundImage} style={styles.bgImage}>
                 <Image source={images.appLogo} style={styles.logoStyle} />
                 <Text style={styles.mainText}>

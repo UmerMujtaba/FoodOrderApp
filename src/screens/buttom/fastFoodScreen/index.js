@@ -68,11 +68,11 @@ const FastFoodScreen = () => {
     {selectedItem && (
       <Modal
         visible={modalVisible}
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         onRequestClose={closeModal}
       >
-        <View style={styles.modalBackground}>
+        <Pressable style={styles.modalBackground} onPress={closeModal}>
           <View style={styles.modalContainer}>
             <Image source={images[selectedItem.imagePath]} style={styles.modalImage} />
             <Text style={styles.modalName}>{selectedItem.name}</Text>
@@ -82,7 +82,7 @@ const FastFoodScreen = () => {
               <Text style={styles.closeButtonText}>Close</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </Pressable>
       </Modal>
     )}
   </View>

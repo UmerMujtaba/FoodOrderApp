@@ -2,7 +2,9 @@ import { StyleSheet } from "react-native";
 import fonts from "../../../constants/fonts";
 
 export default StyleSheet.create({
-  
+        container:{
+          flex:1,
+        },
         row: {
           justifyContent: 'space-between',
           marginBottom: 20,
@@ -28,9 +30,9 @@ export default StyleSheet.create({
           color:'black'
         },
         modalBackground: {
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
+          flex:1,
+          
+          justifyContent: 'flex-end',
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
         },
         modalContainer: {
@@ -38,8 +40,8 @@ export default StyleSheet.create({
           backgroundColor: 'white',
           borderRadius: 10,
           padding: 20,
-          justifyContent: 'center',
-          flex:1,
+          
+          height: '80%',
           alignItems: 'center',
         },
         modalImage: {
