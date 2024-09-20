@@ -18,7 +18,7 @@ const GradientButton = ({ onPress, buttonText }) => (
 
 const styles = StyleSheet.create({
     ctaStart: {
-        marginTop: 20,
+        marginTop: 10,
         width: 157,
         height: 57,
         justifyContent: 'center',

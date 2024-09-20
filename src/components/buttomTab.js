@@ -7,13 +7,14 @@ import ProfileScreen from '../screens/buttom/profileScreen';
 import CartScreen from '../screens/buttom/cartScreen';
 import ChatScreen from '../screens/buttom/chatScreen';
 import fonts from '../constants/fonts';
+import Home from '../navigator/homeStack';
 
 const Tab = createBottomTabNavigator();
 
 const TabBarIconWithLabel = ({ focused, iconSource, label }) => (
   <View style={[
     styles.iconContainer,
-    { backgroundColor: focused ? '#B9F6CA' : 'transparent' } // Change background color when focused
+    { backgroundColor: focused ? '#B9F6CA' : 'transparent', } // Change background color when focused
   ]}>
     <Image
       source={iconSource}
@@ -45,7 +46,7 @@ const Tabs = () => (
   >
     <Tab.Screen
       name="Home"
-      component={DashboardScreen}
+      component={Home}
       options={{
         headerShown: false,
         tabBarIcon: ({ focused }) => (
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     paddingTop:14,
     paddingBottom: 14,
     width: 78,
-    justifyContent:'center'
+    justifyContent:'center',
   },
   icon: {
     width: 20, // Adjust size as needed

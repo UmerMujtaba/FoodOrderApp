@@ -5,6 +5,9 @@ import { images } from '../../../assets/images'
 import { Strings } from '../../../constants/string'
 import fonts from '../../../constants/fonts'
 import SearchField from '../../../components/searchFields'
+import styles from '../vegenScreen/styles';
+import HeaderWithSearch from '../../../components/header';
+import FilterComponent from '../../../components/filter';
 
 
 const { width } = Dimensions.get('window'); // Get screen width
@@ -21,34 +24,11 @@ const DashboardScreen = () => {
   ];
 
   return (
-    <View style={{ flex: 1, }}>
+    <View style={styles.container}>
 
-      <ImageBackground source={images.BackgroundImage2} resizeMode='cover' style={{ width: 360, height: 220 }}>
-
-        <View style={{ position: 'absolute', zIndex: 2, top: '40%', width: 360, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
-          <Text style={{ fontSize: 30, color: 'black', fontFamily: fonts.SF_PRO_TEXT.Spectral.ExtraBold, marginLeft: 20 }}>
-            {Strings.findYourFvrtFood}
-          </Text>
-          <View style={{ height: 45, width: 45, borderRadius: 15, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', marginRight: 30 }}>
-            <Image source={images.notificationIcon} resizeMode='contain' style={{ width: 30, height: 30 }} />
-          </View>
-        </View>
-
-      </ImageBackground>
-
+    <HeaderWithSearch /> 
       <ScrollView>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 10 }}>
-
-          <SearchField
-            //leftIcon
-            imageSource={images.searchIcon}
-          >
-          </SearchField>
-
-          <TouchableOpacity style={{ backgroundColor: '#F9A84D', height: 49, width: 50, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
-            <Image source={images.filterIcon} resizeMode='contain' style={{ width: 25, height: 25, }} />
-          </TouchableOpacity>
-        </View>
+      <FilterComponent/>
 
         <Image source={images.advertiseImage} resizeMode='contain' style={{ width: 'auto', height: 150, marginTop: 10 }} />
 

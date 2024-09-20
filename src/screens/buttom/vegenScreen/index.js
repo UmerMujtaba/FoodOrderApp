@@ -1,60 +1,21 @@
-import React, { useEffect } from 'react';
-import { View, Text, Image, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchMenu } from '../../../redux/slices/menuSlice';
-import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { Text, View } from 'react-native';
+import MenuCategoryScreen from '../../../components/menuComponent';
 import styles from './styles';
-import { images } from '../../../assets/images';
-
-
+import fonts from '../../../constants/fonts';
+import HeaderWithSearch from '../../../components/header';
+import FilterComponent from '../../../components/filter';
 
 const VeganScreen = () => {
-  const dispatch = useDispatch();
-
-
-
-  const { menuItems, loading, error } = useSelector((state) => state.menu);
-  console.log("🚀 ~ VeganScreen ~ menuItems:", menuItems)
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    dispatch(fetchMenu());
-  }, [dispatch]);
-
-  if (loading) {
-    return <ActivityIndicator size="large" color="#0000ff" />;
-  }
-
-  if (error) {
-    return <Text>Error: {error}</Text>;
-  }
-
-  // Render each item in a grid
-
-
-  const salads = menuItems['Salads'] || [];
-
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.itemContainer}
-      onPress={() => navigation.navigate('MenuDetail', { item })}
-    >
-      <Image source={ images[item.imagePath] } style={styles.image} />
-      <Text style={styles.itemName}>{item.name}</Text>
-    </TouchableOpacity>
-  );
-
   return (
-    <FlatList
-      data={salads}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.name}
-      numColumns={2} // Grid layout with 2 columns
-      columnWrapperStyle={styles.row}
-    />
-  );
+    <View style={{ flex: 1 }}>
+
+      <HeaderWithSearch />
+      <FilterComponent/>
+      <Text style={{ fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold, fontSize: 36, textAlign: 'center', color: 'black' }}>Salads</Text>
+      <MenuCategoryScreen category="Salads" />
+    </View>
+  )
 };
-
-
 
 export default VeganScreen;

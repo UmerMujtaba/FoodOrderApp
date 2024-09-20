@@ -10,7 +10,7 @@ export default StyleSheet.create({
     illustrationImage: {
         resizeMode: 'contain',
         alignSelf: 'center',
-
+        
         width: 370
     },
     mainText: {
@@ -29,7 +29,7 @@ export default StyleSheet.create({
         color: '#333333'
     },
     ctaStart: {
-        marginTop: 15,
+        marginTop: 10,
         width: 157,
         height: 57,
 

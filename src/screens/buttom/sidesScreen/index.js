@@ -1,58 +1,21 @@
+import React from 'react';
+import MenuCategoryScreen from '../../../components/menuComponent';
+import HeaderWithSearch from '../../../components/header';
+import FilterComponent from '../../../components/filter';
+import { Text, View } from 'react-native';
+import fonts from '../../../constants/fonts';
 
-
-import React, { useEffect } from 'react';
-import { View, Text, Image, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchMenu } from '../../../redux/slices/menuSlice';
-import { useNavigation } from '@react-navigation/native';
-import styles from './styles';
-import { images } from '../../../assets/images';
-
-
-const SidesScreen= ()=> {
-  const dispatch = useDispatch();
-
-
-  const { menuItems, loading, error } = useSelector((state) => state.menu);
-  console.log("🚀 ~ SidesScreen ~ menuItems:", menuItems)
- 
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    dispatch(fetchMenu());
-  }, [dispatch]);
-
-  if (loading) {
-    return <ActivityIndicator size="large" color="#0000ff" />;
-  }
-
-  if (error) {
-    return <Text>Error: {error}</Text>;
-  }
-  const sides = menuItems['Sides'] || [];
-
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.itemContainer}
-      onPress={() => navigation.navigate('MenuDetail', { item })}
-    >
-       <Image source={ images[item.imagePath] } style={styles.image} />
-      <Text style={styles.itemName}>{item.name}</Text>
-    </TouchableOpacity>
-  );
-
+const SidesScreen = () => {
   return (
-    <FlatList
-      data={sides}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.name}
-      numColumns={2} // Grid layout with 2 columns
-      columnWrapperStyle={styles.row}
-    />
+    <View style={{ flex: 1 }}>
+
+      <HeaderWithSearch />
+      <FilterComponent />
+      <Text style={{ fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold, fontSize: 36, textAlign: 'center', color: 'black' }}>Sides</Text>
+      <MenuCategoryScreen category="Sides" />
+
+    </View>
   );
-}
-export default SidesScreen
+};
 
-
-
-
+export default SidesScreen;

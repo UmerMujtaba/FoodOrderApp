@@ -11,17 +11,14 @@ import SidesScreen from '../../screens/buttom/sidesScreen';
 
 const BottomStack = createNativeStackNavigator();
 
-const Bottom = () => { 
+const Buttom = () => { 
   return (
     <BottomStack.Navigator initialRouteName="tabs">
       <BottomStack.Screen name="tabs" component={Tabs} options={{ headerShown: false }} />
-      <BottomStack.Screen name="Vegan" component={VeganScreen} options={{ headerShown: false }} />
-      <BottomStack.Screen name="Fastfood" component={FastFoodScreen} options={{ headerShown: false }} />
-      <BottomStack.Screen name="Drink" component={DrinkScreen} options={{ headerShown: false }} />
-      <BottomStack.Screen name="Sides" component={SidesScreen} options={{ headerShown: false }} />
+     
      
     </BottomStack.Navigator>
   );
 };
 
-export default Bottom;
+export default Buttom;
