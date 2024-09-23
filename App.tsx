@@ -1,13 +1,11 @@
 // App.js
 import React, {useEffect} from 'react';
-import {Text} from 'react-native';
 import {Provider, useDispatch} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
-import TutorialScreen from './src/screens/auth/tutorialScreen';
-import StartScreen from './src/screens/auth/startScreen';
-import LoginScreen from './src/screens/auth/loginScreen';
-import {NavigationCheck} from './src/navigator';
+
 import store from './src/redux/store';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import { NavigationCheck } from './src/navigator';
 // import { NavigationCheck } from './src/navigator';
 
 const App = () => {
@@ -16,10 +14,12 @@ const App = () => {
   }, []);
 
   return (
-  <Provider store={store}>
-    <NavigationCheck />
-  </Provider>
-  )
+    <GestureHandlerRootView style={{flex: 1}}>
+      <Provider store={store}>
+        <NavigationCheck />
+      </Provider>
+    </GestureHandlerRootView>
+  );
 };
 
 export default App;

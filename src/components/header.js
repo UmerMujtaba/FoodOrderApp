@@ -28,7 +28,7 @@ const HeaderWithSearch = () => {
           }}>
             {Strings.findYourFvrtFood}
           </Text>
-          <View style={{
+          <TouchableOpacity style={{
             height: 45, 
             width: 45, 
             borderRadius: 15, 
@@ -38,7 +38,7 @@ const HeaderWithSearch = () => {
             marginRight: 30
           }}>
             <Image source={images.notificationIcon} resizeMode='contain' style={{ width: 30, height: 30 }} />
-          </View>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
    

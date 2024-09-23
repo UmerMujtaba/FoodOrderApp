@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
         fontWeight: 'bold',
-        color:'black'
+        color:'black',
+        textAlign:'center',
       },
 
 

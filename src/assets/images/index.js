@@ -18,6 +18,8 @@ export const images = {
     fastFoodImage: require('./fastfood.png'),
     drinkImage: require('./drink.png'),
     addOnsImage: require('./addons.png'),
+    crossIcon: require('./cross.png'),
+    deleteIcon: require('./delete.png'),
 
     burger1: require('./burgers/burger1.jpeg'),
     burger2: require('./burgers/burger2.jpeg'),
@@ -43,8 +45,8 @@ export const images = {
     sides6: require('./sides/sticks.jpg'),
     sides7: require('./sides/sauce.jpg'),
 
-
-
+    cardBackground: require('./cardbg.png'),
+    backIcon: require('./backicon.png'),
 
 
 

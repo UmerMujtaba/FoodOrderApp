@@ -5,13 +5,12 @@ import { images } from '../../../assets/images'
 import { Strings } from '../../../constants/string'
 import fonts from '../../../constants/fonts'
 import SearchField from '../../../components/searchFields'
-import styles from '../vegenScreen/styles';
+
 import HeaderWithSearch from '../../../components/header';
 import FilterComponent from '../../../components/filter';
+import styles from './styles';
 
 
-const { width } = Dimensions.get('window'); // Get screen width
-const itemWidth = (width - 30) / 2; // Calculate width for each item (2 columns with 15px margin)
 
 const DashboardScreen = () => {
   const navigation = useNavigation(); // Initialize navigation
@@ -30,49 +29,19 @@ const DashboardScreen = () => {
       <ScrollView>
       <FilterComponent/>
 
-        <Image source={images.advertiseImage} resizeMode='contain' style={{ width: 'auto', height: 150, marginTop: 10 }} />
+        <Image source={images.advertiseImage} style={styles.advertiseBg}/>
 
 
-        <View style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          padding: 10,
-        }}>
+        <View style={styles.containerRow}>
           {items.map(item => (
-            <TouchableOpacity key={item.id} style={{
-              width: itemWidth,
-              backgroundColor: '#FFFFFF',
-              borderRadius: 8,
-              padding: 10,
-              alignItems: 'center',
-              marginBottom: 15,
-              height: 184,
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.1,
-              shadowRadius: 5,
-              elevation: 3,
-              justifyContent: 'center'
-
-            }}
+            <TouchableOpacity key={item.id} style={styles.itemImageStyle}
               onPress={() => navigation.navigate(item.screen)}
             >
               <Image
                 source={item.imageSource}
-                style={{
-                  width: 90,
-                  height: 90,
-                  resizeMode: 'contain',
-
-                }}
+                style={styles.itemImage}
               />
-              <Text style={{
-                marginTop: 10,
-                fontSize: 18,
-                color: '#333',
-                fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold
-              }}>{item.text}</Text>
+              <Text style={styles.itemName}>{item.text}</Text>
             </TouchableOpacity>
           ))}
         </View>

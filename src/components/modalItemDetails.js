@@ -1,8 +1,27 @@
 import React from 'react';
 import { Modal, View, Text, Image, Pressable, TouchableOpacity, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../redux/slices/cartSlice'; // Import the action
+
 
 const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images }) => {
-  if (!selectedItem) return null; // Prevent rendering if no item is selected
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (item) => {
+    console.log('Adding item to cart:', item); // Check item structure
+    const itemToAdd = {
+      ...item,
+
+    };
+    dispatch(addItemToCart(itemToAdd));
+    closeModal();
+  };
+
+
+
+
+  if (!selectedItem) return null;
 
   return (
     <Modal
@@ -13,12 +32,23 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images }) => 
     >
       <Pressable style={styles.modalBackground} onPress={closeModal}>
         <View style={styles.modalContainer}>
+          <View style={{ flexDirection: 'row', alignSelf: 'flex-start' }}>
+
+
+
+            <TouchableOpacity style={[styles.closeButton]} onPress={closeModal}>
+              <Image source={images.crossIcon} resizeMode='contain' style={{ width: 20, height: 20 }} />
+            </TouchableOpacity>
+
+          </View>
           <Image source={images[selectedItem.imagePath]} style={styles.modalImage} />
           <Text style={styles.modalName}>{selectedItem.name}</Text>
           <Text style={styles.modalDescription}>{selectedItem.description}</Text>
           <Text style={styles.modalPrice}>Price: ${selectedItem.price.toFixed(2)}</Text>
-          <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
-            <Text style={styles.closeButtonText}>Close</Text>
+
+
+          <TouchableOpacity style={styles.addToCartButton} onPress={() => handleAddToCart(selectedItem)}>
+            <Text style={styles.addToCartText}>Add to Cart</Text>
           </TouchableOpacity>
         </View>
       </Pressable>
@@ -37,7 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 20,
-    height: '80%',
+    height: '90%',
     alignItems: 'center',
   },
   modalImage: {
@@ -63,16 +93,27 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     color: 'black',
   },
+  addToCartButton: {
+    backgroundColor: '#53E88B',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 20,
+  },
+  addToCartText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   closeButton: {
     marginTop: 20,
-    backgroundColor: '#007BFF',
+    backgroundColor: 'lightgray',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 12,
+    marginBottom: 10,
+    marginLeft: 10,
   },
-  closeButtonText: {
-    color: 'black',
-    fontSize: 16,
-  },
+
 });
 
 export default ItemDetailModal;
