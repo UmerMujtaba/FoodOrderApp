@@ -11,7 +11,7 @@ const FilterComponent = ({ onSearch }) => {
   };
 
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 10 }}>
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 10}}>
       <SearchField imageSource={images.searchIcon} onSearch={onSearch} />
       <TouchableOpacity
         style={{

@@ -10,11 +10,11 @@ const { width } = Dimensions.get('window'); // Get screen width
 const HeaderWithSearch = () => {
   return (
     
-      <ImageBackground source={images.BackgroundImage2} resizeMode='cover' style={{ width: width, height: 220 }}>
+      <ImageBackground source={images.BackgroundImage2} resizeMode='cover' style={{ width: width, height: 200}}>
         <View style={{
           position: 'absolute', 
           zIndex: 2, 
-          top: '40%', 
+          top: '35%', 
           width: width, 
           flexDirection: 'row', 
           justifyContent: 'space-between', 

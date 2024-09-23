@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
       itemName: {
         fontSize: 16,
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
-        fontWeight: 'bold',
+        //fontWeight: 'bold',
         color:'black',
         textAlign:'center',
       },

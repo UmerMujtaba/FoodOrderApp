@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, View, Image, Text } from 'react-native';
+import { StyleSheet, View, Image, Text,Animated } from 'react-native';
 import { images } from '../assets/images';
 import DashboardScreen from '../screens/buttom/dashboardScreen';
 import ProfileScreen from '../screens/buttom/profileScreen';
@@ -13,11 +13,13 @@ import { useSelector } from 'react-redux';
 const Tab = createBottomTabNavigator();
 
 const TabBarIconWithLabel = ({ focused, iconSource, label, cartCount }) => {
+  
   return (
     <View style={[
       styles.iconContainer,
       { 
         backgroundColor: focused ? '#B9F6CA' : 'transparent',
+        width: focused ? 78 : 50
       } 
     ]}>
       <Image

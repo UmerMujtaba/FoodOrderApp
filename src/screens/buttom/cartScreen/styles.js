@@ -5,7 +5,8 @@ export default StyleSheet.create({
 
     container: {
         flex: 1,
-        padding: 10
+        padding: 10,
+        
     },
     backContainer: {
         backgroundColor: '#FFE0B5',
@@ -215,9 +216,11 @@ export default StyleSheet.create({
     emptyMessage: {
         fontSize: 18,
         textAlign: 'center',
-        marginTop: 20,
+       
+        // marginTop: 20,
         color: 'black',
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
+       
     },
     modalBackground: {
         flex: 1,

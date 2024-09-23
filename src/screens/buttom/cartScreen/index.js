@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image, Alert, Modal, ImageBackground } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, updateQuantity } from '../../../redux/slices/cartSlice'; // Adjust the path as needed
+import { removeFromCart, updateQuantity } from '../../../redux/slices/cartSlice';
 import fonts from '../../../constants/fonts';
 import { images } from '../../../assets/images';
 import { SwipeListView } from 'react-native-swipe-list-view';
@@ -15,7 +15,7 @@ const CartScreen = ({ navigation }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const[showFullDescription,setShowFullDescription] = useState(false);
+  const [showFullDescription, setShowFullDescription] = useState(false);
   const [containerHeight, setContainerHeight] = useState(120);
 
 
@@ -46,8 +46,8 @@ const CartScreen = ({ navigation }) => {
   const calculateTotal = () => {
     const deliveryCharge = 10; // Delivery charge
     const discount = 5; // Discount
-    const total = parseFloat(subTotal()) + deliveryCharge - discount; // Parse subTotal as a float and add/subtract
-    return `${total.toFixed(2)}$`; // Format the total with 2 decimal places and append the currency symbol
+    const total = parseFloat(subTotal()) + deliveryCharge - discount;
+    return `${total.toFixed(2)}$`;
   };
 
   const toggleDescription = () => {
@@ -62,14 +62,14 @@ const CartScreen = ({ navigation }) => {
       <View style={styles.detailsContainer}>
         <Text style={styles.itemName}>{item.name}</Text>
         <TouchableOpacity onPress={toggleDescription}>
-        <Text
-          numberOfLines={showFullDescription ? undefined : 1}
-          ellipsizeMode='tail'
-          style={styles.itemDescription}
-        >
-          {item.description}
-        </Text>
-      </TouchableOpacity>
+          <Text
+            numberOfLines={showFullDescription ? undefined : 1}
+            ellipsizeMode='tail'
+            style={styles.itemDescription}
+          >
+            {item.description}
+          </Text>
+        </TouchableOpacity>
 
 
 
@@ -82,10 +82,6 @@ const CartScreen = ({ navigation }) => {
           textStyle={styles.itemPrice}  // Optional
           textProps={{ allowFontScaling: true }}  // Optional
         />
-        {/* <LinearGradient colors={['#FF5733', '#FFC300']} style={styles.gradient}> */}
-
-        {/* <Text style={styles.itemPrice}></Text> */}
-        {/* </LinearGradient> */}
 
 
         <View style={styles.quantityContainer}>
@@ -98,7 +94,7 @@ const CartScreen = ({ navigation }) => {
               colors={['#53E88B', '#53E88B']}
               // start={{ x: 0.2, y: 0.10 }}  // Optional
               //  end={{ x: 0.5, y: 0 }}  // Optional
-              style={styles.gradientButton2} // Style for the gradient background
+              style={styles.gradientButton2}
             >
               <Text style={[styles.button2, item.quantity <= 1 && styles.disabledButton]}>
                 -
@@ -119,7 +115,7 @@ const CartScreen = ({ navigation }) => {
             </LinearGradient>
           </TouchableOpacity>
 
- 
+
         </View>
 
 
@@ -145,9 +141,10 @@ const CartScreen = ({ navigation }) => {
         <Image source={images.backIcon} style={styles.backImage} />
 
       </TouchableOpacity>
-      <Text style={[styles.title]}>Your Cart</Text>
+      <Text style={[styles.title]}>My Cart</Text>
+
       {cartItems.length === 0 ? (
-        <Text style={styles.emptyMessage}>Your cart is empty.</Text>
+        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}><Text style={styles.emptyMessage}>Cart is empty.</Text></View>
       ) : (
         <SwipeListView
           data={cartItems}
