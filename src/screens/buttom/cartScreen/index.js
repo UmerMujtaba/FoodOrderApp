@@ -119,7 +119,7 @@ const CartScreen = ({ navigation }) => {
             </LinearGradient>
           </TouchableOpacity>
 
-
+ 
         </View>
 
 
