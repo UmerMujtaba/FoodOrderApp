@@ -7,12 +7,14 @@ import { images } from '../assets/images';
 import ItemDetailModal from './modalItemDetails';
 import fonts from '../constants/fonts';
 
-const MenuCategoryComponent = ({ category }) => {
+const MenuCategoryComponent = ({ category,searchQuery }) => {
   const dispatch = useDispatch();
   const { menuItems, loading, error } = useSelector((state) => state.menu);
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
+
+  
   useEffect(() => {
     dispatch(fetchMenu());
   }, [dispatch]);
@@ -39,8 +41,13 @@ const MenuCategoryComponent = ({ category }) => {
     return <Text>Error: {error}</Text>;
   }
 
-  const items = menuItems[category] || [];
+  //const items = menuItems[category] || [];
 
+  const items = menuItems[category]?.filter((item) =>
+    item.name.includes(searchQuery) // Filter based on item name and searchQuery
+  ) || [];
+
+  
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.itemContainer}

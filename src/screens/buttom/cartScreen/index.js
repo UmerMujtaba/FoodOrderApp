@@ -10,7 +10,7 @@ import { LinearGradientText } from 'react-native-linear-gradient-text';
 import styles from './styles';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const CartScreen = ({navigation}) => {
+const CartScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -60,8 +60,8 @@ const CartScreen = ({navigation}) => {
         <LinearGradientText
           colors={['#15BE77', '#53E88B']}
           text={`$ ${item.price.toFixed(2)}`}
-          start={{ x: 0.4, y: 0.4 }}  // Optional
-          end={{ x: 0.1, y: 0.5 }}  // Optional
+          start={{ x: 0.1, y: 0.1 }}  // Optional
+          end={{ x: 0.5, y: 0.4 }}  // Optional
           textStyle={styles.itemPrice}  // Optional
           textProps={{ allowFontScaling: true }}  // Optional
         />
@@ -195,6 +195,18 @@ const CartScreen = ({navigation}) => {
 
           </View>
 
+          <TouchableOpacity 
+          activeOpacity= {0.5}
+          style={styles.ctaBtn}>
+            <LinearGradientText
+              colors={['#15BE77', '#53E88B']}
+              text={'Place my Order'}
+              start={{ x: 0.4, y: 0.4 }}  // Optional
+              end={{ x: 0.1, y: 0.5 }}  // Optional
+              textStyle={[styles.OrderText]}  // Optional
+              textProps={{ allowFontScaling: true }}  // Optional
+            />
+          </TouchableOpacity>
         </ImageBackground>
       </LinearGradient>
 

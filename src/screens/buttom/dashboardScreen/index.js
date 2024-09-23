@@ -1,4 +1,4 @@
-import { View, Text, ImageBackground, Image, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
+import { View, Text, ImageBackground, Image, TouchableOpacity, Dimensions, ScrollView, KeyboardAvoidingView } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'; // Import navigation
 import { images } from '../../../assets/images'
@@ -23,32 +23,33 @@ const DashboardScreen = () => {
   ];
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
+      
 
-    <HeaderWithSearch /> 
-      <ScrollView>
-      <FilterComponent/>
+        <HeaderWithSearch />
+        <ScrollView>
+          <FilterComponent />
 
-        <Image source={images.advertiseImage} style={styles.advertiseBg}/>
+          <Image source={images.advertiseImage} style={styles.advertiseBg} />
 
 
-        <View style={styles.containerRow}>
-          {items.map(item => (
-            <TouchableOpacity key={item.id} style={styles.itemImageStyle}
-              onPress={() => navigation.navigate(item.screen)}
-            >
-              <Image
-                source={item.imageSource}
-                style={styles.itemImage}
-              />
-              <Text style={styles.itemName}>{item.text}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+          <View style={styles.containerRow}>
+            {items.map(item => (
+              <TouchableOpacity key={item.id} style={styles.itemImageStyle}
+                onPress={() => navigation.navigate(item.screen)}
+              >
+                <Image
+                  source={item.imageSource}
+                  style={styles.itemImage}
+                />
+                <Text style={styles.itemName}>{item.text}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
 
-      </ScrollView>
-    </View>
-
+        </ScrollView>
+     
+    </KeyboardAvoidingView>
   )
 }
 export default DashboardScreen

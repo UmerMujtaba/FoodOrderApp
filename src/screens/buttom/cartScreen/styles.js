@@ -102,8 +102,7 @@ export default StyleSheet.create({
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
     },
 
-
-
+   
     cardGradient: {
         borderRadius: 16,
         width: 346,
@@ -118,10 +117,56 @@ export default StyleSheet.create({
         width: 346,
         alignSelf: 'center',
     },
-    cardContainerRow:{ flexDirection: 'row', justifyContent: 'space-between', marginLeft: 5, marginRight: 5, width: 346, height: 306 },
-cardContainerCol:{ flexDirection: 'column', padding: 10 },
-headingText:{ fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium, fontSize: 20, color: 'black', marginTop: 10 },
-priceText:{ fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold, fontSize: 24, color: 'black', marginTop: 50 },
+    cardContainerRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginLeft: 5,
+        marginRight: 5,
+        width: 346,
+        height: 306
+    },
+    cardContainerCol: {
+        flexDirection: 'column',
+        padding: 10
+    },
+    headingText: {
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
+        fontSize: 20,
+        color: 'black',
+        marginTop: 5
+    },
+    priceText: {
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
+        fontSize: 22,
+        color: 'black',
+        marginTop: 15
+    },
+    ctaBtn: {
+        backgroundColor: 'white',
+        height: 55,
+        width: 325,
+        borderRadius: 16,
+        position: 'absolute',
+        zIndex: 2,
+        bottom: 5,
+        alignSelf: 'center',
+        justifyContent: 'center'
+        
+    },
+
+    OrderText: {
+        fontSize: 22
+        ,
+        color: '#15BE77',
+        //fontWeight: 'bold',
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
+        alignSelf: 'center',
+
+    },
+
+
+
+
 
 
     hiddenItem: {
