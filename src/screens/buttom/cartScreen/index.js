@@ -123,92 +123,96 @@ const CartScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
 
-      <ScrollView contentContainerStyle={{ paddingBottom: 250 }} showsVerticalScrollIndicator={false}>
-        <TouchableOpacity style={styles.backContainer} onPress={() => navigation.goBack()}>
-          <Image source={images.backIcon} style={styles.backImage} />
 
-        </TouchableOpacity>
-        <Text style={[styles.title]}>Your Cart</Text>
-        {cartItems.length === 0 ? (
-          <Text style={styles.emptyMessage}>Your cart is empty.</Text>
-        ) : (
-          <SwipeListView
-            data={cartItems}
-            renderItem={renderItem}
-            renderHiddenItem={renderHiddenItem}
-            rightOpenValue={-100}
-            keyExtractor={(item) => item.id.toString()}
-          />
-        )}
+      <TouchableOpacity style={styles.backContainer} onPress={() => navigation.goBack()}>
+        <Image source={images.backIcon} style={styles.backImage} />
 
-
-
-
-      </ScrollView>
-      <LinearGradient
-        colors={['#15BE77', '#53E88B']} // Your gradient colors
-        start={{ x: 0.2, y: 0.5 }}  // Optional
-        end={{ x: 0.5, y: 0.2 }}  // Optional
-        style={styles.cardGradient}
-      >
-        <ImageBackground source={images.cardBackground} style={styles.bgImageStyle}>
+      </TouchableOpacity>
+      <Text style={[styles.title]}>Your Cart</Text>
+      {cartItems.length === 0 ? (
+        <Text style={styles.emptyMessage}>Your cart is empty.</Text>
+      ) : (
+        <SwipeListView
+          data={cartItems}
+          renderItem={renderItem}
+          renderHiddenItem={renderHiddenItem}
+          rightOpenValue={-100}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      )}
 
 
 
 
-          <View style={styles.cardContainerRow}>
-
-            <View style={styles.cardContainerCol}>
-
-              <Text style={styles.headingText}>Sub Total:</Text>
-
-              {cartItems.length > 0 && (
-                <>
-                  <Text style={styles.headingText}>
-                    Delivery Charges:
-                  </Text>
-                  <Text style={styles.headingText}>
-                    Discount
-                  </Text>
-
-                  <Text style={styles.priceText}>
-                    Total
-                  </Text>
-                </>
-              )}
-
-            </View>
-
-            <View style={styles.cardContainerCol}>
-              <Text style={[styles.headingText, { textAlign: 'center' }]}>{subTotal()}$</Text>
+      {cartItems.length > 0 && (
+        <>
+          <LinearGradient
+            colors={['#15BE77', '#53E88B']} // Your gradient colors
+            start={{ x: 0.2, y: 0.5 }}  // Optional
+            end={{ x: 0.5, y: 0.2 }}  // Optional
+            style={styles.cardGradient}
+          >
+            <ImageBackground source={images.cardBackground} style={styles.bgImageStyle}>
 
 
-              {cartItems.length > 0 && (
-                <>
-                  <Text style={[styles.headingText, { textAlign: 'center' }]}>{10}$</Text>
-                  <Text style={[styles.headingText, { textAlign: 'center' }]}>{5}$</Text>
 
-                  <Text style={[styles.priceText, { textAlign: 'center' }]}>{calculateTotal()}</Text>
-                </>
-              )}
-            </View>
 
-          </View>
+              <View style={styles.cardContainerRow}>
 
-          <TouchableOpacity 
-          activeOpacity= {0.5}
-          style={styles.ctaBtn}>
-            <LinearGradientText
-              colors={['#15BE77', '#53E88B']}
-              text={'Place my Order'}
-              start={{ x: 0.4, y: 0.4 }}  // Optional
-              end={{ x: 0.1, y: 0.5 }}  // Optional
-              textStyle={[styles.OrderText]}  // Optional
-              textProps={{ allowFontScaling: true }}  // Optional
-            />
-          </TouchableOpacity>
-        </ImageBackground>
-      </LinearGradient>
+                <View style={styles.cardContainerCol}>
+
+                  <Text style={styles.headingText}>Sub Total:</Text>
+
+                  {cartItems.length > 0 && (
+                    <>
+                      <Text style={styles.headingText}>
+                        Delivery Charges:
+                      </Text>
+                      <Text style={styles.headingText}>
+                        Discount
+                      </Text>
+
+                      <Text style={styles.priceText}>
+                        Total
+                      </Text>
+                    </>
+                  )}
+
+                </View>
+
+                <View style={styles.cardContainerCol}>
+                  <Text style={[styles.headingText, { textAlign: 'center' }]}>{subTotal()}$</Text>
+
+
+                  {cartItems.length > 0 && (
+                    <>
+                      <Text style={[styles.headingText, { textAlign: 'center' }]}>{10}$</Text>
+                      <Text style={[styles.headingText, { textAlign: 'center' }]}>{5}$</Text>
+
+                      <Text style={[styles.priceText, { textAlign: 'center' }]}>{calculateTotal()}</Text>
+                    </>
+                  )}
+                </View>
+
+              </View>
+
+
+            </ImageBackground>
+            <TouchableOpacity
+              activeOpacity={0.5}
+              style={styles.ctaBtn}>
+              <LinearGradientText
+                colors={['#15BE77', '#53E88B']}
+                text={'Place my Order'}
+                start={{ x: 0.4, y: 0.4 }}  // Optional
+                end={{ x: 0.1, y: 0.5 }}  // Optional
+                textStyle={[styles.OrderText]}  // Optional
+                textProps={{ allowFontScaling: true }}  // Optional
+              />
+            </TouchableOpacity>
+          </LinearGradient>
+        </>
+      )}
 
 
 

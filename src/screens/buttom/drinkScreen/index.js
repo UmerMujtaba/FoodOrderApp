@@ -24,4 +24,4 @@ const DrinkScreen = () => {
   );
 };
 
-export default DrinkScreen;
+export default DrinkScreen; 

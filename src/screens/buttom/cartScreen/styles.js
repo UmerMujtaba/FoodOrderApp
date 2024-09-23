@@ -102,18 +102,19 @@ export default StyleSheet.create({
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
     },
 
-   
+
     cardGradient: {
         borderRadius: 16,
         width: 346,
         alignSelf: 'center',
-        position: 'absolute',
-        bottom: 0
+        // position: 'absolute',
+        //bottom: 0,
+        // height:300
     },
 
     bgImageStyle: {
         resizeMode: 'contain',
-        height: 206,
+        height: 170,
         width: 346,
         alignSelf: 'center',
     },
@@ -123,7 +124,7 @@ export default StyleSheet.create({
         marginLeft: 5,
         marginRight: 5,
         width: 346,
-        height: 306
+        // height: 2
     },
     cardContainerCol: {
         flexDirection: 'column',
@@ -143,15 +144,16 @@ export default StyleSheet.create({
     },
     ctaBtn: {
         backgroundColor: 'white',
-        height: 55,
+        height: 50,
         width: 325,
         borderRadius: 16,
-        position: 'absolute',
-        zIndex: 2,
+        marginBottom: 5,
+        //position: 'absolute',
+        //zIndex: 2,
         bottom: 5,
         alignSelf: 'center',
         justifyContent: 'center'
-        
+
     },
 
     OrderText: {
