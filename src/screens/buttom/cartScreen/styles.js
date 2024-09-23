@@ -12,7 +12,9 @@ export default StyleSheet.create({
         height: 45,
         width: 45,
         justifyContent: 'center',
-        borderRadius: 16
+        borderRadius: 16,
+        marginTop:30,
+        marginLeft:10
     },
     backImage: {
         resizeMode: 'contain',
@@ -22,7 +24,7 @@ export default StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        marginBottom: 20,
+        marginBottom: 10,
         textAlign: 'center',
         color: 'black',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
@@ -30,7 +32,7 @@ export default StyleSheet.create({
     },
     itemContainer: {
         flexDirection: 'row',
-        padding: 10,
+        padding: 12,
         backgroundColor: 'white',
         borderRadius: 16,
         marginBottom: 10,
@@ -41,20 +43,27 @@ export default StyleSheet.create({
         width: 80,
         height: 80,
         borderRadius: 8,
+        alignSelf:'center'
     },
     detailsContainer: {
         flex: 1,
         marginLeft: 10,
+        height:90,
         justifyContent: 'center',
     },
     itemName: {
         fontSize: 18,
         color: 'black',
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
+        //marginTop:5
+    },
+    itemDescription:{
+        fontSize: 16,
+        color: 'grey',
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular
     },
     itemPrice: {
-        fontSize: 24
-        ,
+        fontSize: 24,
         color: '#15BE77',
         //fontWeight: 'bold',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold
@@ -178,10 +187,10 @@ export default StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'column',
         alignSelf: 'flex-end',
-
+       
         borderRadius: 16,
-        height: 100,
-        width: 300
+        height: 110,
+        width: 335
     },
     deleteButton: {
         flexDirection: 'row',
@@ -189,7 +198,7 @@ export default StyleSheet.create({
         alignSelf: 'flex-end',
         marginRight: 45,
     },
-    crossIcon: {
+    deleteImg: {
         width: 30,
         height: 30,
         //marginRight: 10,
@@ -219,10 +228,11 @@ export default StyleSheet.create({
     modalContainer: {
         width: '95%',
         backgroundColor: 'white',
-        borderRadius: 10,
+        borderRadius: 16,
         padding: 20,
-        height: '30%',
+        height: '25%',
         alignItems: 'center',
+        justifyContent:'center'
     },
     modalText: {
         fontSize: 18,
@@ -237,7 +247,7 @@ export default StyleSheet.create({
     },
     modalButton: {
         //backgroundColor: '#15BE77',
-        padding: 10,
+        padding: 12,
         borderRadius: 5,
         marginHorizontal: 10,
 

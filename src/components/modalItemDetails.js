@@ -2,9 +2,10 @@ import React from 'react';
 import { Modal, View, Text, Image, Pressable, TouchableOpacity, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../redux/slices/cartSlice'; // Import the action
+import fonts from '../constants/fonts';
 
 
-const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images }) => {
+const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images,statusBarTranslucent }) => {
 
   const dispatch = useDispatch();
 
@@ -25,6 +26,7 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images }) => 
 
   return (
     <Modal
+    statusBarTranslucent={statusBarTranslucent}
       visible={modalVisible}
       animationType="fade"
       transparent={true}
@@ -32,15 +34,7 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images }) => 
     >
       <Pressable style={styles.modalBackground} onPress={closeModal}>
         <View style={styles.modalContainer}>
-          <View style={{ flexDirection: 'row', alignSelf: 'flex-start' }}>
-
-
-
-            <TouchableOpacity style={[styles.closeButton]} onPress={closeModal}>
-              <Image source={images.crossIcon} resizeMode='contain' style={{ width: 20, height: 20 }} />
-            </TouchableOpacity>
-
-          </View>
+         
           <Image source={images[selectedItem.imagePath]} style={styles.modalImage} />
           <Text style={styles.modalName}>{selectedItem.name}</Text>
           <Text style={styles.modalDescription}>{selectedItem.description}</Text>
@@ -65,36 +59,43 @@ const styles = StyleSheet.create({
   modalContainer: {
     width: '100%',
     backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 20,
-    height: '90%',
+   borderTopLeftRadius:30,
+    borderTopRightRadius:30,
+    paddingTop: 20,
+    height: '75%',
     alignItems: 'center',
   },
   modalImage: {
-    width: 300,
+    width: '95%',
     height: 300,
     borderRadius: 10,
+    //resizeMode:'contain'
   },
   modalName: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 24,
+   // fontWeight: 'bold',
     marginVertical: 10,
     color: 'black',
+    fontFamily:fonts.SF_PRO_TEXT.Spectral.Bold
   },
   modalDescription: {
     fontSize: 16,
     textAlign: 'center',
     marginVertical: 10,
+    paddingLeft:5,
+    paddingRight:5,
     color: 'black',
+    fontFamily:fonts.SF_PRO_TEXT.Spectral.Medium
   },
   modalPrice: {
     fontSize: 18,
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
     marginVertical: 10,
     color: 'black',
+    fontFamily:fonts.SF_PRO_TEXT.Spectral.SemiBold
   },
   addToCartButton: {
-    backgroundColor: '#53E88B',
+    backgroundColor: 'grey',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
@@ -103,7 +104,8 @@ const styles = StyleSheet.create({
   addToCartText: {
     color: 'white',
     fontSize: 16,
-    fontWeight: 'bold',
+   // fontWeight: 'bold',
+   fontFamily:fonts.SF_PRO_TEXT.Spectral.SemiBold
   },
   closeButton: {
     marginTop: 20,

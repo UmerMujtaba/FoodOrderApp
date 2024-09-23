@@ -10,7 +10,7 @@ import GradientButton from '../../../components/gradientButton';
 const TutorialScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
-            {/* <StatusBar translucent backgroundColor="transparent" /> */}
+            <StatusBar translucent backgroundColor="transparent" />
             <View>
                 <Image source={images.IllustrationImage} style={styles.illustrationImage} />
             </View>

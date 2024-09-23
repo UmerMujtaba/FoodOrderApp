@@ -15,6 +15,9 @@ const CartScreen = ({ navigation }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const[showFullDescription,setShowFullDescription] = useState(false);
+  const [containerHeight, setContainerHeight] = useState(120);
+
 
   const handleRemoveItem = (id) => {
     setSelectedItem(id);
@@ -47,12 +50,26 @@ const CartScreen = ({ navigation }) => {
     return `${total.toFixed(2)}$`; // Format the total with 2 decimal places and append the currency symbol
   };
 
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+    setContainerHeight((prev) => (prev === 120 ? 140 : 120));
+  }
+
 
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+    <View style={[styles.itemContainer, { height: containerHeight }]}>
       <Image source={images[item.imagePath]} style={styles.itemImage} />
       <View style={styles.detailsContainer}>
         <Text style={styles.itemName}>{item.name}</Text>
+        <TouchableOpacity onPress={toggleDescription}>
+        <Text
+          numberOfLines={showFullDescription ? undefined : 1}
+          ellipsizeMode='tail'
+          style={styles.itemDescription}
+        >
+          {item.description}
+        </Text>
+      </TouchableOpacity>
 
 
 
@@ -114,7 +131,7 @@ const CartScreen = ({ navigation }) => {
   const renderHiddenItem = (data) => (
     <View style={styles.hiddenItem}>
       <TouchableOpacity style={styles.deleteButton} onPress={() => handleRemoveItem(data.item.id)}>
-        <Image source={images.deleteIcon} style={styles.crossIcon} />
+        <Image source={images.deleteIcon} style={styles.deleteImg} />
 
       </TouchableOpacity>
     </View>
@@ -138,6 +155,7 @@ const CartScreen = ({ navigation }) => {
           renderHiddenItem={renderHiddenItem}
           rightOpenValue={-100}
           keyExtractor={(item) => item.id.toString()}
+          showsVerticalScrollIndicator={false}
         />
       )}
 
@@ -218,6 +236,7 @@ const CartScreen = ({ navigation }) => {
 
       {/* Delete Confirmation Modal */}
       <Modal
+        statusBarTranslucent={true}
         transparent={true}
         visible={modalVisible}
         animationType="fade"

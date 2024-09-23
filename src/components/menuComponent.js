@@ -68,6 +68,7 @@ const MenuCategoryComponent = ({ category,searchQuery }) => {
         columnWrapperStyle={styles.row}
       />
       <ItemDetailModal
+      statusBarTranslucent={true}
         modalVisible={modalVisible}
         selectedItem={selectedItem}
         closeModal={closeModal}
