@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'; // Ensure this package is installed
+import fonts from '../constants/fonts';
 
 const GradientButton = ({ onPress, buttonText }) => (
     <TouchableOpacity style={styles.ctaStart} onPress={onPress}>
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 16,
         textAlign: 'center',
-        fontFamily: 'SF_PRO_TEXT_inter_Regular', // Make sure the font is correctly linked
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold, // Make sure the font is correctly linked
     },
     linearGradient: {
         borderRadius: 12,

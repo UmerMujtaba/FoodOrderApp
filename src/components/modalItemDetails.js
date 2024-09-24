@@ -6,12 +6,13 @@ import fonts from '../constants/fonts';
 import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
 import { LinearGradientText } from 'react-native-linear-gradient-text';
 import ModalAppBar from './modalAppBar';
+import GradientButton from './gradientButton';
 
 
 
 const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statusBarTranslucent }) => {
   const dispatch = useDispatch();
-  const [modalHeight, setModalHeight] = useState('45%'); // Initial height of the modal
+  const [modalHeight, setModalHeight] = useState('40%'); // Initial height of the modal
 
   const handleAddToCart = (item) => {
     console.log('Adding item to cart:', item); // Check item structure
@@ -23,7 +24,7 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
   const { colors } = useTheme(); // Use useTheme to access the current theme colors
 
   const handleModalPress = () => {
-    setModalHeight((prevHeight) => (prevHeight === '45%' ? '60%' : '45%')); // Toggle between two heights
+    setModalHeight((prevHeight) => (prevHeight === '40%' ? '50%' : '40%')); // Toggle between two heights
   };
 
   if (!selectedItem) return null;
@@ -56,9 +57,12 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
             <Text style={[styles.modalDescription, { color: colors.text }]}>{selectedItem.description}</Text>
             <Text style={[styles.modalPrice, { color: colors.text }]}>Price: ${selectedItem.price.toFixed(2)}</Text>
 
-            <TouchableOpacity style={styles.addToCartButton} onPress={() => handleAddToCart(selectedItem)}>
-              <Text style={styles.addToCartText}>Add to Cart</Text>
-            </TouchableOpacity>
+
+
+            <GradientButton onPress={() => handleAddToCart(selectedItem)} buttonText={'Add to Cart'}>
+            
+            </GradientButton>
+          
           </View>
         </Pressable>
       </Pressable>
@@ -105,36 +109,40 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     width: '100%',
-    alignItems: 'center',
-    paddingBottom: 20, // Space below content
+    paddingBottom: 10, // Space below content
   },
    modalName: {
     fontSize: 24,
     marginVertical: 10,
     color: 'black',
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
+    marginLeft: 10,
   },
   modalDescription: {
     fontSize: 16,
-    textAlign: 'center',
-    marginVertical: 10,
-    paddingLeft: 5,
+   // textAlign: 'center',
+    //marginVertical: 10,
+    marginLeft: 10,
+    //paddingLeft: 5,
     paddingRight: 5,
     color: 'black',
-    fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
+    fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
   },
   modalPrice: {
     fontSize: 18,
     marginVertical: 10,
     color: 'black',
+    marginLeft: 10,
     fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
   },
   addToCartButton: {
     backgroundColor: 'grey',
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
+    alignItems: 'center',
     borderRadius: 10,
     marginTop: 20,
+   margin:120
   },
   addToCartText: {
     color: 'white',

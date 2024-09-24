@@ -53,21 +53,22 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     itemName: {
-        fontSize: 18,
+        fontSize: 20,
         color: 'black',
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
+        marginTop:5
         //marginTop:5
     },
     itemDescription:{
-        fontSize: 16,
+        fontSize: 14,
         color: 'grey',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular
     },
     itemPrice: {
-        fontSize: 24,
+        fontSize: 20,
         color: '#15BE77',
         //fontWeight: 'bold',
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold
     },
     quantityContainer: {
         flexDirection: 'row',

@@ -7,8 +7,9 @@ export const lightTheme = {
     tabIconColor: 'green',
     primary: '#000',
     secondary: '#f5f5f5',
-    modalColor: 'white'
-  },
+    modalColor: 'white',
+    backContainer: '#FFE0B5'
+  }
 };
 
 export const darkTheme = {
@@ -20,6 +21,7 @@ export const darkTheme = {
     tabIconColor: 'lightgreen',
     primary: 'grey',
     secondary:'#f5f5f5',
-    modalColor: '#0E1110'
+    modalColor: '#0E1110',
+    backContainer: '#252525'
   },
 };
