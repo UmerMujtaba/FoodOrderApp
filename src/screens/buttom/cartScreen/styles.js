@@ -124,7 +124,7 @@ export default StyleSheet.create({
 
     bgImageStyle: {
         resizeMode: 'contain',
-        height: 170,
+        height: 150,
         width: 346,
         alignSelf: 'center',
     },
@@ -154,7 +154,7 @@ export default StyleSheet.create({
     },
     ctaBtn: {
         backgroundColor: 'white',
-        height: 50,
+        height: 45,
         width: 325,
         borderRadius: 16,
         marginBottom: 5,

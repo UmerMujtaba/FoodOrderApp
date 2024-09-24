@@ -5,20 +5,23 @@ import LinearGradient from "react-native-linear-gradient";
 import { images } from '../../../assets/images'
 import { Strings } from '../../../constants/string'
 import GradientButton from '../../../components/gradientButton';
+import { useTheme } from '@react-navigation/native';
+
 
 
 const TutorialScreen = ({navigation}) => {
+    const { colors } = useTheme();
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: colors.background }]}>
             <StatusBar translucent backgroundColor="transparent" />
             <View>
                 <Image source={images.IllustrationImage} style={styles.illustrationImage} />
             </View>
-            <Text style={styles.mainText}>
+            <Text style={[styles.mainText,{ color: colors.text }]}>
                 {Strings.starterText}
             </Text>
 
-            <Text style={styles.description}>
+            <Text style={[styles.description,{ color: colors.text }]}>
                 {Strings.starterDescription}
             </Text>
 

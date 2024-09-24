@@ -6,12 +6,18 @@ import { fetchMenu } from '../redux/slices/menuSlice';
 import { images } from '../assets/images';
 import ItemDetailModal from './modalItemDetails';
 import fonts from '../constants/fonts';
+import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
+
+
 
 const MenuCategoryComponent = ({ category,searchQuery }) => {
   const dispatch = useDispatch();
   const { menuItems, loading, error } = useSelector((state) => state.menu);
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const { colors } = useTheme(); // Use useTheme to access the current theme colors
+
+  
 
 
   
@@ -50,11 +56,11 @@ const MenuCategoryComponent = ({ category,searchQuery }) => {
   
   const renderItem = ({ item }) => (
     <TouchableOpacity
-      style={styles.itemContainer}
+      style={[styles.itemContainer, {backgroundColor:colors.tabBackgroundColor}]}
       onPress={() => openModal(item)}
     >
       <Image source={images[item.imagePath]} style={styles.image} />
-      <Text style={styles.itemName}>{item.name}</Text>
+      <Text style={[styles.itemName,{color:colors.text}]}>{item.name}</Text>
     </TouchableOpacity>
   );
 
@@ -88,18 +94,22 @@ const styles = StyleSheet.create({
         marginBottom: 20,
       },
       itemContainer: {
-        backgroundColor: 'lightgray',
-        padding: 10,
-        marginVertical: 8,
+        //backgroundColor: colors.tab,
+        paddingTop:0,
+        paddingBottom:10,
+       // marginVertical: 8,
         marginHorizontal: 8,
         alignItems: 'center',
         borderRadius: 8,
         width: '45%', // Adjust width for grid layout
       },
       image: {
-        width: 150,
-        height: 150,
-        marginBottom: 10,
+        width: 162,
+        height: 170,
+       // marginBottom: 10,
+        resizeMode:'stretch',
+        borderRadius: 8,
+        
       },
       itemName: {
         fontSize: 16,
@@ -107,6 +117,7 @@ const styles = StyleSheet.create({
         //fontWeight: 'bold',
         color:'black',
         textAlign:'center',
+        marginTop: 10,
       },
 
 

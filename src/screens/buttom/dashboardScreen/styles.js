@@ -3,13 +3,15 @@ import fonts from "../../../constants/fonts";
 const { width } = Dimensions.get('window'); // Get screen width
 const itemWidth = (width - 30) / 2; // Calculate width for each item (2 columns with 15px margin)
 
-
 export default StyleSheet.create({
     container: {
         flex: 1,
     },
     advertiseBg: {
-        resizeMode: 'contain', width: 'auto', height: 150, marginTop: 10
+        resizeMode: 'contain',
+        width: 'auto',
+        height: 150,
+        marginTop: 10,
     },
     containerRow: {
         flexDirection: 'row',
@@ -19,7 +21,6 @@ export default StyleSheet.create({
     },
     itemImageStyle: {
         width: itemWidth,
-        backgroundColor: '#FFFFFF',
         borderRadius: 8,
         padding: 10,
         alignItems: 'center',
@@ -30,22 +31,17 @@ export default StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 5,
         elevation: 3,
-        justifyContent:'center'
+        justifyContent: 'center',
     },
     itemImage: {
         width: 90,
         height: 90,
         resizeMode: 'contain',
-
     },
     itemName: {
         marginTop: 10,
         fontSize: 18,
-        color: '#333',
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold
-
-
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
+        // The text color will be dynamically set in the component using theme colors
     },
-
-
-})
+});

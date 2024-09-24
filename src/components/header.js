@@ -4,10 +4,15 @@ import { images } from '../assets/images';
 import { Strings } from '../constants/string';
 import SearchField from './searchFields';
 import fonts from '../constants/fonts';
+import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
+
+
 
 const { width } = Dimensions.get('window'); // Get screen width
 
 const HeaderWithSearch = () => {
+  const { colors } = useTheme(); // Use useTheme to access the current theme colors
+
   return (
     
       <ImageBackground source={images.BackgroundImage2} resizeMode='cover' style={{ width: width, height: 200}}>
@@ -20,19 +25,19 @@ const HeaderWithSearch = () => {
           justifyContent: 'space-between', 
           alignItems: 'center',
         }}>
-          <Text style={{
+          <Text style={[{
             fontSize: 30, 
             color: 'black', 
             fontFamily: fonts.SF_PRO_TEXT.Spectral.ExtraBold, 
             marginLeft: 20
-          }}>
+          },{ color: colors.text }]}>
             {Strings.findYourFvrtFood}
           </Text>
           <TouchableOpacity style={{
             height: 45, 
             width: 45, 
             borderRadius: 15, 
-            backgroundColor: 'white', 
+            backgroundColor: colors.tabBackgroundColor, 
             alignItems: 'center', 
             justifyContent: 'center', 
             marginRight: 30

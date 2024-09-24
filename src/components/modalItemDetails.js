@@ -3,6 +3,7 @@ import { Modal, View, Text, Image, Pressable, TouchableOpacity, StyleSheet } fro
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../redux/slices/cartSlice'; // Import the action
 import fonts from '../constants/fonts';
+import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
 
 
 const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images,statusBarTranslucent }) => {
@@ -19,6 +20,7 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images,status
     closeModal();
   };
 
+  const { colors } = useTheme(); // Use useTheme to access the current theme colors
 
 
 
@@ -33,12 +35,12 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images,status
       onRequestClose={closeModal}
     >
       <Pressable style={styles.modalBackground} onPress={closeModal}>
-        <View style={styles.modalContainer}>
+        <View style={[styles.modalContainer,{backgroundColor:colors.tabBackgroundColor}]}>
          
           <Image source={images[selectedItem.imagePath]} style={styles.modalImage} />
-          <Text style={styles.modalName}>{selectedItem.name}</Text>
-          <Text style={styles.modalDescription}>{selectedItem.description}</Text>
-          <Text style={styles.modalPrice}>Price: ${selectedItem.price.toFixed(2)}</Text>
+          <Text style={[styles.modalName,{color:colors.text}]}>{selectedItem.name}</Text>
+          <Text style={[styles.modalDescription,{color:colors.text}]}>{selectedItem.description}</Text>
+          <Text style={[styles.modalPrice,{color:colors.text}]}>Price: ${selectedItem.price.toFixed(2)}</Text>
 
 
           <TouchableOpacity style={styles.addToCartButton} onPress={() => handleAddToCart(selectedItem)}>

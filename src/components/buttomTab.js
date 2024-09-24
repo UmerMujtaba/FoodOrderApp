@@ -9,10 +9,16 @@ import ChatScreen from '../screens/buttom/chatScreen';
 import fonts from '../constants/fonts';
 import Home from '../navigator/homeStack';
 import { useSelector } from 'react-redux';
+import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
+
+
+
 
 const Tab = createBottomTabNavigator();
 
 const TabBarIconWithLabel = ({ focused, iconSource, label, cartCount }) => {
+  const { colors } = useTheme(); // Use useTheme to access the current theme colors
+
   
   return (
     <View style={[
@@ -52,13 +58,15 @@ const TabBarIconWithLabel = ({ focused, iconSource, label, cartCount }) => {
 
 const Tabs = () => {
   const cartItems = useSelector((state) => state.cart.cartItems); 
-  
+  const { colors } = useTheme(); // Use useTheme to access the current theme colors
+
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
           borderRadius: 20,
           borderTopWidth: 0,
+          backgroundColor:colors.tabBackgroundColor,
           height: 75,
           margin: 10,
           flexDirection: 'row', // Ensure horizontal layout

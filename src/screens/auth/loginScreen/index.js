@@ -9,19 +9,21 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import CustomTextInput from '../../../components/cutomTextInput'
 import SocialLoginTouchable from '../../../components/touchableComponents'
 import GradientButton from '../../../components/gradientButton'
+import { useTheme } from '@react-navigation/native';
 
 
 
 const LoginScreen = ({navigation}) => {
     const [Email, setEmail] = useState();
     const [Password, setPassword] = useState();
+    const { colors } = useTheme();
     const handlePress = () => {
         // Handle button press
     };
 
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: colors.background }]}>
             <StatusBar translucent backgroundColor="transparent" />
             <ImageBackground source={images.BackgroundImage} style={styles.bgImage}>
                 <Image source={images.appLogo} style={styles.logoStyle} />

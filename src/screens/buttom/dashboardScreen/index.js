@@ -5,10 +5,12 @@ import { images } from '../../../assets/images';
 import HeaderWithSearch from '../../../components/header';
 import FilterComponent from '../../../components/filter';
 import styles from './styles';
+import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
 
 const DashboardScreen = () => {
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
+  const { colors } = useTheme(); // Use useTheme to access the current theme colors
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -21,31 +23,32 @@ const DashboardScreen = () => {
     { id: 4, imageSource: images.addOnsImage, text: 'Sides', screen: 'Sides' },
   ];
 
-  
   const filteredItems = items.filter(item =>
     item.text.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
+    <KeyboardAvoidingView style={[styles.container, { backgroundColor: colors.background }]}>
       <HeaderWithSearch />
       <ScrollView>
         <FilterComponent onSearch={handleSearch} />
-
-        <Image source={images.advertiseImage} style={styles.advertiseBg} />
-
+        <TouchableOpacity>
+          <Image source={images.advertiseImage} style={styles.advertiseBg} />
+        </TouchableOpacity>
         <View style={styles.containerRow}>
           {filteredItems.map(item => (
             <TouchableOpacity
               key={item.id}
-              style={styles.itemImageStyle}
+              style={[
+                styles.itemImageStyle,
+                { backgroundColor: colors.tabBackgroundColor } // Use theme color for item background
+              ]}
               onPress={() => navigation.navigate(item.screen)}
             >
-              <Image
-                source={item.imageSource}
-                style={styles.itemImage}
-              />
-              <Text style={styles.itemName}>{item.text}</Text>
+              <Image source={item.imageSource} style={[styles.itemImage, { backgroundColor: colors.tabBackgroundColor }]} />
+              <Text style={[styles.itemName, { color: colors.text }]}>
+                {item.text}
+              </Text>
             </TouchableOpacity>
           ))}
         </View>

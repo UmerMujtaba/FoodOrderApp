@@ -6,9 +6,11 @@ import SplashScreen from 'react-native-splash-screen';
 import store from './src/redux/store';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import { NavigationCheck } from './src/navigator';
-// import { NavigationCheck } from './src/navigator';
+import { useColorScheme } from 'react-native';
+
 
 const App = () => {
+  const scheme = useColorScheme(); // Detect system theme
   useEffect(() => {
     SplashScreen.hide(); // Hide the splash screen when the app is ready
   }, []);

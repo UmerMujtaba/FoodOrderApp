@@ -9,6 +9,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import { LinearGradientText } from 'react-native-linear-gradient-text';
 import styles from './styles';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
+
+
+
 
 const CartScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -17,6 +21,7 @@ const CartScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [containerHeight, setContainerHeight] = useState(120);
+  const { colors } = useTheme(); // Use useTheme to access the current theme colors
 
 
   const handleRemoveItem = (id) => {
@@ -57,15 +62,15 @@ const CartScreen = ({ navigation }) => {
 
 
   const renderItem = ({ item }) => (
-    <View style={[styles.itemContainer, { height: containerHeight }]}>
+    <View style={[styles.itemContainer, { height: containerHeight },{backgroundColor:colors.tabBackgroundColor}]}>
       <Image source={images[item.imagePath]} style={styles.itemImage} />
       <View style={styles.detailsContainer}>
-        <Text style={styles.itemName}>{item.name}</Text>
+        <Text style={[styles.itemName,{color:colors.text}]}>{item.name}</Text>
         <TouchableOpacity onPress={toggleDescription}>
           <Text
             numberOfLines={showFullDescription ? undefined : 1}
             ellipsizeMode='tail'
-            style={styles.itemDescription}
+            style={[styles.itemDescription,{color:colors.text}]}
           >
             {item.description}
           </Text>
@@ -79,7 +84,7 @@ const CartScreen = ({ navigation }) => {
           text={`$ ${item.price.toFixed(2)}`}
           start={{ x: 0.1, y: 0.1 }}  // Optional
           end={{ x: 0.5, y: 0.4 }}  // Optional
-          textStyle={styles.itemPrice}  // Optional
+          textStyle={[styles.itemPrice,{color:colors.text}]}  // Optional
           textProps={{ allowFontScaling: true }}  // Optional
         />
 
@@ -102,7 +107,7 @@ const CartScreen = ({ navigation }) => {
             </LinearGradient>
           </TouchableOpacity>
 
-          <Text style={styles.quantity}>{item.quantity}</Text>
+          <Text style={[styles.quantity,{color:colors.text}]}>{item.quantity}</Text>
 
           <TouchableOpacity onPress={() => handleQuantityChange(item.id, item.quantity + 1)}>
             <LinearGradient
@@ -141,10 +146,10 @@ const CartScreen = ({ navigation }) => {
         <Image source={images.backIcon} style={styles.backImage} />
 
       </TouchableOpacity>
-      <Text style={[styles.title]}>My Cart</Text>
+      <Text style={[styles.title,{color:colors.text}]}>My Cart</Text>
 
       {cartItems.length === 0 ? (
-        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}><Text style={styles.emptyMessage}>Cart is empty.</Text></View>
+        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}><Text style={[styles.emptyMessage,{color:colors.text}]}>Cart is empty.</Text></View>
       ) : (
         <SwipeListView
           data={cartItems}
@@ -215,7 +220,7 @@ const CartScreen = ({ navigation }) => {
             </ImageBackground>
             <TouchableOpacity
               activeOpacity={0.5}
-              style={styles.ctaBtn}>
+              style={[styles.ctaBtn,{backgroundColor:colors.tabBackgroundColor}]}>
               <LinearGradientText
                 colors={['#15BE77', '#53E88B']}
                 text={'Place my Order'}
@@ -239,9 +244,9 @@ const CartScreen = ({ navigation }) => {
         animationType="fade"
       >
         <TouchableOpacity style={styles.modalBackground} onPress={() => setModalVisible(false)}>
-          <View style={styles.modalContainer}>
+          <View style={[styles.modalContainer,{backgroundColor:colors.tabBackgroundColor}]}>
 
-            <Text style={styles.modalText}>Are you sure you want to remove this item?</Text>
+            <Text style={[styles.modalText,{color:colors.text}]}>Are you sure you want to remove this item?</Text>
             <View style={styles.modalButtonContainer}>
               <TouchableOpacity onPress={confirmDelete} style={styles.modalButton}>
                 <LinearGradient
