@@ -1,15 +1,20 @@
 import React from 'react';
 import { TouchableOpacity, View, Image, Text, StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+
+
+
 
 const SocialLoginTouchable = ({ onPress, imageSource, text }) => {
+    const { colors } = useTheme();
     return (
         <TouchableOpacity
-            style={styles.container}
+            style={[styles.container,{backgroundColor:colors.tabBackgroundColor,borderColor:colors.tabBackgroundColor}]}
             onPress={onPress}
         >
             <View style={styles.content}>
                 <Image source={imageSource} resizeMode='contain' style={styles.image} />
-                <Text style={styles.text}>{text}</Text>
+                <Text style={[styles.text,{color:colors.text}]}>{text}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -37,7 +42,7 @@ const styles = StyleSheet.create({
     },
     text: {
         textAlign: 'center',
-        marginLeft: 5,
+        marginLeft: 10,
         fontFamily: 'SF Pro Text Medium', // Adjust fontFamily as needed
         color: 'black',
         fontSize: 16,
