@@ -11,23 +11,42 @@ import GradientButton from './gradientButton';
 
 
 const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statusBarTranslucent }) => {
+  console.log("🚀 ~ ItemDetailModal ~ selectedItem:", selectedItem)
   const dispatch = useDispatch();
-  const [modalHeight, setModalHeight] = useState('40%'); // Initial height of the modal
+  const [modalHeight, setModalHeight] = useState('34%'); // Initial height of the modal
+  const [selectedAddon, setSelectedAddon] = useState([]);
+  const { colors } = useTheme(); 
 
+
+ 
   const handleAddToCart = (item) => {
-    console.log('Adding item to cart:', item); // Check item structure
-    const itemToAdd = { ...item };
+    const itemToAdd = { 
+      ...selectedItem,
+      selectedAddon, // Include selected add-on
+      totalPrice: selectedItem.price + (selectedAddon ? selectedAddon.price : 0) // Calculate total price
+    };
     dispatch(addItemToCart(itemToAdd));
     closeModal();
+    console.log('Adding item to cart:', item); // Check item structure
   };
 
-  const { colors } = useTheme(); // Use useTheme to access the current theme colors
+ 
+  const handleAddonSelect = (addon) => {
+    setSelectedAddon(addon); // Set selected add-on
+    console.log("🚀 ~----------setSelectedAddons ----------~ setSelectedAddons:", addon)
+  };
+
 
   const handleModalPress = () => {
-    setModalHeight((prevHeight) => (prevHeight === '40%' ? '50%' : '40%')); // Toggle between two heights
+    setModalHeight((prevHeight) => (prevHeight === '34%' ? '60%' : '34%')); // Toggle between two heights
   };
 
   if (!selectedItem) return null;
+
+  // Display available add-ons if available
+  const availableAddons = selectedItem.availableAddons || []; // Ensure we have a valid array
+  console.log("🚀 Available Add-ons:", availableAddons); // Log to consol
+
 
   return (
     <Modal
@@ -49,20 +68,49 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
           {/* Content below the nudge */}
           <View style={styles.contentContainer}>
 
-          
-          <ModalAppBar/>
-           
+
+            <ModalAppBar />
+
 
             <Text style={[styles.modalName, { color: colors.text }]}>{selectedItem.name}</Text>
             <Text style={[styles.modalDescription, { color: colors.text }]}>{selectedItem.description}</Text>
             <Text style={[styles.modalPrice, { color: colors.text }]}>Price: ${selectedItem.price.toFixed(2)}</Text>
 
 
+            <View style={{ flexDirection: 'column', justifyContent: 'center', alignSelf: 'center' }}>
+              <Text style={[styles.modalAddons, { color: colors.text }]}>Available Add-ons</Text>
 
-            <GradientButton onPress={() => handleAddToCart(selectedItem)} buttonText={'Add to Cart'}>
-            
+              {/* Dynamically render the availableAddons */}
+              {availableAddons.length > 0 ? (
+                availableAddons.map((addon, index) => (
+                  <TouchableOpacity
+                    key={addon.id}
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-around',
+                      margin: 5,
+                      height: 35,
+                      width: 140,
+                      borderRadius: 16,
+                      backgroundColor: colors.tabBackgroundColor,
+                      alignItems: 'center',
+                    }}
+                    onPress={() => handleAddonSelect(addon)}
+                  >
+                    <Text style={{ textAlign: 'center', color: 'white', fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium }}>{addon.name}</Text>
+                    {/* <Text style={{ color: 'white' ,fontFamily:fonts.SF_PRO_TEXT.Spectral.Medium }}>${addon.price.toFixed(2)}</Text> */}
+                  </TouchableOpacity>
+                ))
+              ) : (
+                <Text style={[styles.modalDescription, { color: colors.text }]}>No add-ons available</Text>
+              )}
+            </View>
+
+
+            <GradientButton onPress={() => handleAddToCart(selectedItem)} buttonText={'Add to Cart'} >
+
             </GradientButton>
-          
+
           </View>
         </Pressable>
       </Pressable>
@@ -70,8 +118,9 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
   );
 };
 
+
 const styles = StyleSheet.create({
-  
+
   modalBackground: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -88,6 +137,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingTop: 20,
+
     alignItems: 'center',
     justifyContent: 'flex-start', // Align items to start
   },
@@ -109,9 +159,10 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     width: '100%',
-    paddingBottom: 10, // Space below content
+    //backgroundColor:'red',
+    paddingBottom: 20,
   },
-   modalName: {
+  modalName: {
     fontSize: 24,
     marginVertical: 10,
     color: 'black',
@@ -120,13 +171,19 @@ const styles = StyleSheet.create({
   },
   modalDescription: {
     fontSize: 16,
-   // textAlign: 'center',
-    //marginVertical: 10,
     marginLeft: 10,
-    //paddingLeft: 5,
     paddingRight: 5,
     color: 'black',
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
+  },
+  modalAddons: {
+    fontSize: 16,
+    //marginLeft: 10,
+    marginBottom: 10,
+    // paddingRight: 5,
+    color: 'black',
+    textAlign: 'center',
+    fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
   },
   modalPrice: {
     fontSize: 18,
@@ -142,7 +199,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     marginTop: 20,
-   margin:120
+    margin: 120
   },
   addToCartText: {
     color: 'white',

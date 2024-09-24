@@ -16,7 +16,11 @@ import { useTheme } from '@react-navigation/native'; // Import useTheme to acces
 
 const CartScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems.map(item => ({
+    ...item,
+    totalPrice: item.price + (item.selectedAddon ? item.selectedAddon.price : 0), // Calculate total price with selected add-on
+  })));
+
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -43,8 +47,16 @@ const CartScreen = ({ navigation }) => {
     }
   };
 
+  // const subTotal = () => {
+  //   return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+  // };
+
+
   const subTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+    return cartItems.reduce((total, item) => {
+      const addOnPrice = item.selectedAddon ? item.selectedAddon.price : 0;
+      return total + (item.price + addOnPrice) * item.quantity;
+    }, 0).toFixed(2);
   };
 
 
@@ -64,8 +76,10 @@ const CartScreen = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     const isExpanded = expandedItemId === item.id;
+    const addOnsTotal = item.addOns?.reduce((sum, addOn) => sum + addOn.price, 0) || 0;
+
     return (
-      <View style={[styles.itemContainer, { height: isExpanded ? 140 : 120 }, { backgroundColor: colors.tabBackgroundColor }]}>
+      <View style={[styles.itemContainer, { height: isExpanded ? 140 : 140 }, { backgroundColor: colors.tabBackgroundColor }]}>
         <Image source={images[item.imagePath]} style={[styles.itemImage, { height: isExpanded ? 100 : 80, width: isExpanded ? 100 : 80 }]} />
         <View style={styles.detailsContainer}>
           <Text style={[styles.itemName, { color: colors.text }, { marginTop: isExpanded ? 18 : 5 }]}>{item.name}</Text>
@@ -75,6 +89,13 @@ const CartScreen = ({ navigation }) => {
               ellipsizeMode='tail'
               style={[styles.itemDescription, { color: colors.text }]}> {item.description}</Text>
           </TouchableOpacity>
+
+          {item.selectedAddon && (
+            <View>
+            <Text style={{ color: colors.text ,fontFamily:fonts.SF_PRO_TEXT.Spectral.Medium}}>Add-On: </Text>
+            <Text style={{ color: colors.text ,fontFamily:fonts.SF_PRO_TEXT.Spectral.Regular}}>{item.selectedAddon.name}: $ {item.selectedAddon.price}</Text>
+            </View>
+          )}
 
           <LinearGradientText
             colors={['#15BE77', '#53E88B']}

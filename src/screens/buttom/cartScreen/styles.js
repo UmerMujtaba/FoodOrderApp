@@ -179,7 +179,10 @@ export default StyleSheet.create({
 
 
 
-
+    addOnsContainer: {
+        marginTop: 5,
+        paddingBottom: 5,
+      },
 
 
     hiddenItem: {
