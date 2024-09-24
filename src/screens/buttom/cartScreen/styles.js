@@ -44,31 +44,43 @@ export default StyleSheet.create({
         width: 80,
         height: 80,
         borderRadius: 8,
-        alignSelf:'center'
+        alignSelf:'center',
+        
     },
     detailsContainer: {
         flex: 1,
         marginLeft: 10,
-        height:90,
+        //height:90,
         justifyContent: 'center',
+        //backgroundColor:'red'
     },
     itemName: {
         fontSize: 20,
         color: 'black',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
-        marginTop:5
+        marginTop:5,
+       // backgroundColor:'green'
         //marginTop:5
     },
     itemDescription:{
         fontSize: 14,
         color: 'grey',
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
+        //backgroundColor:'blue'
     },
+
+    addOnsContainer: {
+        marginTop: 5,
+        paddingBottom: 5,
+        //backgroundColor:'pink'
+      },
+
     itemPrice: {
         fontSize: 20,
         color: '#15BE77',
         //fontWeight: 'bold',
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
+        //backgroundColor:'teal'
     },
     quantityContainer: {
         flexDirection: 'row',
@@ -179,11 +191,7 @@ export default StyleSheet.create({
 
 
 
-    addOnsContainer: {
-        marginTop: 5,
-        paddingBottom: 5,
-      },
-
+   
 
     hiddenItem: {
         //alignItems: 'flex-end',

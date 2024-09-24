@@ -79,20 +79,22 @@ const CartScreen = ({ navigation }) => {
     const addOnsTotal = item.addOns?.reduce((sum, addOn) => sum + addOn.price, 0) || 0;
 
     return (
-      <View style={[styles.itemContainer, { height: isExpanded ? 140 : 140 }, { backgroundColor: colors.tabBackgroundColor }]}>
-        <Image source={images[item.imagePath]} style={[styles.itemImage, { height: isExpanded ? 100 : 80, width: isExpanded ? 100 : 80 }]} />
+      <View style={[styles.itemContainer, { backgroundColor: colors.tabBackgroundColor }]}>
+        <Image source={images[item.imagePath]} style={[styles.itemImage, { height: isExpanded ? 140 : 100, width: isExpanded ? 100 : 80 }]} />
+        
+        
         <View style={styles.detailsContainer}>
-          <Text style={[styles.itemName, { color: colors.text }, { marginTop: isExpanded ? 18 : 5 }]}>{item.name}</Text>
+          <Text style={[styles.itemName, { color: colors.text }, { marginTop: isExpanded ? 70 : 35 }]}>{item.name}</Text>
           <TouchableOpacity onPress={() => toggleDescription(item.id)}>
             <Text
               numberOfLines={isExpanded ? undefined : 1}
               ellipsizeMode='tail'
-              style={[styles.itemDescription, { color: colors.text }]}> {item.description}</Text>
+              style={[styles.itemDescription, { color: colors.text }]}>{item.description}</Text>
           </TouchableOpacity>
 
           {item.selectedAddon && (
             <View>
-            <Text style={{ color: colors.text ,fontFamily:fonts.SF_PRO_TEXT.Spectral.Medium}}>Add-On: </Text>
+            <Text style={{ color: colors.text ,fontFamily:fonts.SF_PRO_TEXT.Spectral.Bold}}>Add-On: </Text>
             <Text style={{ color: colors.text ,fontFamily:fonts.SF_PRO_TEXT.Spectral.Regular}}>{item.selectedAddon.name}: $ {item.selectedAddon.price}</Text>
             </View>
           )}
