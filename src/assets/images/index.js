@@ -49,9 +49,9 @@ export const images = {
     backIcon: require('./backicon.png'),
 
 
-
-
-
+    popularContainer: require('./containerpopular.png'),
+    locationIcon: require('./locationicon.png'),
+    heartIcon: require('./hearticon.png'),
 }
 // 
 

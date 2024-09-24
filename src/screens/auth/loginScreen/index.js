@@ -13,7 +13,7 @@ import { useTheme } from '@react-navigation/native';
 
 
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({ navigation }) => {
     const [Email, setEmail] = useState();
     const [Password, setPassword] = useState();
     const { colors } = useTheme();
@@ -47,7 +47,7 @@ const LoginScreen = ({navigation}) => {
                     keyboardType='default'
                 />
 
-                <Text style={styles.optText}>{Strings.orContinueWith}</Text>
+                <Text style={[styles.optText, { color: colors.text }]}>{Strings.orContinueWith}</Text>
 
                 <View style={styles.socialLoginContainer}>
 
@@ -63,15 +63,18 @@ const LoginScreen = ({navigation}) => {
                     />
 
                 </View>
-                <Text
-                    style={styles.forgotPswrdText}>
-                    {Strings.forgotPassword}
-                </Text>
+                <TouchableOpacity>
+                    <Text
+                        style={styles.forgotPswrdText}>
+                        {Strings.forgotPassword}
+                    </Text>
+                </TouchableOpacity>
             </View>
+
             <GradientButton
-                 onPress={() =>  navigation.navigate('BottomStack', {
+                onPress={() => navigation.navigate('BottomStack', {
                     screen: 'Home', // This is correct if you named the tab as "DashboardTab"
-                  })}
+                })}
                 buttonText="Next"
                 textStyle={{ fontSize: 18 }}
             />

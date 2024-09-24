@@ -47,20 +47,21 @@ export default StyleSheet.create({
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
         fontSize: 16,
         marginBottom: 5,
-        marginTop: 5
+        marginTop: 15
     },
     socialLoginContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         height: 60,
-        marginTop: 5
+        marginTop: 15
     },
 
     forgotPswrdText: {
         textAlign: 'center',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
         fontSize: 14,
-        marginTop: 15,
+        marginTop: 10,
+        marginBottom:5,
         color: '#15BE77',
         marginBottom: 5,
         textDecorationLine: 'underline',

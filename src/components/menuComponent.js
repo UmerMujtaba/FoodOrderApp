@@ -72,14 +72,16 @@ const MenuCategoryComponent = ({ category,searchQuery }) => {
         keyExtractor={(item) => item.name}
         numColumns={2}
         columnWrapperStyle={styles.row}
+        showsVerticalScrollIndicator={false}
       />
-      <ItemDetailModal
-      statusBarTranslucent={true}
+        <ItemDetailModal
+        statusBarTranslucent={true}
         modalVisible={modalVisible}
         selectedItem={selectedItem}
         closeModal={closeModal}
-        images={images}
+        images={images} // Pass your images object here
       />
+    
     </View>
   );
 };
@@ -108,8 +110,9 @@ const styles = StyleSheet.create({
         height: 170,
        // marginBottom: 10,
         resizeMode:'stretch',
-        borderRadius: 8,
-        
+       
+        borderTopRightRadius: 8,
+        borderTopLeftRadius:8,
       },
       itemName: {
         fontSize: 16,

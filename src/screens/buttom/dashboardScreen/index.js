@@ -30,7 +30,9 @@ const DashboardScreen = () => {
   return (
     <KeyboardAvoidingView style={[styles.container, { backgroundColor: colors.background }]}>
       <HeaderWithSearch />
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+      >
         <FilterComponent onSearch={handleSearch} />
         <TouchableOpacity>
           <Image source={images.advertiseImage} style={styles.advertiseBg} />

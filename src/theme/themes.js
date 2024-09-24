@@ -6,7 +6,8 @@ export const lightTheme = {
     tabBackgroundColor: '#f5f5f5',
     tabIconColor: 'green',
     primary: '#000',
-    secondary: '#f5f5f5'
+    secondary: '#f5f5f5',
+    modalColor: 'white'
   },
 };
 
@@ -18,6 +19,7 @@ export const darkTheme = {
     tabBackgroundColor: '#3b3a3a',
     tabIconColor: 'lightgreen',
     primary: 'grey',
-    secondary:'#f5f5f5'
+    secondary:'#f5f5f5',
+    modalColor: '#0E1110'
   },
 };
