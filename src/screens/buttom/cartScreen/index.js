@@ -10,6 +10,7 @@ import { LinearGradientText } from 'react-native-linear-gradient-text';
 import styles from './styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
+import { Strings } from '../../../constants/string';
 
 
 
@@ -23,7 +24,6 @@ const CartScreen = ({ navigation }) => {
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [showFullDescription, setShowFullDescription] = useState(false);
   const [expandedItemId, setExpandedItemId] = useState(null);
   const { colors } = useTheme();
 
@@ -46,11 +46,6 @@ const CartScreen = ({ navigation }) => {
       dispatch(updateQuantity({ id, quantity }));
     }
   };
-
-  // const subTotal = () => {
-  //   return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
-  // };
-
 
   const subTotal = () => {
     return cartItems.reduce((total, item) => {
@@ -76,26 +71,26 @@ const CartScreen = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     const isExpanded = expandedItemId === item.id;
-    const addOnsTotal = item.addOns?.reduce((sum, addOn) => sum + addOn.price, 0) || 0;
+   
 
     return (
-      <View style={[styles.itemContainer, { backgroundColor: colors.tabBackgroundColor }]}>
-        <Image source={images[item.imagePath]} style={[styles.itemImage, { height: isExpanded ? 140 : 100, width: isExpanded ? 100 : 80 }]} />
-        
-        
+      <View style={[styles.itemContainer(colors)]}>
+        <Image source={images[item.imagePath]} style={styles.itemImage(isExpanded)} />
+
+
         <View style={styles.detailsContainer}>
-          <Text style={[styles.itemName, { color: colors.text }, { marginTop: isExpanded ? 70 : 35 }]}>{item.name}</Text>
+          <Text style={styles.itemName(colors, isExpanded)}>{item.name}</Text>
           <TouchableOpacity onPress={() => toggleDescription(item.id)}>
             <Text
               numberOfLines={isExpanded ? undefined : 1}
               ellipsizeMode='tail'
-              style={[styles.itemDescription, { color: colors.text }]}>{item.description}</Text>
+              style={styles.itemDescription(colors)}>{item.description}</Text>
           </TouchableOpacity>
 
           {item.selectedAddon && (
             <View>
-            <Text style={{ color: colors.text ,fontFamily:fonts.SF_PRO_TEXT.Spectral.Bold}}>Add-On: </Text>
-            <Text style={{ color: colors.text ,fontFamily:fonts.SF_PRO_TEXT.Spectral.Regular}}>{item.selectedAddon.name}: $ {item.selectedAddon.price}</Text>
+              <Text style={styles.addOnHeading(colors)}>{Strings.addOn}</Text>
+              <Text style={styles.addOnName(colors)}>{item.selectedAddon.name}: $ {item.selectedAddon.price}</Text>
             </View>
           )}
 
@@ -122,7 +117,7 @@ const CartScreen = ({ navigation }) => {
               </LinearGradient>
             </TouchableOpacity>
 
-            <Text style={[styles.quantity, { color: colors.text }]}>{item.quantity}</Text>
+            <Text style={styles.quantity(colors)}>{item.quantity}</Text>
 
             <TouchableOpacity onPress={() => handleQuantityChange(item.id, item.quantity + 1)}>
               <LinearGradient
@@ -140,25 +135,26 @@ const CartScreen = ({ navigation }) => {
     )
   }
 
-  const renderHiddenItem = (data) => (
-    <View style={styles.hiddenItem}>
-      <TouchableOpacity style={styles.deleteButton} onPress={() => handleRemoveItem(data.item.id)}>
-        <Image source={images.deleteIcon} style={styles.deleteImg} />
-      </TouchableOpacity>
-    </View>
-  );
+  const renderHiddenItem = (data) => {
+
+    return (
+      <View style={styles.hiddenItem}>
+        <TouchableOpacity style={styles.deleteButton} onPress={() => handleRemoveItem(data.item.id)}>
+          <Image source={images.deleteIcon} style={styles.deleteImg} />
+        </TouchableOpacity>
+      </View>
+    )
+  };
 
   return (
     <View style={styles.container}>
-
-
-      <TouchableOpacity style={[styles.backContainer, { backgroundColor: colors.backContainer }]} onPress={() => navigation.goBack()}>
+      <TouchableOpacity style={styles.backIconContainer(colors)} onPress={() => navigation.goBack()}>
         <Image source={images.backIcon} style={styles.backImage} />
       </TouchableOpacity>
-      <Text style={[styles.title, { color: colors.text }]}>My Cart</Text>
+      <Text style={styles.title(colors)}>{Strings.myCart}</Text>
 
       {cartItems.length === 0 ? (
-        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}><Text style={[styles.emptyMessage, { color: colors.text }]}>Cart is empty.</Text></View>
+        <View style={styles.displayMsg}><Text style={styles.emptyMessage(colors)}>{Strings.cartEmptyMsg}</Text></View>
       ) : (
         <SwipeListView
           data={cartItems}
@@ -182,12 +178,12 @@ const CartScreen = ({ navigation }) => {
 
               <View style={styles.cardContainerRow}>
                 <View style={styles.cardContainerCol}>
-                  <Text style={styles.headingText}>Sub Total:</Text>
+                  <Text style={styles.headingText}>{Strings.subTotal}</Text>
                   {cartItems.length > 0 && (
                     <>
-                      <Text style={styles.headingText}>Delivery Charges:</Text>
-                      <Text style={styles.headingText}>Discount</Text>
-                      <Text style={styles.priceText}>Total</Text>
+                      <Text style={styles.headingText}>{Strings.deliveryCharges}</Text>
+                      <Text style={styles.headingText}>{Strings.discount}</Text>
+                      <Text style={styles.priceText}>{Strings.total}</Text>
                     </>
                   )}
                 </View>
@@ -205,7 +201,7 @@ const CartScreen = ({ navigation }) => {
             </ImageBackground>
             <TouchableOpacity
               activeOpacity={0.5}
-              style={[styles.ctaBtn, { backgroundColor: colors.tabBackgroundColor }]}>
+              style={styles.ctaBtn(colors)}>
               <LinearGradientText
                 colors={['#15BE77', '#53E88B']}
                 text={'Place my Order'}
@@ -229,9 +225,9 @@ const CartScreen = ({ navigation }) => {
         animationType="fade"
       >
         <TouchableOpacity style={styles.modalBackground} onPress={() => setModalVisible(false)}>
-          <View style={[styles.modalContainer, { backgroundColor: colors.tabBackgroundColor }]}>
+          <View style={styles.modalContainer(colors)}>
 
-            <Text style={[styles.modalText, { color: colors.text }]}>Are you sure you want to remove this item?</Text>
+            <Text style={styles.modalText(colors)}>{Strings.confirmationMsg}</Text>
             <View style={styles.modalButtonContainer}>
               <TouchableOpacity onPress={confirmDelete} style={styles.modalButton}>
                 <LinearGradient

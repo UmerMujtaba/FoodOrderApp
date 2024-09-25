@@ -18,6 +18,9 @@ export default StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         padding: 10,
+        marginTop:10,
+        //backgroundColor:'red',
+        
     },
     itemImageStyle: {
         width: itemWidth,

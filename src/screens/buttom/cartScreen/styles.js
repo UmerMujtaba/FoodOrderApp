@@ -6,47 +6,49 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
-        
+
     },
-    backContainer: {
-        backgroundColor: '#FFE0B5',
+    backIconContainer:(colors)=> ({
+        backgroundColor: colors.backContainer,
+    
         height: 45,
         width: 45,
         justifyContent: 'center',
         borderRadius: 16,
-        marginTop:30,
-        marginLeft:10
-    },
+        marginTop: 30,
+        marginLeft: 10
+    }),
     backImage: {
         resizeMode: 'contain',
         height: 16.36,
         width: 10,
         alignSelf: 'center',
     },
-    title: {
+    title:(colors)=> ({
         fontSize: 24,
         marginBottom: 10,
         textAlign: 'center',
-        color: 'black',
+        color: colors.text,
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
 
-    },
-    itemContainer: {
+    }),
+    itemContainer: (colors) => ({
         flexDirection: 'row',
         padding: 12,
         backgroundColor: 'white',
         borderRadius: 16,
         marginBottom: 10,
+        backgroundColor: colors.tabBackgroundColor
 
-
-    },
-    itemImage: {
-        width: 80,
-        height: 80,
+    }),
+    itemImage: (isExpanded) => ({
+        // width: 80,
+        // height: 80,
         borderRadius: 8,
-        alignSelf:'center',
-        
-    },
+        alignSelf: 'center',
+        height: isExpanded ? 140 : 100, width: isExpanded ? 100 : 80
+
+    }),
     detailsContainer: {
         flex: 1,
         marginLeft: 10,
@@ -54,27 +56,42 @@ export default StyleSheet.create({
         justifyContent: 'center',
         //backgroundColor:'red'
     },
-    itemName: {
+    itemName: (colors, isExpanded) => ({
         fontSize: 20,
-        color: 'black',
+        // color: 'black',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
-        marginTop:5,
-       // backgroundColor:'green'
+        // marginTop:5,
+        // backgroundColor:'green'
         //marginTop:5
-    },
-    itemDescription:{
+        color: colors.text,
+        marginTop: isExpanded ? 70 : 35
+    }),
+    itemDescription:(colors)=> ({
         fontSize: 14,
-        color: 'grey',
+        // color: 'grey',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
+        color: colors.text
         //backgroundColor:'blue'
-    },
-
+    }),
+addOnHeading:(colors)=>({
+    color: colors.text, 
+    fontFamily: 
+    fonts.SF_PRO_TEXT.Spectral.Bold 
+}),
+addOnName:(colors) => ({
+    color: colors.text, 
+    fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular 
+}),
     addOnsContainer: {
         marginTop: 5,
         paddingBottom: 5,
         //backgroundColor:'pink'
-      },
+    },
 
+    displayMsg:{ 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        flex: 1 },
     itemPrice: {
         fontSize: 20,
         color: '#15BE77',
@@ -118,12 +135,12 @@ export default StyleSheet.create({
         paddingBottom: 2,
         opacity: 0.8
     },
-    quantity: {
+    quantity:(colors)=> ({
         marginHorizontal: 15,
         fontSize: 18,
-        color: 'black',
+        color: colors.text,
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
-    },
+    }),
 
 
     cardGradient: {
@@ -165,8 +182,8 @@ export default StyleSheet.create({
         color: 'black',
         marginTop: 15
     },
-    ctaBtn: {
-        backgroundColor: 'white',
+    ctaBtn:(colors)=> ({
+       
         height: 45,
         width: 325,
         borderRadius: 16,
@@ -175,9 +192,9 @@ export default StyleSheet.create({
         //zIndex: 2,
         bottom: 5,
         alignSelf: 'center',
-        justifyContent: 'center'
-
-    },
+        justifyContent: 'center',
+        backgroundColor: colors.tabBackgroundColor,
+    }),
 
     OrderText: {
         fontSize: 22
@@ -191,7 +208,7 @@ export default StyleSheet.create({
 
 
 
-   
+
 
     hiddenItem: {
         //alignItems: 'flex-end',
@@ -200,9 +217,9 @@ export default StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'column',
         alignSelf: 'flex-end',
-       
+
         borderRadius: 16,
-        height: 110,
+        height: 185,
         width: 335
     },
     deleteButton: {
@@ -225,37 +242,38 @@ export default StyleSheet.create({
         color: 'black',
         marginTop: 40,
     },
-    emptyMessage: {
+    emptyMessage:(colors)=> ({
         fontSize: 18,
         textAlign: 'center',
-       
+
         // marginTop: 20,
-        color: 'black',
+        color: colors.text,
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
-       
-    },
+
+    }),
     modalBackground: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
-    modalContainer: {
+    modalContainer:(colors) => ({
         width: '95%',
-        backgroundColor: 'white',
+       
         borderRadius: 16,
         padding: 20,
         height: '25%',
         alignItems: 'center',
-        justifyContent:'center'
-    },
-    modalText: {
+        justifyContent: 'center',
+        backgroundColor: colors.tabBackgroundColor 
+    }),
+    modalText:(colors) => ({
         fontSize: 18,
-        color: 'black',
+        color: colors.text,
         marginBottom: 20,
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
         textAlign: 'center',
-    },
+    }),
     modalButtonContainer: {
         flexDirection: 'row',
 

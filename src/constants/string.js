@@ -10,5 +10,15 @@ export const Strings ={
     Google: 'Google',
     Gmail: 'Gmail',
     forgotPassword: 'Forgot Your Password?',
-    findYourFvrtFood: 'Find Your\nFavorite Food'
+    findYourFvrtFood: 'Find Your\nFavorite Food',
+    noAddonsAvailable: 'No add-ons available',
+    availableAddOns:'Available Add-ons',
+    confirmationMsg: 'Are you sure you want to remove this item?',
+    addOn:'Add-On: ',
+    cartEmptyMsg:'Cart is empty.',
+    myCart:'My Cart',
+    subTotal:'Sub Total:',
+    deliveryCharges:'Delivery Charges:',
+    discount:'Discount',
+    total:'Total',
 }

@@ -15,6 +15,7 @@ const MenuCategoryComponent = ({ category,searchQuery }) => {
   const { menuItems, loading, error } = useSelector((state) => state.menu);
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [selectedAddon, setSelectedAddon] = useState(null);
   const { colors } = useTheme(); // Use useTheme to access the current theme colors
 
   
@@ -27,6 +28,7 @@ const MenuCategoryComponent = ({ category,searchQuery }) => {
 
   const openModal = (item) => {
     setSelectedItem(item);
+    setSelectedAddon(null);
     setModalVisible(true);
   };
 
