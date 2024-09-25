@@ -33,7 +33,8 @@ export default StyleSheet.create({
         fontSize: 24,
         color: colors.text,
         alignSelf: 'center',
-        top: '35%'
+        top: '35%',
+        
     }),
     body: {
         height: 280,
@@ -42,31 +43,5 @@ export default StyleSheet.create({
         marginRight: 18,
         marginTop: 15
     },
-    optText:(colors)=>( {
-        alignSelf: 'center',
-        color: colors.text,
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
-        fontSize: 16,
-        marginBottom: 5,
-        marginTop: 15
-    }),
-    socialLoginContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        height: 60,
-        marginTop: 15
-    },
-
-    forgotPswrdText: {
-        textAlign: 'center',
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
-        fontSize: 14,
-        marginTop: 10,
-        marginBottom:5,
-        color: '#15BE77',
-        marginBottom: 5,
-        textDecorationLine: 'underline',
-    },
-
-
+   
 });

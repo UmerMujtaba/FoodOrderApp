@@ -34,7 +34,7 @@ const LoginScreen = ({ navigation }) => {
 
             if (loginSuccess.user) {
                 await AsyncStorage.setItem('session', JSON.stringify(loginSuccess.user)); // Store user session
-       
+
                 navigation.navigate('BottomStack', {
                     screen: 'Home',
                 });
@@ -50,11 +50,11 @@ const LoginScreen = ({ navigation }) => {
 
 
     return (
-        <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <View style={styles.container(colors)}>
             <StatusBar translucent backgroundColor="transparent" />
             <ImageBackground source={images.BackgroundImage} style={styles.bgImage}>
                 <Image source={images.appLogo} style={styles.logoStyle} />
-                <Text style={styles.mainText}>
+                <Text style={styles.mainText(colors)}>
                     {Strings.loginToYourAcc}
                 </Text>
             </ImageBackground>
@@ -74,7 +74,7 @@ const LoginScreen = ({ navigation }) => {
                     keyboardType='default'
                 />
 
-                <Text style={[styles.optText, { color: colors.text }]}>{Strings.orContinueWith}</Text>
+                <Text style={styles.optText(colors)}>{Strings.orContinueWith}</Text>
 
                 <View style={styles.socialLoginContainer}>
 

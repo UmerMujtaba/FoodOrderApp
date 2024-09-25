@@ -1,33 +1,55 @@
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
-import { TextInput, StyleSheet } from 'react-native';
+import { TextInput, StyleSheet, View, Image } from 'react-native';
 
-const CustomTextInput = ({ placeholder, value, onChangeText, keyboardType }) => {
+const CustomTextInput = ({ placeholder, value, onChangeText, keyboardType, secureTextEntry, rightIcon, imageSource, suffixIconStyle, style }) => {
     const { colors, dark } = useTheme();
     return (
-        <TextInput
-            placeholder={placeholder}
-            placeholderTextColor={dark ? '#FFFFFF' : '#3B3B3B'} // Adjust color based on theme
-            onChangeText={onChangeText}
-            value={value}
-            keyboardType={keyboardType}
-            style={[styles.input, { backgroundColor: colors.tabBackgroundColor, borderColor: colors.tabBackgroundColor, color:colors.text }]}
-        />
+        <View style={[styles.container(colors), style]}>
+            {rightIcon && (
+                <Image
+                    style={[styles.icon, { ...suffixIconStyle }]}
+                    resizeMode="contain"
+                    source={imageSource}
+                />
+            )}
+            <TextInput
+                placeholder={placeholder}
+                placeholderTextColor={dark ? '#FFFFFF' : '#3B3B3B'} // Adjust color based on theme
+                onChangeText={onChangeText}
+                value={value}
+                keyboardType={keyboardType}
+                secureTextEntry={secureTextEntry}
+                style={{ flex: 1, marginLeft: 5 }}
+            //style={[styles.input, { backgroundColor: colors.tabBackgroundColor, borderColor: colors.tabBackgroundColor, color:colors.text }]}
+            />
+
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    input: {
-        color: '#3B3B3B',
-        height: 55,
-        // borderColor: '#F4F4F4',
-        borderWidth: 1,
-        paddingLeft: 20,
-        //backgroundColor: colors.,
-        borderRadius: 15,
+    container: (colors) => ({
+        flexDirection: 'row',
+        alignItems: 'center',
+
         marginTop: 5,
         marginBottom: 10,
-    },
+        borderRadius: 15,
+        backgroundColor: colors.tabBackgroundColor, borderColor: colors.tabBackgroundColor, color: colors.text,
+        //paddingHorizontal: 16,
+        height: 55,
+        // width:"80%",
+        paddingLeft: 10,
+        //justifyContent: 'space-between',
+        // alignItems: 'center',
+        // marginBottom: 30
+    }),
+    icon: {
+
+
+    }
+
 });
 
 export default CustomTextInput;

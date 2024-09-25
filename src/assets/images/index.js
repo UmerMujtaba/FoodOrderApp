@@ -52,6 +52,12 @@ export const images = {
     popularContainer: require('./containerpopular.png'),
     locationIcon: require('./locationicon.png'),
     heartIcon: require('./hearticon.png'),
+
+
+
+    lockIcon: require('./lock.png'),
+    emailIcon: require('./message.png'),
+    profileIcon: require('./profile.png'),
 }
 // 
 
