@@ -11,7 +11,7 @@ const CustomTextInput = ({ placeholder, value, onChangeText, keyboardType }) => 
             onChangeText={onChangeText}
             value={value}
             keyboardType={keyboardType}
-            style={[styles.input, { backgroundColor: colors.tabBackgroundColor, borderColor: colors.tabBackgroundColor }]}
+            style={[styles.input, { backgroundColor: colors.tabBackgroundColor, borderColor: colors.tabBackgroundColor, color:colors.text }]}
         />
     );
 };

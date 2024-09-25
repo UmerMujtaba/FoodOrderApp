@@ -6,9 +6,9 @@ import fonts from '../constants/fonts';
 const GradientButton = ({ onPress, buttonText }) => (
     <TouchableOpacity style={styles.ctaStart} onPress={onPress}>
         <LinearGradient
-            start={{ x: 0.0, y: 0.5 }}
-            end={{ x: 1.0, y: 0.5 }}
-            locations={[0.2, 0.7]}
+            start={{ x: 0, y: 0.5 }}
+            end={{ x: 1, y: 0.5 }}
+            // locations={[0.1, 0.5,0.9]}
             colors={['#53E88B', '#15BE77']}
             style={styles.linearGradient}
         >
@@ -32,12 +32,12 @@ const styles = StyleSheet.create({
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold, // Make sure the font is correctly linked
     },
     linearGradient: {
-        borderRadius: 12,
+        borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingVertical: 10,
-        width: '100%',
-        height: '100%',
+       // paddingVertical: 10,
+       // width: '100%',
+      height: '100%',
     },
 });
 

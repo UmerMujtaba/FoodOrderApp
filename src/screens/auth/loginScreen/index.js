@@ -1,4 +1,4 @@
-import { View, Text, StatusBar, ImageBackground, Image, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StatusBar, ImageBackground, Image, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import styles from './styles'
 import { images } from '../../../assets/images'
@@ -11,14 +11,41 @@ import SocialLoginTouchable from '../../../components/touchableComponents'
 import GradientButton from '../../../components/gradientButton'
 import { useTheme } from '@react-navigation/native';
 
+import { loginUser } from '../../../services/authServices';
+import { supabase } from '../utils/supabase';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 
 const LoginScreen = ({ navigation }) => {
     const [Email, setEmail] = useState();
     const [Password, setPassword] = useState();
     const { colors } = useTheme();
-    const handlePress = () => {
-        // Handle button press
+    const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+
+    const handleLogin = async () => {
+        setLoading(true);
+        try {
+            const loginSuccess = await loginUser(Email, Password);
+            setLoading(false);
+
+            if (loginSuccess.user) {
+                await AsyncStorage.setItem('session', JSON.stringify(loginSuccess.user)); // Store user session
+       
+                navigation.navigate('BottomStack', {
+                    screen: 'Home',
+                });
+            } else {
+                setErrorMessage(loginSuccess.error?.message || 'Login failed'); e
+                console.log('Login failed:', loginSuccess.error?.message);
+            }
+        } catch (err) {
+            setLoading(false); // Stop loading on error
+            console.error('Error during login:', err); // Log any unexpected errors
+        }
     };
 
 
@@ -70,15 +97,20 @@ const LoginScreen = ({ navigation }) => {
                     </Text>
                 </TouchableOpacity>
             </View>
-
-            <GradientButton
-                onPress={() => navigation.navigate('BottomStack', {
-                    screen: 'Home', // This is correct if you named the tab as "DashboardTab"
-                })}
-                buttonText="Next"
-                textStyle={{ fontSize: 18 }}
-            />
-
+            {errorMessage ? (
+                <Text style={{ color: 'red', marginBottom: 10 }}>{errorMessage}</Text>
+            ) : null}
+            {loading ? (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <ActivityIndicator size="large" color="#0000ff" />
+                </View>
+            ) : (
+                <GradientButton
+                    onPress={handleLogin} // Call the handleLogin function
+                    buttonText="Next"
+                    textStyle={{ fontSize: 18 }}
+                />
+            )}
 
         </View>
     )

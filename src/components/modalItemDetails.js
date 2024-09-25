@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, Image, Pressable, TouchableOpacity, StyleSheet } from 'react-native';
+import { Modal, View, Text, Image, Pressable, TouchableOpacity, StyleSheet, } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../redux/slices/cartSlice'; // Import the action
 import fonts from '../constants/fonts';
@@ -15,10 +15,10 @@ import { RadioButton } from 'react-native-paper';
 const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statusBarTranslucent }) => {
   const dispatch = useDispatch();
   const [modalHeight, setModalHeight] = useState('34%');
-  const [selectedAddon, setSelectedAddon] = useState(null); // Track selected addon
+  const [selectedAddon, setSelectedAddon] = useState([]); // Track selected addon
   const { colors } = useTheme();
 
-  console.log("🚀 ~ ItemDetailModal ~ selectedItem:", selectedItem)
+  //console.log("🚀 ~ ItemDetailModal ~ selectedItem:", selectedItem)
 
   const handleAddToCart = (item) => {
     const itemToAdd = {
@@ -47,7 +47,7 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
 
   // Display available add-ons if available
   const availableAddons = selectedItem.availableAddons || [];
-  console.log("🚀 Available Add-ons:", availableAddons);
+ // console.log("🚀 Available Add-ons:", availableAddons);
 
 
   return (
@@ -80,9 +80,9 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
 
               <View style={{ flexDirection: 'row' }}>
                 {availableAddons.length > 0 ? (
-                  availableAddons.map((addon) => (
+                  availableAddons.map((addon,index) => (
                     <TouchableOpacity
-                      key={addon.id}
+                      key={index+addon.price}
                       style={styles.addOnContainer(colors)}
                       onPress={() => handleAddonSelect(addon)}
                     >
