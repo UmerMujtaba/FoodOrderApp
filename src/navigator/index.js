@@ -5,6 +5,8 @@ import Bottom from './buttomStack';
 import { NavigationContainer } from '@react-navigation/native';
 import { lightTheme, darkTheme } from '../theme/themes';
 import { useColorScheme } from 'react-native';
+import { navigationRef } from './navigationRef';
+import { ScreenNames } from '../constants/string';
 
 const NavigationStack = createNativeStackNavigator();
 
@@ -12,10 +14,10 @@ export const NavigationCheck = ({ session }) => {
   const scheme = useColorScheme();
 
   return (
-    <NavigationContainer theme={scheme === 'dark' ? darkTheme : lightTheme}>
-      <NavigationStack.Navigator initialRouteName={session ? 'BottomStack' : 'AuthStack'}>
-        <NavigationStack.Screen name="AuthStack" component={Auth} options={{ headerShown: false }} />
-        <NavigationStack.Screen name="BottomStack" component={Bottom} options={{ headerShown: false }} />
+    <NavigationContainer theme={scheme === 'dark' ? darkTheme : lightTheme } ref={ navigationRef }>
+      <NavigationStack.Navigator initialRouteName={session ? '{ScreenNames.BottomStack}' : '{ScreenNames.AuthStack}'}>
+        <NavigationStack.Screen name={ScreenNames.AuthStack} component={Auth} options={{ headerShown: false }} />
+        <NavigationStack.Screen name={ScreenNames.BottomStack} component={Bottom} options={{ headerShown: false }} />
       </NavigationStack.Navigator>
     </NavigationContainer>
   );

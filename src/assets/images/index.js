@@ -58,6 +58,8 @@ export const images = {
     lockIcon: require('./lock.png'),
     emailIcon: require('./message.png'),
     profileIcon: require('./profile.png'),
+
+    confirmationImage: require('./illustration.png'),
 }
 // 
 

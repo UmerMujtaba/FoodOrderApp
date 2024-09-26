@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { View, TextInput, Button, Text, StatusBar, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { registerUser } from '../../../services/authServices';
 import GradientButton from '../../../components/gradientButton';
 import { images } from '../../../assets/images';
 import styles from './styles';
 import { useTheme } from '@react-navigation/native';
-import { Strings } from '../../../constants/string';
+import { ScreenNames, Strings } from '../../../constants/string';
 import CustomTextInput from '../../../components/cutomTextInput';
 import CustomCheckbox from '../../../components/customCheckbox';
+import { navigate, navigationRef } from '../../../navigator/navigationRef';
 
 
 
@@ -18,6 +19,9 @@ const Register = ({ navigation }) => {
     const [username, setUserName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const { colors } = useTheme();
+    const ref_input2 = useRef();
+    const ref_input3 = useRef();
+
 
     const handleCheckboxPress = (isChecked) => {
         console.log('Checkbox 1 is checked:', isChecked);
@@ -34,7 +38,7 @@ const Register = ({ navigation }) => {
             setErrorMessage(error.message);
         } else {
             console.log('Registration successful:', user);
-            navigation.navigate('Login')
+            navigate(ScreenNames.Confirmation)
             // Handle successful registration (e.g., navigate to login)
         }
     };
@@ -95,16 +99,22 @@ const Register = ({ navigation }) => {
                 <GradientButton buttonText='Create Account' onPress={handleRegister} style={{ marginTop: 15 }} />
                 {errorMessage ? <Text>{errorMessage}</Text> : null}
 
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <TouchableOpacity onPress={() => navigate(ScreenNames.Login)}>
                     <Text
                         style={styles.forgotPswrdText}>
                         {Strings.alreadyHaveAnAccount}
                     </Text>
                 </TouchableOpacity>
-            </View>
 
 
 
+                {/* <TouchableOpacity onPress={() => navigation.navigate('Confirmation')}>
+                    <Text
+                        style={styles.forgotPswrdText}>
+                        {Strings.alreadyHaveAnAccount}
+                    </Text>
+                </TouchableOpacity> */}
+            </View> 
         </View>
     );
 };

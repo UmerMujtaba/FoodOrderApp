@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView, KeyboardAvoidingView, StatusBar } from 'react-native';
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { images } from '../../../assets/images';
@@ -6,6 +6,7 @@ import HeaderWithSearch from '../../../components/header';
 import FilterComponent from '../../../components/filter';
 import styles from './styles';
 import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
+import { ScreenNames } from '../../../constants/string';
 
 const DashboardScreen = () => {
   const navigation = useNavigation();
@@ -17,10 +18,10 @@ const DashboardScreen = () => {
   };
 
   const items = [
-    { id: 1, imageSource: images.veganImage, text: 'Vegetarian Food', screen: 'Vegan' },
-    { id: 2, imageSource: images.fastFoodImage, text: 'Fast Food', screen: 'Fastfood' },
-    { id: 3, imageSource: images.drinkImage, text: 'Drinks', screen: 'Drink' },
-    { id: 4, imageSource: images.addOnsImage, text: 'Sides', screen: 'Sides' },
+    { id: 1, imageSource: images.veganImage, text: 'Vegetarian Food', screen: ScreenNames.Vegan },
+    { id: 2, imageSource: images.fastFoodImage, text: 'Fast Food', screen: ScreenNames.Fastfood },
+    { id: 3, imageSource: images.drinkImage, text: 'Drinks', screen: ScreenNames.Drink },
+    { id: 4, imageSource: images.addOnsImage, text: 'Sides', screen: ScreenNames.Sides },
   ];
 
   const filteredItems = items.filter(item =>
@@ -29,6 +30,7 @@ const DashboardScreen = () => {
 
   return (
     <KeyboardAvoidingView style={[styles.container, { backgroundColor: colors.background }]}>
+      <StatusBar translucent backgroundColor="transparent" />
       <HeaderWithSearch />
       <ScrollView
         showsVerticalScrollIndicator={false}

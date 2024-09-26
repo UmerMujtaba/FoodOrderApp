@@ -2,7 +2,7 @@ import { View, Text, StatusBar, ImageBackground, Image, TextInput, TouchableOpac
 import React, { useState } from 'react'
 import styles from './styles'
 import { images } from '../../../assets/images'
-import { Strings } from '../../../constants/string'
+import { ScreenNames, Strings } from '../../../constants/string'
 import fonts from '../../../constants/fonts'
 import LinearGradient from 'react-native-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
@@ -14,6 +14,7 @@ import { useTheme } from '@react-navigation/native';
 import { loginUser } from '../../../services/authServices';
 import { supabase } from '../utils/supabase';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { navigate, navigationRef } from '../../../navigator/navigationRef';
 
 
 
@@ -35,11 +36,12 @@ const LoginScreen = ({ navigation }) => {
             if (loginSuccess.user) {
                 await AsyncStorage.setItem('session', JSON.stringify(loginSuccess.user)); // Store user session
 
-                navigation.navigate('BottomStack', {
-                    screen: 'Home',
-                });
+               // navigate(ScreenNames.Login)
+                navigate(ScreenNames.BottomStack,{screen: ScreenNames.Home})
+                // 'AuthStack', { screen: 'Login' }
+                // navigateReset('AuthStack', { screen: 'Login' });
             } else {
-                setErrorMessage(loginSuccess.error?.message || 'Login failed'); e
+                setErrorMessage(loginSuccess.error?.message || 'Login failed'); 
                 console.log('Login failed:', loginSuccess.error?.message);
             }
         } catch (err) {
@@ -72,6 +74,7 @@ const LoginScreen = ({ navigation }) => {
                     value={Password}
                     onChangeText={setPassword}
                     keyboardType='default'
+                    secureTextEntry={true}
                 />
 
                 <Text style={styles.optText(colors)}>{Strings.orContinueWith}</Text>
@@ -92,13 +95,13 @@ const LoginScreen = ({ navigation }) => {
                 </View>
                 <TouchableOpacity>
                     <Text
-                        style={[styles.forgotPswrdText, { marginTop: 20, marginBottom: 20 }]}>
+                        style={[styles.forgotPswrdText, { marginTop: 20}]}>
                         {Strings.forgotPassword}
                     </Text>
                 </TouchableOpacity>
             </View>
             {errorMessage ? (
-                <Text style={{ color: 'red', marginBottom: 10 }}>{errorMessage}</Text>
+                <Text style={{ color: 'red',marginTop:5 }}>{errorMessage}</Text>
             ) : null}
             {loading ? (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -106,7 +109,7 @@ const LoginScreen = ({ navigation }) => {
                 </View>
             ) : (
                 <GradientButton
-                    style={{ marginTop: 30 }}
+                    style={{ marginTop: 20 }}
                     onPress={handleLogin} // Call the handleLogin function
                     buttonText="Next"
                     textStyle={{ fontSize: 18 }}

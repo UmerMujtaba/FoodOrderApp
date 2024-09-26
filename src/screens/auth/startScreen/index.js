@@ -3,9 +3,10 @@ import React from 'react'
 import styles from './styles'
 import LinearGradient from "react-native-linear-gradient";
 import { images } from '../../../assets/images'
-import { Strings } from '../../../constants/string'
+import { ScreenNames, Strings } from '../../../constants/string'
 import GradientButton from '../../../components/gradientButton';
 import { useTheme } from '@react-navigation/native';
+import { navigate, navigationRef } from '../../../navigator/navigationRef';
 
 
 
@@ -26,13 +27,14 @@ const StartScreen = ({navigation}) => {
             </Text>
 
             <GradientButton
-                onPress={() => navigation.navigate('Register')}
+                onPress={() => navigate(ScreenNames.Registeration)}
                 buttonText="Next"
                 textStyle={{ fontSize: 18 }}
             />
 
 
         </View>
+        
     )
 }
 export default StartScreen;

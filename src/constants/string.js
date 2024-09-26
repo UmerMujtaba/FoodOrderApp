@@ -25,3 +25,26 @@ export const Strings ={
     keepMeSignedIn:'Keep me signed in',
     emailMeAboutSpecialPricing:'Email me about special pricing',
 }
+
+export const ScreenNames={
+    Login: 'Login',
+    Tutorial: 'TutorialScreen',
+    Start:'StartScreen',
+    Registeration: 'Register',
+    Confirmation: 'Confirmation',
+    Tabs:'tabs',
+    Dashboard:'Dashboard',
+    Vegan:'Vegan', 
+    Fastfood:'Fastfood',
+    Drink:'Drink',
+    Sides:'Sides',
+    AuthStack:'AuthStack',
+    BottomStack:'BottomStack',
+    Home:'Home',
+    Profile:'Profile',
+    Cart:'Cart',
+    Chat:'Chat',
+
+
+
+}

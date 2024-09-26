@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import GradientButton from '../../../components/gradientButton';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { navigateReset } from '../../../navigator/navigationRef';
 
 
 
@@ -24,7 +25,13 @@ const ProfileScreen = () => {
     } else {
       await AsyncStorage.removeItem('session'); // Remove session from AsyncStorage
       console.log('Logout successful');
-      navigation.navigate('AuthStack', { screen: 'Login' });
+     
+      navigateReset('AuthStack', { screen: 'Login' });
+      // navigation.reset({
+      //   index: 0, // The index of the active route in the new stack (0 means the first screen)
+      //   routes: [{ name: 'AuthStack', params: { screen: 'Login' } }],
+      // });
+      
     }
   };
 

@@ -10,6 +10,8 @@ import fonts from '../constants/fonts';
 import Home from '../navigator/homeStack';
 import { useSelector } from 'react-redux';
 import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
+import { ScreenNames } from '../constants/string';
+import { Screen } from 'react-native-screens';
 
 
 
@@ -76,7 +78,7 @@ const Tabs = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name={ScreenNames.Home}
         component={Home}
         options={{
           headerShown: false,
@@ -91,7 +93,7 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name={ScreenNames.Profile}
         component={ProfileScreen}
         options={{
           headerShown: false,
@@ -106,7 +108,7 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Cart"
+        name={ScreenNames.Cart}
         component={CartScreen}
         options={{
           headerShown: false,
@@ -121,7 +123,7 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Chat"
+        name={ScreenNames.Chat}
         component={ChatScreen}
         options={{
           headerShown: false,
