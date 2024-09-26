@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, TextInput, Button, Text, StatusBar, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { registerUser } from '../../../services/authServices';
 import GradientButton from '../../../components/gradientButton';
@@ -19,9 +19,10 @@ const Register = ({ navigation }) => {
     const [username, setUserName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const { colors } = useTheme();
-    const ref_input2 = useRef();
-    const ref_input3 = useRef();
 
+    const firstRef = useRef(null);
+    const secondRef = useRef(null);
+    const thirdRef = useRef(null);
 
     const handleCheckboxPress = (isChecked) => {
         console.log('Checkbox 1 is checked:', isChecked);
@@ -57,6 +58,7 @@ const Register = ({ navigation }) => {
             <View style={styles.body}>
 
                 <CustomTextInput
+                    ref={firstRef}
                     placeholder='Username'
                     value={username}
                     onChangeText={setUserName}
@@ -64,9 +66,17 @@ const Register = ({ navigation }) => {
                     rightIcon
                     imageSource={images.profileIcon}
                     suffixIconStyle={{ width: 24, height: 26.4, }}
+
+                    autoFocus={true}
+                    showSoftInputOnFocus={true}
+                    returnKeyType='next'
+                    blurOnSubmit={false}
+                    autoCorrect={false}
+                    onSubmitEditing={() => secondRef.current.focus()}
                 />
 
                 <CustomTextInput
+                    ref={secondRef}
                     placeholder='Email'
                     value={email}
                     onChangeText={setEmail}
@@ -74,8 +84,14 @@ const Register = ({ navigation }) => {
                     rightIcon
                     imageSource={images.emailIcon}
                     suffixIconStyle={{ width: 24, height: 26.4, }}
+                    returnKeyType='next'
+                    blurOnSubmit={false}
+                    autoCorrect={false}
+                    onSubmitEditing={() => thirdRef.current.focus()}
+
                 />
                 <CustomTextInput
+                    ref={thirdRef}
                     placeholder='Password'
                     value={password}
                     onChangeText={setPassword}
@@ -84,6 +100,11 @@ const Register = ({ navigation }) => {
                     rightIcon
                     imageSource={images.lockIcon}
                     suffixIconStyle={{ width: 24, height: 26.4, }}
+                    autoCapitalize='none'
+                    returnKeyType='next'
+                    autoCorrect={false}
+                //   onSubmitEditing={handleRegister}
+
                 />
 
 
@@ -94,7 +115,7 @@ const Register = ({ navigation }) => {
                 <CustomCheckbox label={Strings.emailMeAboutSpecialPricing} onPress={handleCheckboxSecondPress}>
 
                 </CustomCheckbox>
-            
+
 
                 <GradientButton buttonText='Create Account' onPress={handleRegister} style={{ marginTop: 15 }} />
                 {errorMessage ? <Text>{errorMessage}</Text> : null}
@@ -114,7 +135,7 @@ const Register = ({ navigation }) => {
                         {Strings.alreadyHaveAnAccount}
                     </Text>
                 </TouchableOpacity> */}
-            </View> 
+            </View>
         </View>
     );
 };

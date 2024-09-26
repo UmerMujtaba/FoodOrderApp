@@ -1,8 +1,24 @@
 import { useTheme } from '@react-navigation/native';
-import React from 'react';
+import React,{forwardRef} from 'react';
 import { TextInput, StyleSheet, View, Image } from 'react-native';
 
-const CustomTextInput = ({ placeholder, value, onChangeText, keyboardType, secureTextEntry, rightIcon, imageSource, suffixIconStyle, style }) => {
+const CustomTextInput = forwardRef(({
+    placeholder, 
+    value, 
+    onChangeText, 
+    keyboardType, 
+    secureTextEntry, 
+    rightIcon, 
+    imageSource, 
+    suffixIconStyle, 
+    style, 
+    showSoftInputOnFocus, 
+    autoFocus, 
+    returnKeyType, 
+    blurOnSubmit, 
+    autoCorrect,
+    onSubmitEditing
+}, ref) => {
     const { colors, dark } = useTheme();
     return (
         <View style={[styles.container(colors), style]}>
@@ -14,6 +30,7 @@ const CustomTextInput = ({ placeholder, value, onChangeText, keyboardType, secur
                 />
             )}
             <TextInput
+            ref={ref} 
                 placeholder={placeholder}
                 placeholderTextColor={dark ? '#FFFFFF' : '#3B3B3B'} // Adjust color based on theme
                 onChangeText={onChangeText}
@@ -21,12 +38,18 @@ const CustomTextInput = ({ placeholder, value, onChangeText, keyboardType, secur
                 keyboardType={keyboardType}
                 secureTextEntry={secureTextEntry}
                 style={{ flex: 1, marginLeft: 5 }}
+                showSoftInputOnFocus={showSoftInputOnFocus}
+                autoFocus={autoFocus}
+                returnKeyType={returnKeyType}
+                onSubmitEditing={onSubmitEditing}
+                blurOnSubmit={blurOnSubmit}
+                autoCorrect={autoCorrect}
             //style={[styles.input, { backgroundColor: colors.tabBackgroundColor, borderColor: colors.tabBackgroundColor, color:colors.text }]}
             />
 
         </View>
-    );
-};
+     );
+    });
 
 const styles = StyleSheet.create({
     container: (colors) => ({
