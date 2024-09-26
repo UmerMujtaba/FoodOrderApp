@@ -36,7 +36,7 @@ export default StyleSheet.create({
         top: '35%'
     }),
     body: {
-        height: 280,
+        height: 'auto',
         width: 'auto',
         marginLeft: 18,
         marginRight: 18,
@@ -48,13 +48,13 @@ export default StyleSheet.create({
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
         fontSize: 16,
         marginBottom: 5,
-        marginTop: 15
+        marginTop: 5
     }),
     socialLoginContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         height: 60,
-        marginTop: 15
+        marginTop: 10
     },
 
     forgotPswrdText: {
@@ -65,7 +65,7 @@ export default StyleSheet.create({
         marginBottom:5,
         color: '#15BE77',
         marginBottom: 5,
-        textDecorationLine: 'underline',
+       // textDecorationLine: 'underline',
     },
 
 

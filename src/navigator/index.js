@@ -11,13 +11,21 @@ import { ScreenNames } from '../constants/string';
 const NavigationStack = createNativeStackNavigator();
 
 export const NavigationCheck = ({ session }) => {
+
   const scheme = useColorScheme();
+ const navigationOptions = () => ({
+  headerShown: false,
+  animationEnabled: true,
+  animationTypeForReplace: 'push',
+        animation: 'slide_from_right'
+  
+});
 
   return (
     <NavigationContainer theme={scheme === 'dark' ? darkTheme : lightTheme } ref={ navigationRef }>
-      <NavigationStack.Navigator initialRouteName={session ? '{ScreenNames.BottomStack}' : '{ScreenNames.AuthStack}'}>
-        <NavigationStack.Screen name={ScreenNames.AuthStack} component={Auth} options={{ headerShown: false }} />
-        <NavigationStack.Screen name={ScreenNames.BottomStack} component={Bottom} options={{ headerShown: false }} />
+      <NavigationStack.Navigator initialRouteName={session ? `${ScreenNames.BottomStack}` : `${ScreenNames.AuthStack}`}>
+        <NavigationStack.Screen name={ScreenNames.AuthStack} component={Auth} options={navigationOptions} />
+        <NavigationStack.Screen name={ScreenNames.BottomStack} component={Bottom} options={navigationOptions } />
       </NavigationStack.Navigator>
     </NavigationContainer>
   );

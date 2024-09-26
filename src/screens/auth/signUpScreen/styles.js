@@ -48,11 +48,11 @@ export default StyleSheet.create({
         textAlign: 'center',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
         fontSize: 14,
-        marginTop: 15,
+        marginTop: 12,
         marginBottom: 5,
         color: '#15BE77',
         marginBottom: 5,
-        textDecorationLine: 'underline',
+       // textDecorationLine: 'underline',
     },
 
 });

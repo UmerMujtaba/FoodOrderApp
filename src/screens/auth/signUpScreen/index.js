@@ -13,7 +13,7 @@ import { navigate, navigationRef } from '../../../navigator/navigationRef';
 
 
 
-const Register = ({ navigation }) => {
+const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUserName] = useState('');
@@ -66,7 +66,6 @@ const Register = ({ navigation }) => {
                     rightIcon
                     imageSource={images.profileIcon}
                     suffixIconStyle={{ width: 24, height: 26.4, }}
-
                     autoFocus={true}
                     showSoftInputOnFocus={true}
                     returnKeyType='next'
@@ -116,16 +115,16 @@ const Register = ({ navigation }) => {
 
                 </CustomCheckbox>
 
-
-                <GradientButton buttonText='Create Account' onPress={handleRegister} style={{ marginTop: 15 }} />
-                {errorMessage ? <Text>{errorMessage}</Text> : null}
-
                 <TouchableOpacity onPress={() => navigate(ScreenNames.Login)}>
                     <Text
                         style={styles.forgotPswrdText}>
                         {Strings.alreadyHaveAnAccount}
                     </Text>
                 </TouchableOpacity>
+
+                <GradientButton buttonText='Create Account' onPress={handleRegister} style={{ marginTop: 10 }} />
+                {errorMessage ? <Text>{errorMessage}</Text> : null}
+
 
 
 

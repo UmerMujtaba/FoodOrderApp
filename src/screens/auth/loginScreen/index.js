@@ -1,31 +1,27 @@
-import { View, Text, StatusBar, ImageBackground, Image, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
-import React, { useState } from 'react'
-import styles from './styles'
-import { images } from '../../../assets/images'
-import { ScreenNames, Strings } from '../../../constants/string'
-import fonts from '../../../constants/fonts'
-import LinearGradient from 'react-native-linear-gradient';
-import MaskedView from '@react-native-masked-view/masked-view';
-import CustomTextInput from '../../../components/cutomTextInput'
-import SocialLoginTouchable from '../../../components/touchableComponents'
-import GradientButton from '../../../components/gradientButton'
-import { useTheme } from '@react-navigation/native';
-
-import { loginUser } from '../../../services/authServices';
-import { supabase } from '../utils/supabase';
+import React, { useState, useRef } from 'react';
+import { View, Text, Image, StatusBar, ImageBackground, ActivityIndicator, TouchableOpacity, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { navigate, navigationRef } from '../../../navigator/navigationRef';
+import { useTheme } from '@react-navigation/native';
+import styles from './styles';
+import { ScreenNames, Strings } from '../../../constants/string';
+import { images } from '../../../assets/images';
+import CustomTextInput from '../../../components/cutomTextInput';
+import SocialLoginTouchable from '../../../components/touchableComponents';
+import { loginUser } from '../../../services/authServices';
+import GradientButton from '../../../components/gradientButton';
+import { navigateReset,navigate } from '../../../navigator/navigationRef';
 
 
 
-
-const LoginScreen = ({ navigation }) => {
-    const [Email, setEmail] = useState();
-    const [Password, setPassword] = useState();
-    const { colors } = useTheme();
+const LoginScreen = () => {
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const { colors } = useTheme();
 
+    const firstRef = useRef(null);
+    const secondRef = useRef(null);
 
     const handleLogin = async () => {
         setLoading(true);
@@ -35,21 +31,33 @@ const LoginScreen = ({ navigation }) => {
 
             if (loginSuccess.user) {
                 await AsyncStorage.setItem('session', JSON.stringify(loginSuccess.user)); // Store user session
-
-               // navigate(ScreenNames.Login)
-                navigate(ScreenNames.BottomStack,{screen: ScreenNames.Home})
-                // 'AuthStack', { screen: 'Login' }
-                // navigateReset('AuthStack', { screen: 'Login' });
+                navigateReset('BottomStack', { screen: ScreenNames.Home });
             } else {
-                setErrorMessage(loginSuccess.error?.message || 'Login failed'); 
-                console.log('Login failed:', loginSuccess.error?.message);
+                const errorMessage = loginSuccess.error?.message || 'Login failed';
+                setErrorMessage(errorMessage);
+               
+
+
+                ToastAndroid.showWithGravity(
+                    errorMessage,
+                    ToastAndroid.LONG,
+                    ToastAndroid.TOP
+                );
+                console.log('Login failed:', errorMessage);
             }
         } catch (err) {
             setLoading(false); // Stop loading on error
-            console.error('Error during login:', err); // Log any unexpected errors
+            console.error('Error during login:', err); 
+         
+
+
+            ToastAndroid.showWithGravity(
+                'An unexpected error occurred. Please try again.',
+                ToastAndroid.LONG,
+                ToastAndroid.TOP
+            );
         }
     };
-
 
     return (
         <View style={styles.container(colors)}>
@@ -62,25 +70,34 @@ const LoginScreen = ({ navigation }) => {
             </ImageBackground>
 
             <View style={styles.body}>
-
                 <CustomTextInput
+                    ref={firstRef}
                     placeholder='Email'
                     value={Email}
                     onChangeText={setEmail}
                     keyboardType='email-address'
+                    autoFocus={true}
+                    showSoftInputOnFocus={true}
+                    returnKeyType='next'
+                    blurOnSubmit={false}
+                    autoCorrect={false}
+                    onSubmitEditing={() => secondRef.current.focus()}
                 />
                 <CustomTextInput
+                    ref={secondRef}
                     placeholder='Password'
                     value={Password}
                     onChangeText={setPassword}
                     keyboardType='default'
                     secureTextEntry={true}
+                    autoCapitalize='none'
+                    returnKeyType='done'
+                    autoCorrect={false}
                 />
 
                 <Text style={styles.optText(colors)}>{Strings.orContinueWith}</Text>
 
                 <View style={styles.socialLoginContainer}>
-
                     <SocialLoginTouchable
                         onPress={() => { /* handle press */ }}
                         imageSource={images.fbLogo}
@@ -91,33 +108,40 @@ const LoginScreen = ({ navigation }) => {
                         imageSource={images.gmailLogo}
                         text={Strings.Google}
                     />
-
                 </View>
+
                 <TouchableOpacity>
                     <Text
-                        style={[styles.forgotPswrdText, { marginTop: 20}]}>
+                        style={[styles.forgotPswrdText, { marginTop: 10 }]}>
                         {Strings.forgotPassword}
                     </Text>
                 </TouchableOpacity>
+
+
+                <TouchableOpacity onPress={()=> navigate(ScreenNames.Registeration)}>
+                    <Text
+                        style={[styles.forgotPswrdText, { marginTop: 10 }]}>
+                        {Strings.dontHaveAnAccount}
+                    </Text>
+                </TouchableOpacity>
+
+                
             </View>
-            {errorMessage ? (
-                <Text style={{ color: 'red',marginTop:5 }}>{errorMessage}</Text>
-            ) : null}
+
             {loading ? (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <ActivityIndicator size="large" color="#0000ff" />
                 </View>
             ) : (
                 <GradientButton
-                    style={{ marginTop: 20 }}
-                    onPress={handleLogin} // Call the handleLogin function
+                    style={{ marginTop: 10 }}
+                    onPress={handleLogin}
                     buttonText="Next"
                     textStyle={{ fontSize: 18 }}
                 />
             )}
-
         </View>
-    )
-}
+    );
+};
 
 export default LoginScreen;

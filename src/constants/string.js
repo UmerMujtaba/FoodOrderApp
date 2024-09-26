@@ -24,6 +24,8 @@ export const Strings ={
     alreadyHaveAnAccount: 'Already have an account?',
     keepMeSignedIn:'Keep me signed in',
     emailMeAboutSpecialPricing:'Email me about special pricing',
+    dontHaveAnAccount:'Sign up',
+    
 }
 
 export const ScreenNames={
