@@ -92,7 +92,7 @@ const LoginScreen = ({ navigation }) => {
                 </View>
                 <TouchableOpacity>
                     <Text
-                        style={styles.forgotPswrdText}>
+                        style={[styles.forgotPswrdText, { marginTop: 20, marginBottom: 20 }]}>
                         {Strings.forgotPassword}
                     </Text>
                 </TouchableOpacity>
@@ -106,6 +106,7 @@ const LoginScreen = ({ navigation }) => {
                 </View>
             ) : (
                 <GradientButton
+                    style={{ marginTop: 30 }}
                     onPress={handleLogin} // Call the handleLogin function
                     buttonText="Next"
                     textStyle={{ fontSize: 18 }}

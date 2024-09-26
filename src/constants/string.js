@@ -21,4 +21,7 @@ export const Strings ={
     deliveryCharges:'Delivery Charges:',
     discount:'Discount',
     total:'Total',
+    alreadyHaveAnAccount: 'Already have an account?',
+    keepMeSignedIn:'Keep me signed in',
+    emailMeAboutSpecialPricing:'Email me about special pricing',
 }

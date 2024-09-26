@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StatusBar, ImageBackground, Image } from 'react-native';
+import { View, TextInput, Button, Text, StatusBar, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { registerUser } from '../../../services/authServices';
 import GradientButton from '../../../components/gradientButton';
 import { images } from '../../../assets/images';
@@ -7,6 +7,7 @@ import styles from './styles';
 import { useTheme } from '@react-navigation/native';
 import { Strings } from '../../../constants/string';
 import CustomTextInput from '../../../components/cutomTextInput';
+import CustomCheckbox from '../../../components/customCheckbox';
 
 
 
@@ -18,6 +19,14 @@ const Register = ({ navigation }) => {
     const [errorMessage, setErrorMessage] = useState('');
     const { colors } = useTheme();
 
+    const handleCheckboxPress = (isChecked) => {
+        console.log('Checkbox 1 is checked:', isChecked);
+    };
+
+
+    const handleCheckboxSecondPress = (isCheckedSecond) => {
+        console.log('Checkbox 2 is checked:', isCheckedSecond);
+    };
 
     const handleRegister = async () => {
         const { user, error } = await registerUser(email, password);
@@ -74,11 +83,24 @@ const Register = ({ navigation }) => {
                 />
 
 
-                <Button title="Register" onPress={handleRegister} />
+                <CustomCheckbox label={Strings.keepMeSignedIn} onPress={handleCheckboxPress}>
 
+                </CustomCheckbox>
 
-                <GradientButton buttonText='Login?' onPress={() => navigation.navigate('Login')} />
+                <CustomCheckbox label={Strings.emailMeAboutSpecialPricing} onPress={handleCheckboxSecondPress}>
+
+                </CustomCheckbox>
+            
+
+                <GradientButton buttonText='Create Account' onPress={handleRegister} style={{ marginTop: 15 }} />
                 {errorMessage ? <Text>{errorMessage}</Text> : null}
+
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text
+                        style={styles.forgotPswrdText}>
+                        {Strings.alreadyHaveAnAccount}
+                    </Text>
+                </TouchableOpacity>
             </View>
 
 

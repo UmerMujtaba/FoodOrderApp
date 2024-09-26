@@ -29,7 +29,10 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 ,justifyContent:'center',alignSelf:'center'}}>
+      <View style={{}}>
+
+    
       {errorMessage ? (
         <Text style={{ color: 'red', marginBottom: 10 }}>{errorMessage}</Text>
       ) : null}
@@ -44,6 +47,7 @@ const ProfileScreen = () => {
           textStyle={{ fontSize: 18 }}
         />
       )}
+        </View>
     </View>
   );
 };

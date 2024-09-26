@@ -59,7 +59,7 @@ export default StyleSheet.create({
 
     forgotPswrdText: {
         textAlign: 'center',
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
         fontSize: 14,
         marginTop: 10,
         marginBottom:5,
