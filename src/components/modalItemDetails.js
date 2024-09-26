@@ -10,7 +10,7 @@ import GradientButton from './gradientButton';
 import { Strings } from '../constants/string';
 import { RadioButton } from 'react-native-paper';
 
-  
+
 
 const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statusBarTranslucent }) => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
   const [selectedAddon, setSelectedAddon] = useState([]); // Track selected addon
   const { colors } = useTheme();
 
-  //console.log("🚀 ~ ItemDetailModal ~ selectedItem:", selectedItem)
+ 
 
   const handleAddToCart = (item) => {
     const itemToAdd = {
@@ -33,7 +33,7 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
 
 
   const handleAddonSelect = (addon) => {
-   
+
     setSelectedAddon(addon); // Set selected add-on by ID
     console.log("🚀 ~----------setSelectedAddon ----------~ setSelectedAddon:", addon)
   };
@@ -45,9 +45,9 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
 
   if (!selectedItem) return null;
 
-  // Display available add-ons if available
+  
   const availableAddons = selectedItem.availableAddons || [];
- // console.log("🚀 Available Add-ons:", availableAddons);
+ 
 
 
   return (
@@ -78,33 +78,45 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
             <View style={styles.addOnContainerCol}>
               <Text style={styles.modalAddons(colors)}>{Strings.availableAddOns}</Text>
 
-              <View style={{ flexDirection: 'row' }}>
-                {availableAddons.length > 0 ? (
-                  availableAddons.map((addon,index) => (
-                    <TouchableOpacity
-                      key={index+addon.price}
-                      style={styles.addOnContainer(colors)}
-                      onPress={() => handleAddonSelect(addon)}
-                    >
-                      <RadioButton
-                        value={addon}
-                        status={selectedAddon === addon ? 'checked' : 'unchecked'}
+              <View style={{  flexDirection: 'column' }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    flexWrap: availableAddons.length > 3 ? 'wrap' : 'nowrap', // Wrap if more than 3 items
+                    justifyContent: availableAddons.length <= 3 ? 'space-between' : 'flex-start',
+                    gap: 10, // Space between items
+                  }}
+                >
+                  {availableAddons.length > 0 ? (
+                    availableAddons.map((addon, index) => (
+                      <TouchableOpacity
+                        key={index + addon.price}
+                        style={[
+                          styles.addOnContainer(colors),
+                          {
+                            width: availableAddons.length <= 3 ? 'auto' : '45%', // 100% width if 3 or fewer, otherwise 45%
+                            marginBottom: availableAddons.length > 3 ? 10 : 0, // Add margin only if wrapped
+                            justifyContent: availableAddons.length <= 3 ? 'space-evenly' : 'center',
+                          },
+                        ]}
                         onPress={() => handleAddonSelect(addon)}
-                        color={selectedAddon === addon ? colors.selected : colors.unselected} // Change color for selected one
-                        uncheckedColor={colors.unselected} // Default color for others
-                      />
-                      <Text style={styles.addOnName(colors)}>{addon.name}</Text>
-                      {/* 
-          <Text style={{ color: 'white', fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium }}>
-            ${addon.price.toFixed(2)}
-          </Text> 
-          */}
-                    </TouchableOpacity>
-                  ))
-                ) : (
-                  <Text style={styles.modalDescription(colors)}>{Strings.noAddonsAvailable}</Text>
-                )}
+                      >
+                        <RadioButton
+                          value={addon}
+                          status={selectedAddon === addon ? 'checked' : 'unchecked'}
+                          onPress={() => handleAddonSelect(addon)}
+                          color={selectedAddon === addon ? colors.selected : colors.unselected}
+                          uncheckedColor={colors.unselected}
+                        />
+                        <Text style={styles.addOnName(colors)}>{addon.name}</Text>
+                      </TouchableOpacity>
+                    ))
+                  ) : (
+                    <Text style={styles.modalDescription(colors)}>{Strings.noAddonsAvailable}</Text>
+                  )}
+                </View>
               </View>
+
             </View>
 
             {/* button */}

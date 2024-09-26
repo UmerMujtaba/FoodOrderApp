@@ -24,16 +24,13 @@ export default StyleSheet.create({
     },
     itemImageStyle: {
         width: itemWidth,
-        borderRadius: 8,
+        borderRadius: 12,
         padding: 10,
         alignItems: 'center',
         marginBottom: 15,
         height: 184,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
-        elevation: 3,
+      
+        elevation: 5,
         justifyContent: 'center',
     },
     itemImage: {

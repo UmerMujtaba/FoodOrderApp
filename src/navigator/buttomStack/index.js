@@ -76,6 +76,8 @@ const Bottom = () => {
             margin: 10,
             flexDirection: 'row', // Ensure horizontal layout
             justifyContent: 'space-between', // Space between tabs
+            animation: 'shift',
+            animationEnabled: true,
           },
           tabBarLabel: () => null, // Hide default labels
         }}
@@ -86,6 +88,7 @@ const Bottom = () => {
           options={{
             headerShown:false,
             animationEnabled: true,
+           
             tabBarIcon: ({ focused }) => (
               <TabBarIconWithLabel
                 focused={focused}
@@ -102,6 +105,7 @@ const Bottom = () => {
           options={{
             headerShown:false,
             animationEnabled: true,
+           
             tabBarIcon: ({ focused }) => (
               <TabBarIconWithLabel
                 focused={focused}
@@ -117,6 +121,7 @@ const Bottom = () => {
           component={CartScreen}
           options={{
             headerShown:false,
+          
             animationEnabled: true,
             tabBarIcon: ({ focused }) => (
            
@@ -135,6 +140,7 @@ const Bottom = () => {
           options={{
             headerShown:false,
             animationEnabled: true,
+          
             tabBarIcon: ({ focused }) => (
               <TabBarIconWithLabel
                 focused={focused}

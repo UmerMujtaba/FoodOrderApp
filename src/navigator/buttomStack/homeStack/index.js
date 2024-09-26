@@ -16,8 +16,8 @@ const navigationOptions = () => ({
   headerShown: false,
   animationEnabled: true,
   animationTypeForReplace: 'push',
-        animation: 'slide_from_right'
-  
+  animation: 'slide_from_right'
+
 });
 
 const Home = () => {
@@ -28,11 +28,11 @@ const Home = () => {
         headerShown: false,  // Hide headers globally
       }}
     >
-      <HomeStack.Screen name={ScreenNames.Dashboard} component={DashboardScreen} options={ navigationOptions}/>
-      <HomeStack.Screen name={ScreenNames.Vegan} component={VeganScreen} options={ navigationOptions} />
-      <HomeStack.Screen name={ScreenNames.Fastfood} component={FastFoodScreen} options={ navigationOptions} />
-      <HomeStack.Screen name={ScreenNames.Drink} component={DrinkScreen} options={ navigationOptions} />
-      <HomeStack.Screen name={ScreenNames.Sides} component={SidesScreen} options={ navigationOptions} />
+      <HomeStack.Screen name={ScreenNames.Dashboard} component={DashboardScreen} options={navigationOptions} />
+      <HomeStack.Screen name={ScreenNames.Vegan} component={VeganScreen} options={navigationOptions} />
+      <HomeStack.Screen name={ScreenNames.Fastfood} component={FastFoodScreen} options={navigationOptions} />
+      <HomeStack.Screen name={ScreenNames.Drink} component={DrinkScreen} options={navigationOptions} />
+      <HomeStack.Screen name={ScreenNames.Sides} component={SidesScreen} options={navigationOptions} />
     </HomeStack.Navigator>
   );
 };

@@ -78,6 +78,9 @@ const LoginScreen = () => {
                     keyboardType='email-address'
                     autoFocus={true}
                     showSoftInputOnFocus={true}
+                   
+
+
                     returnKeyType='next'
                     blurOnSubmit={false}
                     autoCorrect={false}
