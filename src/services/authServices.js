@@ -28,7 +28,8 @@ export const loginUser = async (email, password) => {
 export const logoutUser = async () => {
   const { error } = await supabase.auth.signOut();
   if (!error) {
-    await AsyncStorage.removeItem('access_token'); // Remove token on logout
+    await AsyncStorage.removeItem('access_token');
+    await AsyncStorage.removeItem('session'); // Remove session object on logout
   }
   return { error };
 };
