@@ -1,42 +1,45 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, Image, Pressable, TouchableOpacity, StyleSheet, } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { Modal, View, Text, Image, Pressable, TouchableOpacity, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart } from '../redux/slices/cartSlice'; // Import the action
+import { addClickedItem } from '../redux/slices/clickedItemSlice';
 import fonts from '../constants/fonts';
-import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
+import { useTheme } from '@react-navigation/native';
 import ModalAppBar from './modalAppBar';
 import GradientButton from './gradientButton';
 import { Strings } from '../constants/string';
 import { RadioButton } from 'react-native-paper';
 
 
-
 const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statusBarTranslucent }) => {
   const dispatch = useDispatch();
   const [modalHeight, setModalHeight] = useState('34%');
-  const [selectedAddon, setSelectedAddon] = useState([]); // Track selected addon
+  const [selectedAddon, setSelectedAddon] = useState(null); // Track selected addon
   const { colors } = useTheme();
 
- 
 
-  const handleAddToCart = (item) => {
+
+
+  const handleAddToCart = () => {
     const itemToAdd = {
-      ...selectedItem,
+    ...selectedItem,
       selectedAddon,
-      totalPrice: selectedItem.price + (selectedAddon ? selectedAddon.price : 0)
+      totalPrice: selectedItem.price + (selectedAddon ? selectedAddon.price : 0),
     };
+  
     dispatch(addItemToCart(itemToAdd));
+   
+  
+    console.log("🚀 ~ Adding item to cart:", itemToAdd);
     closeModal();
-    console.log("🚀 ~Adding item to cart:", item);
   };
-
+  
+   
 
   const handleAddonSelect = (addon) => {
-
     setSelectedAddon(addon); // Set selected add-on by ID
-    console.log("🚀 ~----------setSelectedAddon ----------~ setSelectedAddon:", addon)
+    console.log("🚀 ~----------setSelectedAddon ----------~ setSelectedAddon:", addon);
   };
-
 
   const handleModalPress = () => {
     setModalHeight((prevHeight) => (prevHeight === '34%' ? '65%' : '34%')); // Toggle between two heights
@@ -44,10 +47,7 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
 
   if (!selectedItem) return null;
 
-  
   const availableAddons = selectedItem.availableAddons || [];
- 
-
 
   return (
     <Modal
@@ -63,27 +63,24 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
           style={styles.modalImage}
         />
         <Pressable style={styles.modalContainer(colors, modalHeight)} onPress={handleModalPress}>
-          {/* nudge */}
           <View style={styles.nudge(colors)} />
           <View style={styles.contentContainer}>
-            {/* favorite and location icon */}
             <ModalAppBar />
 
             <Text style={styles.modalName(colors)}>{selectedItem.name}</Text>
             <Text style={styles.modalDescription(colors)}>{selectedItem.description}</Text>
             <Text style={styles.modalPrice(colors)}>Price: ${selectedItem.price.toFixed(2)}</Text>
 
-
             <View style={styles.addOnContainerCol}>
               <Text style={styles.modalAddons(colors)}>{Strings.availableAddOns}</Text>
 
-              <View style={{  flexDirection: 'column' }}>
+              <View style={{ flexDirection: 'column' }}>
                 <View
                   style={{
                     flexDirection: 'row',
-                    flexWrap: availableAddons.length > 3 ? 'wrap' : 'nowrap', // Wrap if more than 3 items
+                    flexWrap: availableAddons.length > 3 ? 'wrap' : 'nowrap',
                     justifyContent: availableAddons.length <= 3 ? 'space-between' : 'flex-start',
-                    gap: 10, // Space between items
+                    gap: 10,
                   }}
                 >
                   {availableAddons.length > 0 ? (
@@ -93,8 +90,8 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
                         style={[
                           styles.addOnContainer(colors),
                           {
-                            width: availableAddons.length <= 3 ? 'auto' : '45%', // 100% width if 3 or fewer, otherwise 45%
-                            marginBottom: availableAddons.length > 3 ? 10 : 0, // Add margin only if wrapped
+                            width: availableAddons.length <= 3 ? 'auto' : '45%',
+                            marginBottom: availableAddons.length > 3 ? 10 : 0,
                             justifyContent: availableAddons.length <= 3 ? 'space-evenly' : 'center',
                           },
                         ]}
@@ -115,11 +112,9 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
                   )}
                 </View>
               </View>
-
             </View>
 
-            {/* button */}
-            <GradientButton onPress={() => handleAddToCart(selectedItem)} buttonText={'Add to Cart'} />
+            <GradientButton onPress={handleAddToCart} buttonText={'Add to Cart'} />
           </View>
         </Pressable>
       </Pressable>
@@ -127,9 +122,7 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
   );
 };
 
-
 const styles = StyleSheet.create({
-
   modalBackground: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -166,16 +159,13 @@ const styles = StyleSheet.create({
     left: 0,
     resizeMode: "cover"
   },
-
   contentContainer: {
     width: '100%',
-    //backgroundColor:'red',
     paddingBottom: 20,
   },
   modalName: (colors) => ({
     fontSize: 24,
     marginVertical: 10,
-    // color: 'black',
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
     marginLeft: 10,
     color: colors.text,
@@ -187,11 +177,9 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
   }),
-
   modalAddons: (colors) => ({
     fontSize: 16,
     marginBottom: 10,
-    //color: 'black',
     textAlign: 'center',
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
     color: colors.text
@@ -204,13 +192,8 @@ const styles = StyleSheet.create({
   addOnContainer: (colors) => ({
     flexDirection: 'row',
     margin: 5,
-    //height: 35,
-    width: 'auto',
-    // borderRadius: 8,
     alignItems: 'center',
-    //backgroundColor: colors.tabBackgroundColor,
   }),
-
   addOnName: (colors) => ({
     textAlign: 'center',
     color: colors.text,
@@ -223,20 +206,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
   }),
-  addToCartButton: {
-    backgroundColor: 'grey',
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    alignItems: 'center',
-    borderRadius: 10,
-    marginTop: 20,
-    margin: 120
-  },
-  addToCartText: {
-    color: 'white',
-    fontSize: 16,
-    fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
-  },
 });
 
 export default ItemDetailModal;

@@ -24,6 +24,22 @@ export const loginUser = async (email, password) => {
   };
 };
 
+
+// Function to register a user
+export const registerUser = async (email, password) => {
+  const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+  });
+
+  if (error) {
+      return { user: null, error }; // Return null user if there's an error
+  }
+
+  return { user: data.user, error: null }; // Return user object on success
+};
+
+
 // Function to log out a user
 export const logoutUser = async () => {
   const { error } = await supabase.auth.signOut();

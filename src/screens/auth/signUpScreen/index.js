@@ -18,7 +18,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [username, setUserName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    //const { colors } = useTheme();
+    const { colors } = useTheme();
 
     const firstRef = useRef(null);
     const secondRef = useRef(null);
@@ -32,19 +32,23 @@ const Register = () => {
     const handleCheckboxSecondPress = (isCheckedSecond) => {
         console.log('Checkbox 2 is checked:', isCheckedSecond);
     };
-
     const handleRegister = async () => {
-        const { user, error } = await registerUser(email, password);
-        if (error) {
-            setErrorMessage(error.message);
-        } else {
-            
-            console.log('Registration successful:', user);
-            navigate(ScreenNames.Confirmation)
-            // Handle successful registration (e.g., navigate to login)
+        try {
+            const { user, error } = await registerUser(email, password);
+            if (error) {
+                setErrorMessage(error.message);
+                console.error('Registration error:', error);
+            } else {
+                console.log('Registration successful:', user); // This should now show the user object
+                navigate(ScreenNames.Confirmation);
+                // Handle successful registration (e.g., navigate to confirmation)
+            }
+        } catch (error) {
+            console.error('Unexpected registration error:', error);
+            setErrorMessage('An unexpected error occurred. Please try again.');
         }
     };
-
+    
 
     return (
         <View style={styles.container(colors)}>

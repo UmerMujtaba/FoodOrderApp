@@ -12,7 +12,7 @@ export const Strings ={
     forgotPassword: 'Forgot Your Password?',
     findYourFvrtFood: 'Find Your\nFavorite Food',
     noAddonsAvailable: 'No add-ons available',
-    availableAddOns:'Available Add-ons',
+    availableAddOn:'Available Add-ons',
     confirmationMsg: 'Are you sure you want to remove this item?',
     addOn:'Add-On: ',
     cartEmptyMsg:'Cart is empty.',

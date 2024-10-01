@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import MenuCategoryScreen from '../../../components/menuComponent';
+import MenuCategoryComponent from '../../../components/menuComponent';
 import HeaderWithSearch from '../../../components/header';
 import FilterComponent from '../../../components/filter';
 import { Text, View } from 'react-native';
@@ -18,7 +18,7 @@ const SidesScreen = () => {
       <HeaderWithSearch />
       <FilterComponent onSearch={handleSearch} />
       <Text style={{ fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold, fontSize: 36, textAlign: 'center', color: 'black' }}>Sides</Text>
-      <MenuCategoryScreen category="Sides" searchQuery={searchQuery}/>
+      <MenuCategoryComponent category="Sides" searchQuery={searchQuery}/>
 
     </View>
   );

@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { Text, View } from 'react-native';
-import MenuCategoryScreen from '../../../components/menuComponent';
+import MenuCategoryComponent from '../../../components/menuComponent';
 import styles from './styles';
 import fonts from '../../../constants/fonts';
 import HeaderWithSearch from '../../../components/header';
@@ -19,7 +19,7 @@ const VeganScreen = () => {
       <HeaderWithSearch />
       <FilterComponent onSearch={handleSearch} />
       <Text style={{ fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold, fontSize: 36, textAlign: 'center', color: 'black' }}>Salads</Text>
-      <MenuCategoryScreen category="Salads" searchQuery={searchQuery}/>
+      <MenuCategoryComponent category="Salads" searchQuery={searchQuery}/>
     </View>
   )
 };
