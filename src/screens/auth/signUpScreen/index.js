@@ -18,7 +18,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [username, setUserName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const { colors } = useTheme();
+    //const { colors } = useTheme();
 
     const firstRef = useRef(null);
     const secondRef = useRef(null);
@@ -38,6 +38,7 @@ const Register = () => {
         if (error) {
             setErrorMessage(error.message);
         } else {
+            
             console.log('Registration successful:', user);
             navigate(ScreenNames.Confirmation)
             // Handle successful registration (e.g., navigate to login)

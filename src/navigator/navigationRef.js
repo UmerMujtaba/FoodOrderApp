@@ -9,7 +9,11 @@ import {
 export const navigationRef = React.createRef();
 
 export async function navigateReset(name, params) {
-  console.log(":rocket: ~ file: navigationRef.js:9 ~ navigateReset ~ name:", name, '  params => ', params);
+  
+  
+  console.log("🚀 ~ navigateReset ~ navigateReset ~ name:", name, '  params => ', params)
+  
+ 
   navigationRef.current?.dispatch(
     CommonActions.reset({
       index: 0,
@@ -47,7 +51,7 @@ export function getRouteName() {
 }
 
 export async function navigate(name, params) {
-  console.log(":rocket: ~ file: navigationRef.js:9 ~ navigateReset ~ name:", name, '  params => ', params);
+  console.log("🚀 ~ navigateReset ~ navigateReset ~ name:", name, '  params => ', params)
  
   navigationRef.current?.navigate(name, params);
 }

@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../redux/slices/cartSlice'; // Import the action
 import fonts from '../constants/fonts';
 import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
-import { LinearGradientText } from 'react-native-linear-gradient-text';
 import ModalAppBar from './modalAppBar';
 import GradientButton from './gradientButton';
 import { Strings } from '../constants/string';

@@ -1,10 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 import { supabase } from '../utils/supabase';
-
-// Function to register a user
-export const registerUser = async (email, password) => {
-  const { data, error } = await supabase.auth.signUp({ email, password });
-  return { user: data?.user, error };
-};
 
 // Function to log in a user
 export const loginUser = async (email, password) => {
@@ -12,11 +7,28 @@ export const loginUser = async (email, password) => {
     email,
     password,
   });
-  return { user: data?.user, error };
+
+  if (error) {
+    return { user: null, access_token: null, error };
+  }
+
+  // Store the access token in AsyncStorage after login
+  if (data.session) {
+    await AsyncStorage.setItem('access_token', data.session.access_token);
+  }
+
+  return {
+    user: data.user,
+    access_token: data.session?.access_token,
+    error: null,
+  };
 };
 
 // Function to log out a user
 export const logoutUser = async () => {
   const { error } = await supabase.auth.signOut();
+  if (!error) {
+    await AsyncStorage.removeItem('access_token'); // Remove token on logout
+  }
   return { error };
 };

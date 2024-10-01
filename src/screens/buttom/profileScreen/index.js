@@ -13,6 +13,23 @@ const ProfileScreen = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const getStoredToken = async () => {
+    try {
+      const token = await AsyncStorage.getItem('access_token'); // Retrieve access token
+      if (token !== null) {
+        // Token exists
+        console.log('Retrieved token:', token);
+        return token;
+      } else {
+        // Token doesn't exist
+        console.log('No token found');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error retrieving token from AsyncStorage:', error);
+      return null;
+    }
+  };
 
   const logout = async () => {
 
@@ -24,37 +41,42 @@ const ProfileScreen = () => {
       setErrorMessage(error.message);
     } else {
       await AsyncStorage.removeItem('session'); // Remove session from AsyncStorage
-      console.log('Logout successful');
-     
-      navigateReset('AuthStack', { screen: 'Login' });
-      // navigation.reset({
-      //   index: 0, // The index of the active route in the new stack (0 means the first screen)
-      //   routes: [{ name: 'AuthStack', params: { screen: 'Login' } }],
-      // });
+      // const token = await AsyncStorage.removeItem('access_token'); // Retrieve access token
+      // console.log("🚀 ~ logout ~ token:", token)
       
+      console.log('Logout successful');
+
+      navigateReset('AuthStack', { screen: 'Login' });
+
+
     }
   };
 
   return (
-    <View style={{ flex: 1 ,justifyContent:'center',alignSelf:'center'}}>
+    <View style={{ flex: 1, justifyContent: 'center', alignSelf: 'center' }}>
       <View style={{}}>
 
-    
-      {errorMessage ? (
-        <Text style={{ color: 'red', marginBottom: 10 }}>{errorMessage}</Text>
-      ) : null}
-      {loading ? (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <ActivityIndicator size="large" color="#0000ff" />
-        </View>
-      ) : (
-        <GradientButton
-          onPress={logout}
-          buttonText="Logout"
-          textStyle={{ fontSize: 18 }}
-        />
-      )}
-        </View>
+
+        {errorMessage ? (
+          <Text style={{ color: 'red', marginBottom: 10 }}>{errorMessage}</Text>
+        ) : null}
+        {loading ? (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        ) : (
+          <GradientButton
+            onPress={logout}
+            buttonText="Logout"
+            textStyle={{ fontSize: 18 }}
+          />
+        )}
+         <GradientButton
+            onPress={getStoredToken}
+            buttonText="get token"
+            textStyle={{ fontSize: 18 }}
+          />
+      </View>
     </View>
   );
 };

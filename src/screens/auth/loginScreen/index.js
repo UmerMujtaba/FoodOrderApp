@@ -28,16 +28,34 @@ const LoginScreen = () => {
         try {
             const loginSuccess = await loginUser(Email, Password);
             setLoading(false);
-
+    
             if (loginSuccess.user) {
-                await AsyncStorage.setItem('session', JSON.stringify(loginSuccess.user)); // Store user session
-                navigateReset('BottomStack', { screen: ScreenNames.Home });
+                // Extract session and access token
+                const { access_token } = loginSuccess; // Access the token directly from loginSuccess
+                console.log("🚀 ~ handleLogin ~ access_token:", access_token)
+                
+    
+                if (access_token) {
+                    // Store user session and token
+                    await AsyncStorage.setItem('session', JSON.stringify(loginSuccess.user)); // Store user session
+                    await AsyncStorage.setItem('access_token', access_token); // Store the access token
+    
+                    // Navigate to Home screen
+                    navigateReset('BottomStack', { screen: ScreenNames.Home });
+                } else {
+                    console.log('Access token is undefined');
+                    setErrorMessage('Failed to retrieve access token.');
+                    ToastAndroid.showWithGravity(
+                        'Failed to retrieve access token.',
+                        ToastAndroid.LONG,
+                        ToastAndroid.TOP
+                    );
+                }
+    
             } else {
                 const errorMessage = loginSuccess.error?.message || 'Login failed';
                 setErrorMessage(errorMessage);
-               
-
-
+    
                 ToastAndroid.showWithGravity(
                     errorMessage,
                     ToastAndroid.LONG,
@@ -47,10 +65,8 @@ const LoginScreen = () => {
             }
         } catch (err) {
             setLoading(false); // Stop loading on error
-            console.error('Error during login:', err); 
-         
-
-
+            console.error('Error during login:', err);
+    
             ToastAndroid.showWithGravity(
                 'An unexpected error occurred. Please try again.',
                 ToastAndroid.LONG,
@@ -58,6 +74,7 @@ const LoginScreen = () => {
             );
         }
     };
+    
 
     return (
         <View style={styles.container(colors)}>
@@ -78,9 +95,6 @@ const LoginScreen = () => {
                     keyboardType='email-address'
                     autoFocus={true}
                     showSoftInputOnFocus={true}
-                   
-
-
                     returnKeyType='next'
                     blurOnSubmit={false}
                     autoCorrect={false}
