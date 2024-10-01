@@ -16,11 +16,11 @@ const MenuCategoryComponent = ({ category, searchQuery }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedAddon, setSelectedAddon] = useState(null);
   const { colors } = useTheme(); // Use useTheme to access the current theme colors
-  
+
   const [itemCounts, setItemCounts] = useState({});
 
- // Assume generateId is a function that returns a unique ID
-const generateId = () => Math.random().toString(36).substr(2, 9); // Example ID generation function
+  // Assume generateId is a function that returns a unique ID
+  const generateId = () => Math.random().toString(36).substr(2, 9); // Example ID generation function
 
 
   useEffect(() => {
@@ -28,90 +28,100 @@ const generateId = () => Math.random().toString(36).substr(2, 9); // Example ID 
   }, [dispatch]);
 
 
-  const storeItemCount = async (itemName, count) => {
-    
-    console.log(`🚀 ~  Attempting to upsert item: ${itemName}, count: ${count}`);
-  
-    // Validate input data
-    if (!itemName || count === undefined) {
-      console.error('Invalid input data:', { itemName, count });
-      return;
+  const storeItemCount = async (item) => {
+    const { name, description, image, price, count } = item; // Destructure the item
+
+
+  console.log(`Attempting to upsert item: ${name}, count: ${count}`);
+
+  // Validate input data
+  if (!name || count === undefined) {
+    console.error('Invalid input data:', { name, count });
+    return;
+  }
+
+  try {
+    // Check if the item already exists in the table by item_name
+    const { data: existingItem, error: fetchError } = await supabase
+      .from('item_counts')
+      .select('id, count') // Select id and count to check if the item exists
+      .eq('item_name', name)
+      .single(); // Fetch a single item matching the item_name
+
+    // If fetchError is not a "no rows found" error (code 'PGRST116'), throw it
+    if (fetchError && fetchError.code !== 'PGRST116') {
+      throw fetchError;
     }
-  
-    try {
-      // Check if the item already exists in the table by item_name
-      const { data: existingItem, error: fetchError } = await supabase
-        .from('item_counts')
-        .select('id, count') // Select id and count to check if the item exists
-        .eq('item_name', itemName)
-        .single(); 
-  
-      
-      if (fetchError && fetchError.code !== 'PGRST116') {
-        throw fetchError;
-      }
-  
-      let newCount = count; // Start with the incoming count
-      let itemId;
-  
-      // If the item exists, use the existing ID and calculate the new count
-      if (existingItem) {
-        itemId = existingItem.id;
-        newCount += 1; // Increment the count only for the existing item
-      } else {
-        // If the item doesn't exist, generate a new ID
-        itemId = generateId(); 
-      }
-  
-      // Upsert the item with the new count and id (insert or update)
-      const { data, error } = await supabase
-        .from('item_counts') 
-        .upsert({
-          id: itemId, // Use the existing or newly generated ID
-          item_name: itemName,
-          count: count,
-        })
-        
-        .select(); // Ensure we get the updated item back
-  
-      if (error) {
-        console.log("🚀 ~ storeItemCount ~ error:", error.message)
-        
-      } else {
-        console.log("🚀 ~ storeItemCount ~ count:", count)
-      }
-    } catch (error) {
-      console.log("🚀 ~ storeItemCount ~ error:", error.message)
+
+    let newCount = count;
+    let itemId;
+
+    // If the item exists, use the existing ID and increment the count
+    if (existingItem) {
+      itemId = existingItem.id;
+      newCount += existingItem.count;
+    } else {
+      // If the item doesn't exist, generate a new ID
+      itemId = generateId(); // Ensure you have a unique ID generation logic
     }
+
+    // Upsert the item with the new count and id (insert or update)
+    const { data, error } = await supabase
+      .from('item_counts')
+      .upsert({
+        id: itemId, // Use the existing or newly generated ID
+        item_name: name,
+        description, // Add the description
+        image, // Add the image URL
+        price, // Add the price
+        count: count,
+      });
+       
+
+    if (error) {
+      console.error('Error storing item count:', error.message);
+    } else {
+      console.log('Stored item count:', data);
+    }
+  } catch (error) {
+    console.error('Error processing item count:', error.message);
+  }
     console.log(`🚀 ~  Attempting to upsert item: ${itemName}, count: ${count}`);
   };
-  
+
   // Open modal function with functional setState
   const openModal = async (item) => {
     setSelectedItem(item);
     setSelectedAddon(null);
     setModalVisible(true);
-  
-    
+    // console.log("🚀 ~ openModal ~ item:", item)
+
     setItemCounts((prevCounts) => {
-      const currentCount = prevCounts[item.name] || 0; // Get the current count
-      const newCount = currentCount + 1; // Increment count for the selected item
-    
-      //console.log(`Item selected: ${item.name}, New Count: ${newCount}`); // Log the new count
+      const currentCount = prevCounts[item.name] || 0;
+      const newCount = currentCount + 1;
+
+
+      const itemDetails = {
+        name: item.name,
+        description: item.description, // Ensure you have this in your item object
+        image: images[item.imagePath], // Ensure you have this in your item object
+        price: item.price, // Ensure you have this in your item object
+        count: newCount,
+      };
      
-     
-      //console.log("🚀 ~ setItemCounts ~ newCount & Item selected:", newCount , `${item.name}`)
+
       // Store the count for the item in the database
-      storeItemCount(item.name, newCount);
-  
-      
+      storeItemCount(itemDetails);
+
+
       return { ...prevCounts, [item.name]: newCount };
     });
   };
-  
 
-  
-  
+
+
+
+
 
 
   const closeModal = () => {
