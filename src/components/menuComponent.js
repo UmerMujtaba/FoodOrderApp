@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, ActivityIndicator, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchMenu } from '../redux/slices/menuSlice';
-
 import { images } from '../assets/images';
 import ItemDetailModal from './modalItemDetails';
 import fonts from '../constants/fonts';

@@ -1,4 +1,4 @@
-import { View, Text, Image, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Image, ActivityIndicator, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../../../utils/supabase';
 import { Strings } from '../../../constants/string';
@@ -34,12 +34,13 @@ const RecommendationScreen =({navigation})=> {
   }
 
   // Debugging: Check what data is being rendered
-  console.log('Recommendations:', recommendations);
+  console.log("🚀 ~ RecommendationScreen ~ recommendations:", recommendations)
 
 
 
   return (
     <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
       <TouchableOpacity style={styles.backIconContainer(colors)} onPress={() => navigation.goBack()}>
         <Image source={images.backIcon} style={styles.backImage} />
       </TouchableOpacity>
@@ -57,8 +58,10 @@ const RecommendationScreen =({navigation})=> {
           </View>
         </View>
       ))}
+      </ScrollView>
     </View>
   )
 }
+  
 
 export default RecommendationScreen

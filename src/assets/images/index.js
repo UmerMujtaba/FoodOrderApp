@@ -60,6 +60,12 @@ export const images = {
     profileIcon: require('./profile.png'),
 
     confirmationImage: require('./illustration.png'),
+
+    tokenIcon: require('./tokenicon.png'),
+    settingIcon: require('./settingicon.png'),
+    helpIcon:require('./helpicon.png'),
+    notificationIcon2: require('./notification2.png'),
+    logoutIcon:require('./logouticon.png'),
 }
 // 
 

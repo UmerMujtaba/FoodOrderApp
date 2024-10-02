@@ -8,14 +8,15 @@ export const fetchRecommendations = createAsyncThunk(
       const { data, error } = await supabase
         .from('item_counts')
         .select('*')
-        .gt('count', 5);
+        .gt('count', 10);
   
       if (error) {
+       
         console.error('Error fetching recommendations:', error);
         return [];  // Return an empty array in case of an error
       }
-  
-      console.log('Fetched data:', data);  // Add this line for debugging
+      console.log("🚀 ~ Fetched data:", data)
+     
       return data;
     }
   );

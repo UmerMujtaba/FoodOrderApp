@@ -6,7 +6,8 @@ export
         container: {
             flex: 1,
             padding: 10,
-
+            marginLeft:5,
+            marginRight:5,
         },
         backIconContainer: (colors) => ({
             backgroundColor: colors.backContainer,
@@ -25,7 +26,7 @@ export
         },
         title: (colors) => ({
             fontSize: 24,
-            marginBottom: 10,
+            marginBottom: 15,
             textAlign: 'center',
             color: colors.text,
             fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
