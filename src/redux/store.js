@@ -1,14 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import menuReducer from './slices/menuSlice';
-import cartReducer from './slices/cartSlice';
-import recommendationReducer from './slices/recommendationSlice';
+import rootReducer from './reducers/combinedReducers';
 
 const store = configureStore({
-  reducer: {
-    menu: menuReducer,
-    cart: cartReducer,
-    recommendations: recommendationReducer,
-  },
+  reducer: rootReducer, // Use the combined reducers
 });
+
 
 export default store;
