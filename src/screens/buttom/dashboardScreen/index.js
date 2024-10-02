@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity, ScrollView, KeyboardAvoidingView, StatusBar } from 'react-native';
-import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState,useCallback } from 'react';
+import { useNavigation,useFocusEffect } from '@react-navigation/native';
 import { images } from '../../../assets/images';
 import HeaderWithSearch from '../../../components/header';
 import FilterComponent from '../../../components/filter';
@@ -11,20 +11,44 @@ import { ScreenNames } from '../../../constants/string';
 const DashboardScreen = () => {
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
-  const { colors } = useTheme(); // Use useTheme to access the current theme colors
+  const [selectedType, setSelectedType] = useState(''); // Store the selected type
+  const [appliedType, setAppliedType] = useState('');   // Store the type to apply after button click
+  const { colors } = useTheme();
 
+
+  useFocusEffect(
+    useCallback(() => {
+      // Reset filter states when navigating to the screen
+      setSelectedType('');
+      setAppliedType('');
+      setSearchQuery('');
+    }, [])
+  );
+
+
+  
   const handleSearch = (query) => {
     setSearchQuery(query);
   };
 
+  const handleFilter = (type) => {
+    setSelectedType(type); // Set the selected type but don’t apply it yet
+  };
+
+  const applyFilter = () => {
+    setAppliedType(selectedType); // Apply the selected type on button click
+  };
+
   const items = [
-    { id: 1, imageSource: images.veganImage, text: 'Vegetarian Food', screen: ScreenNames.Vegan },
-    { id: 2, imageSource: images.fastFoodImage, text: 'Fast Food', screen: ScreenNames.Fastfood },
-    { id: 3, imageSource: images.drinkImage, text: 'Drinks', screen: ScreenNames.Drink },
-    { id: 4, imageSource: images.addOnsImage, text: 'Sides', screen: ScreenNames.Sides },
+    { id: 1, imageSource: images.veganImage, text: 'Vegetarian Food', type: 'Vegan', screen: ScreenNames.Vegan },
+    { id: 2, imageSource: images.fastFoodImage, text: 'Fast Food', type: 'Fast Food', screen: ScreenNames.Fastfood },
+    { id: 3, imageSource: images.drinkImage, text: 'Drinks', type: 'Drinks', screen: ScreenNames.Drink },
+    { id: 4, imageSource: images.addOnsImage, text: 'Sides', type: 'Sides', screen: ScreenNames.Sides },
   ];
 
+  // Filter items based on applied type and search query
   const filteredItems = items.filter(item =>
+    (appliedType === '' || item.type === appliedType) &&
     item.text.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -32,10 +56,8 @@ const DashboardScreen = () => {
     <KeyboardAvoidingView style={[styles.container, { backgroundColor: colors.background }]}>
       <StatusBar translucent backgroundColor="transparent" />
       <HeaderWithSearch />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-      >
-        <FilterComponent onSearch={handleSearch} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <FilterComponent onSearch={handleSearch} onFilter={handleFilter} onApply={applyFilter} showPriceFilter={false} />
         <TouchableOpacity>
           <Image source={images.advertiseImage} style={styles.advertiseBg} />
         </TouchableOpacity>
@@ -45,14 +67,12 @@ const DashboardScreen = () => {
               key={item.id}
               style={[
                 styles.itemImageStyle,
-                { backgroundColor: colors.tabBackgroundColor } // Use theme color for item background
+                { backgroundColor: colors.tabBackgroundColor }
               ]}
               onPress={() => navigation.navigate(item.screen)}
             >
               <Image source={item.imageSource} style={[styles.itemImage, { backgroundColor: colors.tabBackgroundColor }]} />
-              <Text style={[styles.itemName, { color: colors.text }]}>
-                {item.text}
-              </Text>
+              <Text style={[styles.itemName, { color: colors.text }]}>{item.text}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -60,5 +80,7 @@ const DashboardScreen = () => {
     </KeyboardAvoidingView>
   );
 };
+
+
 
 export default DashboardScreen;

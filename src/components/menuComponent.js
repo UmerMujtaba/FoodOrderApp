@@ -9,7 +9,7 @@ import { useTheme } from '@react-navigation/native'; // Import useTheme to acces
 import { supabase } from '../utils/supabase';
 import { incrementCount } from '../redux/slices/itemCountSlice';
 
-const MenuCategoryComponent = ({ category, searchQuery }) => {
+const MenuCategoryComponent = ({ category, searchQuery,filter}) => {
   const dispatch = useDispatch();
   const { menuItems, loading, error } = useSelector((state) => state.menu);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -116,9 +116,14 @@ const MenuCategoryComponent = ({ category, searchQuery }) => {
     return <Text>Error: {error}</Text>;
   }
 
-  const items = menuItems[category]?.filter((item) =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  ) || [];
+
+
+  const filteredItems = menuItems[category]?.filter((item) => {
+    const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesPrice = filter.price ? parseFloat(item.price) >= parseFloat(filter.price) : true;
+    return matchesSearch && matchesPrice;
+  }) || [];
+
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -133,7 +138,7 @@ const MenuCategoryComponent = ({ category, searchQuery }) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={items}
+        data={filteredItems}
         renderItem={renderItem}
         keyExtractor={(item) => item.name}
         numColumns={2}

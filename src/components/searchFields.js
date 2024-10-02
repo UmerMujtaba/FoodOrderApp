@@ -38,9 +38,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 15,
     height: 50,
-    width: 250,
+    width: 270,
     backgroundColor: '#FFCC80',
-    marginLeft: 10,
+    //marginLeft: 10,
     paddingHorizontal: 10,
   },
   icon: {
