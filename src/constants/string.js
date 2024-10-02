@@ -1,3 +1,5 @@
+import RecommendationScreen from "../screens/buttom/recommendationScreen"
+
 export const Strings ={
     starterText: ' Find your Comfort\nFood here',
     starterDescription: 'Here you can order food and read \n about its ingredients. Enjoy!',
@@ -25,6 +27,7 @@ export const Strings ={
     keepMeSignedIn:'Keep me signed in',
     emailMeAboutSpecialPricing:'Email me about special pricing',
     dontHaveAnAccount:'Sign up',
+    recommendations:'Recommendations'
     
 }
 
@@ -46,7 +49,7 @@ export const ScreenNames={
     Profile:'Profile',
     Cart:'Cart',
     Chat:'Chat',
-
+    Recommendation:'Recommendation',
 
 
 }

@@ -86,7 +86,8 @@ const MenuCategoryComponent = ({ category, searchQuery }) => {
   } catch (error) {
     console.error('Error processing item count:', error.message);
   }
-    console.log(`🚀 ~  Attempting to upsert item: ${itemName}, count: ${count}`);
+   
+    console.log(`🚀 ~  Attempting to upsert item: ${name}, count: ${count}`);
   };
 
   // Open modal function with functional setState

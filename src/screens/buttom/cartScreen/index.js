@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image, Alert, Modal, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Modal, ImageBackground } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, updateQuantity } from '../../../redux/slices/cartSlice';
-import fonts from '../../../constants/fonts';
 import { images } from '../../../assets/images';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import LinearGradient from 'react-native-linear-gradient';
 import { LinearGradientText } from 'react-native-linear-gradient-text';
 import styles from './styles';
-import { ScrollView } from 'react-native-gesture-handler';
-import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
+import { useTheme } from '@react-navigation/native'; 
 import { Strings } from '../../../constants/string';
 
 
@@ -18,10 +16,10 @@ import { Strings } from '../../../constants/string';
 const CartScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const cartItemsFromStore = useSelector((state) => state.cart.cartItems);
-const cartItems = cartItemsFromStore.map(item => ({
-  ...item,
-  totalPrice: item.price + (item.selectedAddon ? item.selectedAddon.price : 0), // Calculate total price with selected add-on
-}))
+  const cartItems = cartItemsFromStore.map(item => ({
+    ...item,
+    totalPrice: item.price + (item.selectedAddon ? item.selectedAddon.price : 0), // Calculate total price with selected add-on
+  }))
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [expandedItemId, setExpandedItemId] = useState(null);
@@ -71,7 +69,7 @@ const cartItems = cartItemsFromStore.map(item => ({
 
   const renderItem = ({ item }) => {
     const isExpanded = expandedItemId === item.id;
-   
+
 
     return (
       <View style={[styles.itemContainer(colors)]}>

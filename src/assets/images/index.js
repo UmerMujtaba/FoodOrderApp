@@ -7,7 +7,7 @@ export const images = {
     fbLogo: require('./fblogo.png'),
     gmailLogo: require('./gmaillogo.png'),
     homeIcon: require('./homeicon.png'),
-    profileIcon: require('./usericon.png'),
+    userIcon: require('./usericon.png'),
     chatIcon: require('./chaticon.png'),
     cartIcon: require('./carticon.png'),
     notificationIcon: require('./notificaitonicon.png'),
