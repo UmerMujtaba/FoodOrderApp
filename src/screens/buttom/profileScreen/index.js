@@ -53,7 +53,7 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.avatar(colors)}>
-        <Image source={images.profileIcon} style={styles.imgStyle} />
+        <Image source={images.manIcon} style={styles.imgStyle} />
       </View>
 
       <Text style={styles.name(colors)}>Joseph</Text>

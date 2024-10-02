@@ -50,12 +50,12 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
+    fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
     alignSelf: 'center',
     marginLeft: 20,
   },
   separator:(colors)=> ({
-    width: 250,
+    width: 270,
     height: 1, // Add height for the separator
     backgroundColor: colors.tabBackgroundColor, // Use a background color instead
     alignSelf: 'center',

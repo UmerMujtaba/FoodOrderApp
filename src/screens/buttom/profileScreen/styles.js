@@ -29,9 +29,10 @@ export default StyleSheet.create({
         
     }),
     imgStyle: {
-        width: 80,
-        height: 80,
-        resizeMode: 'contain'
+        width: 90,
+        height: 85,
+        resizeMode: 'contain',
+        
     },
     body: {
         height: 400,

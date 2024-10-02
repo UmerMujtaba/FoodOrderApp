@@ -6,6 +6,8 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
+        marginLeft:5,
+        marginRight:5,
 
     },
     backIconContainer:(colors)=> ({
@@ -16,7 +18,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 16,
         marginTop: 30,
-        marginLeft: 10
+        //marginLeft: 10
     }),
     backImage: {
         resizeMode: 'contain',

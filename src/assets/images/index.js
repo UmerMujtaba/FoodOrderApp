@@ -66,6 +66,9 @@ export const images = {
     helpIcon:require('./helpicon.png'),
     notificationIcon2: require('./notification2.png'),
     logoutIcon:require('./logouticon.png'),
+
+    manIcon:require('./man.png'),
 }
+
 // 
 
