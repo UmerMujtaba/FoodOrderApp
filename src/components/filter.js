@@ -91,19 +91,19 @@ const FilterComponent = ({ onSearch, onFilter, onApply, showPriceFilter }) => {
                 <Text style={styles.heading(colors)}>Price</Text>
                 <View style={[styles.modalBody, { marginBottom: 20 }]}>
                   <View style={{ flexDirection: 'column' }}>
-                    <TouchableOpacity style={[styles.touchableContainer(colors), selectedPrice === '0.5' && { backgroundColor: colors.primary }]} onPress={() => handlePriceSelect('0.5')}>
-                      <Text style={styles.subHeading(colors)}>{'> 0.5 $'}</Text>
+                    <TouchableOpacity style={[styles.touchableContainer(colors), selectedPrice === '1.5' && { backgroundColor: colors.primary }]} onPress={() => handlePriceSelect('1.5')}>
+                      <Text style={styles.subHeading(colors)}>{'> 1.5 $'}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.touchableContainer(colors), selectedPrice === '2.0' && { backgroundColor: colors.primary }]} onPress={() => handlePriceSelect('2.0')}>
-                      <Text style={styles.subHeading(colors)}>{'> 2.0 $'}</Text>
+                    <TouchableOpacity style={[styles.touchableContainer(colors), selectedPrice === '5.0' && { backgroundColor: colors.primary }]} onPress={() => handlePriceSelect('5.0')}>
+                      <Text style={styles.subHeading(colors)}>{'> 5.0 $'}</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={{ flexDirection: 'column' }}>
-                    <TouchableOpacity style={[styles.touchableContainer(colors), selectedPrice === '1.0' && { backgroundColor: colors.primary }]} onPress={() => handlePriceSelect('1.0')}>
-                      <Text style={styles.subHeading(colors)}>{'> 1.0 $'}</Text>
-                    </TouchableOpacity>
                     <TouchableOpacity style={[styles.touchableContainer(colors), selectedPrice === '2.5' && { backgroundColor: colors.primary }]} onPress={() => handlePriceSelect('2.5')}>
                       <Text style={styles.subHeading(colors)}>{'> 2.5 $'}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.touchableContainer(colors), selectedPrice === '9.0' && { backgroundColor: colors.primary }]} onPress={() => handlePriceSelect('9.0')}>
+                      <Text style={styles.subHeading(colors)}>{'< 9.0 $'}</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
