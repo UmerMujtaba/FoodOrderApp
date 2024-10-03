@@ -5,6 +5,8 @@ import { images } from '../assets/images';
 import { useTheme } from '@react-navigation/native';
 import fonts from '../constants/fonts';
 import GradientButton from './gradientButton';
+import { hp, rfs, rhp, rwp, width, wp } from '../constants/dimensions';
+
 
 const FilterComponent = ({ onSearch, onFilter, onApply, showPriceFilter }) => {
   const [filterVisible, setFilterVisible] = useState(false);
@@ -126,75 +128,68 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10
+    paddingVertical: rhp(10), // Adjust as necessary
+    paddingHorizontal: rwp(10),
   },
   searchContainer: {
     backgroundColor: '#F9A84D',
-    height: 49,
-    width: 50,
+    height: rhp(55),
+    width: rwp(55),
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
   },
   imgStyle: {
-    width: 25,
-    height: 25,
+    width: rwp(30),
+    height: rhp(30),
     resizeMode: 'contain'
   },
   modalContainer: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,0.5)'
   },
   modalView: (colors) => ({
-    width: 320,
-    height: 300,
+    width: wp(100),
+    height: rwp(350),
     backgroundColor: colors.modalColor,
     borderRadius: 10,
-    padding: 20,
-    marginTop: 10
+    paddingVertical: rhp(20), // Adjust as necessary
+    paddingHorizontal: rwp(20),
+    marginTop: rhp(15)
 
   }),
   heading: (colors) => ({
-    fontSize: 18,
-    marginBottom: 10,
+    fontSize: rfs(20),
+    marginBottom: rhp(15),
     color: colors.text,
-    marginTop: 20,
+    marginTop: rhp(30),
     fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold
 
   }),
-  placeHolderText: {
-    marginBottom: 10,
-    color: 'red',
-    backgroundColor: 'green'
-
-  },
-  placeHolderContainer: {
-    marginBottom: 10,
-    backgroundColor: 'blue'
-
-  },
+  
   modalBody: {
-    height: 100,
+    height: rhp(120),
     flexDirection: 'row',
     justifyContent: 'space-around',
-    padding: 10
+    paddingVertical: rhp(10), // Adjust as necessary
+    paddingHorizontal: rwp(10),
 
   },
   touchableContainer: (colors) => ({
     backgroundColor: colors.tabBackgroundColor,
-    height: 40,
-    width: 90,
+    height: rhp(50),
+    width: rwp(100),
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10
+    marginBottom: rhp(15)
   }),
   subHeading: (colors) => ({
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
-    fontSize: 16, color:
-      colors.text
+    fontSize: rfs(18), 
+    color: colors.text
   })
 })
 export default FilterComponent;

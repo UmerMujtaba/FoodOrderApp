@@ -9,6 +9,7 @@ import ModalAppBar from './modalAppBar';
 import GradientButton from './gradientButton';
 import { Strings } from '../constants/string';
 import { RadioButton } from 'react-native-paper';
+import { hp, rfs, rhp, rwp, width, wp } from '../constants/dimensions';
 
 
 const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statusBarTranslucent }) => {
@@ -134,52 +135,52 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   modalContainer: (colors, modalHeight) => ({
-    width: '100%',
+    width: wp(100),
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    paddingTop: 20,
+    paddingTop: rhp(25),
     alignItems: 'center',
     justifyContent: 'flex-start',
     backgroundColor: colors.modalColor,
     height: modalHeight
   }),
   nudge: (colors) => ({
-    width: 60,
-    height: 4,
+    width: rwp(60),
+    height: rhp(4),
     backgroundColor: colors.nudge,
     alignSelf: 'center',
     borderRadius: 8,
-    marginBottom: 10,
+    marginBottom: rhp(15),
   }),
   modalImage: {
-    width: '100%',
-    height: '80%',
+    width: wp(100),
+    height: hp(80),
     position: 'absolute',
     top: 0,
     left: 0,
     resizeMode: "cover"
   },
   contentContainer: {
-    width: '100%',
-    paddingBottom: 20,
+    width: wp(100),
+    paddingBottom: rhp(20),
   },
   modalName: (colors) => ({
-    fontSize: 24,
-    marginVertical: 10,
+    fontSize: rfs(28),
+    marginVertical: rhp(15),
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
-    marginLeft: 10,
+    marginLeft: rwp(15),
     color: colors.text,
   }),
   modalDescription: (colors) => ({
-    fontSize: 16,
-    marginLeft: 10,
-    paddingRight: 5,
+    fontSize: rfs(18),
+    marginLeft: rwp(15),
+    paddingRight: rwp(10),
     color: colors.text,
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
   }),
   modalAddons: (colors) => ({
-    fontSize: 16,
-    marginBottom: 10,
+    fontSize: rfs(20),
+    marginBottom: rhp(10),
     textAlign: 'center',
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
     color: colors.text
@@ -191,7 +192,9 @@ const styles = StyleSheet.create({
   },
   addOnContainer: (colors) => ({
     flexDirection: 'row',
-    margin: 5,
+    //margin: 5,
+    marginVertical: rhp(10),
+    marginHorizontal: rwp(10),
     alignItems: 'center',
   }),
   addOnName: (colors) => ({
@@ -200,10 +203,10 @@ const styles = StyleSheet.create({
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium
   }),
   modalPrice: (colors) => ({
-    fontSize: 18,
-    marginVertical: 10,
+    fontSize: rfs(22),
+    marginVertical: rhp(15),
     color: colors.text,
-    marginLeft: 10,
+    marginLeft: rwp(15),
     fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
   }),
 });

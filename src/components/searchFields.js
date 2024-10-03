@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextInput, StyleSheet, View, Image } from 'react-native';
+import { hp, rfs, rhp, rwp, wp } from '../constants/dimensions';
 
 const SearchField = ({ placeholder = 'What do you want to order?', imageSource, style, onSearch, ...props }) => {
   const [searchText, setSearchText] = useState('');
@@ -37,16 +38,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 15,
-    height: 50,
-    width: 270,
+    height: rhp(55),
+    width: rwp(300),
     backgroundColor: '#FFCC80',
     //marginLeft: 10,
-    paddingHorizontal: 10,
+    paddingHorizontal: rwp(10),
   },
   icon: {
-    width: 24,
-    height: 24,
-    marginRight: 10,
+    width: rwp(26),
+    height: rhp(26),
+    marginRight: rwp(10),
   },
   input: {
     flex: 1,

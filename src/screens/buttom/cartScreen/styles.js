@@ -1,34 +1,35 @@
 import { StyleSheet } from "react-native";
 import fonts from "../../../constants/fonts";
+import { height, hp, rfs, rhp, rwp, wp } from "../../../constants/dimensions";
 
 export default StyleSheet.create({
 
     container: {
         flex: 1,
-        padding: 10,
-        marginLeft:5,
-        marginRight:5,
+        paddingHorizontal: rwp(10),
+        paddingVertical: rhp(10),
+        marginLeft: rwp(5),
+        marginRight: rwp(5),
 
     },
-    backIconContainer:(colors)=> ({
+    backIconContainer: (colors) => ({
         backgroundColor: colors.backContainer,
-    
-        height: 45,
-        width: 45,
+        height: rhp(55),
+        width: rwp(50),
         justifyContent: 'center',
         borderRadius: 16,
-        marginTop: 30,
+        marginTop: rhp(40),
         //marginLeft: 10
     }),
     backImage: {
         resizeMode: 'contain',
-        height: 16.36,
-        width: 10,
+        height: rhp(18.36),
+        width: rwp(14),
         alignSelf: 'center',
     },
-    title:(colors)=> ({
-        fontSize: 24,
-        marginBottom: 10,
+    title: (colors) => ({
+        fontSize: rfs(28),
+        marginBottom: rhp(20),
         textAlign: 'center',
         color: colors.text,
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
@@ -36,66 +37,68 @@ export default StyleSheet.create({
     }),
     itemContainer: (colors) => ({
         flexDirection: 'row',
-        padding: 12,
+        paddingHorizontal: rwp(12),
+        paddingVertical: rhp(12),
         backgroundColor: 'white',
         borderRadius: 16,
-        marginBottom: 10,
+        marginBottom: rhp(10),
         backgroundColor: colors.tabBackgroundColor
 
     }),
     itemImage: (isExpanded) => ({
-        // width: 80,
-        // height: 80,
         borderRadius: 8,
         alignSelf: 'center',
-        height: isExpanded ? 140 : 100, width: isExpanded ? 100 : 80
+        height: isExpanded ? rhp(140) : rhp(120), 
+        width: isExpanded ? rwp(110) : rwp(90)
 
     }),
     detailsContainer: {
         flex: 1,
-        marginLeft: 10,
+        marginLeft: rhp(10),
         //height:90,
         justifyContent: 'center',
         //backgroundColor:'red'
     },
     itemName: (colors, isExpanded) => ({
-        fontSize: 20,
+        fontSize: rfs(24),
         // color: 'black',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
         // marginTop:5,
         // backgroundColor:'green'
         //marginTop:5
         color: colors.text,
-        marginTop: isExpanded ? 70 : 35
+        marginTop: isExpanded ? rhp(70) : rhp(40)
     }),
-    itemDescription:(colors)=> ({
-        fontSize: 14,
+    itemDescription: (colors) => ({
+        fontSize: rfs(16),
         // color: 'grey',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
         color: colors.text
         //backgroundColor:'blue'
     }),
-addOnHeading:(colors)=>({
-    color: colors.text, 
-    fontFamily: 
-    fonts.SF_PRO_TEXT.Spectral.Bold 
-}),
-addOnName:(colors) => ({
-    color: colors.text, 
-    fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular 
-}),
+    addOnHeading: (colors) => ({
+        color: colors.text,
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
+        fontSize: rfs(16)
+    }),
+    addOnName: (colors) => ({
+        color: colors.text,
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
+        fontSize: rfs(16)
+    }),
     addOnsContainer: {
-        marginTop: 5,
-        paddingBottom: 5,
+        marginTop: rhp(5),
+        paddingBottom: rhp(5),
         //backgroundColor:'pink'
     },
 
-    displayMsg:{ 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        flex: 1 },
+    displayMsg: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1
+    },
     itemPrice: {
-        fontSize: 20,
+        fontSize: rfs(24),
         color: '#15BE77',
         //fontWeight: 'bold',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
@@ -107,14 +110,14 @@ addOnName:(colors) => ({
         justifyContent: 'flex-end',
     },
     button: {
-        fontSize: 18,
+        fontSize: rfs(20),
         fontWeight: 'bold',
         color: 'white',
         borderRadius: 8,
         textAlign: 'center', // Center the text
     },
     button2: {
-        fontSize: 18,
+        fontSize: rfs(20),
         fontWeight: 'bold',
         color: '#185519',
         borderRadius: 8,
@@ -126,20 +129,23 @@ addOnName:(colors) => ({
     },
     gradientButton: {
         borderRadius: 8,
-        padding: 10,
-        paddingTop: 2,
-        paddingBottom: 2,
+    
+        paddingHorizontal:rwp(8),
+        paddingVertical:rhp(8),
+        paddingTop: rhp(2),
+        paddingBottom: rhp(2),
     },
     gradientButton2: {
         borderRadius: 8,
-        padding: 10,
-        paddingTop: 2,
-        paddingBottom: 2,
+        paddingHorizontal:rwp(8),
+        paddingVertical:rhp(8),
+        paddingTop: rhp(2),
+        paddingBottom: rhp(2),
         opacity: 0.8
     },
-    quantity:(colors)=> ({
-        marginHorizontal: 15,
-        fontSize: 18,
+    quantity: (colors) => ({
+        marginHorizontal: rwp(15),
+        fontSize: rfs(20),
         color: colors.text,
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
     }),
@@ -147,7 +153,7 @@ addOnName:(colors) => ({
 
     cardGradient: {
         borderRadius: 16,
-        width: 346,
+        width: rwp(380),
         alignSelf: 'center',
         // position: 'absolute',
         //bottom: 0,
@@ -156,59 +162,58 @@ addOnName:(colors) => ({
 
     bgImageStyle: {
         resizeMode: 'contain',
-        height: 150,
-        width: 346,
+        height: rhp(186),
+        width: rwp(370),
+        marginRight: rwp(2),
         alignSelf: 'center',
     },
     cardContainerRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginLeft: 5,
-        marginRight: 5,
-        width: 346,
+        marginLeft: rwp(5),
+        marginRight: rwp(5),
+        width: rwp(370),
         // height: 2
     },
     cardContainerCol: {
         flexDirection: 'column',
-        padding: 10
+        paddingHorizontal:rwp(10),
+        paddingVertical:rhp(10),
     },
     headingText: {
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
-        fontSize: 20,
+        fontSize: rfs(24),
         color: 'black',
-        marginTop: 5
+        marginTop: rhp(5)
     },
     priceText: {
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
-        fontSize: 22,
+        fontSize: rfs(26),
         color: 'black',
-        marginTop: 15
+        marginTop: rhp(15)
     },
-    ctaBtn:(colors)=> ({
-       
-        height: 45,
-        width: 325,
+    ctaBtn: (colors) => ({
+
+        height: rhp(50),
+        width: rwp(355),
         borderRadius: 16,
-        marginBottom: 5,
+        marginBottom: rhp(5),
         //position: 'absolute',
         //zIndex: 2,
-        bottom: 5,
+        bottom: rhp(5),
         alignSelf: 'center',
         justifyContent: 'center',
         backgroundColor: colors.tabBackgroundColor,
     }),
 
     OrderText: {
-        fontSize: 22
-        ,
+        fontSize: rfs(26),
         color: '#15BE77',
         //fontWeight: 'bold',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
         alignSelf: 'center',
 
     },
-
-
 
 
 
@@ -221,18 +226,18 @@ addOnName:(colors) => ({
         alignSelf: 'flex-end',
 
         borderRadius: 16,
-        height: 185,
-        width: 330
+        height: rhp(210),
+        width: rwp(350)
     },
     deleteButton: {
         flexDirection: 'row',
         // alignItems: 'center',
         alignSelf: 'flex-end',
-        marginRight: 45,
+        marginRight: rwp(45),
     },
     deleteImg: {
-        width: 30,
-        height: 30,
+        width: rwp(30),
+        height: rhp(30),
         //marginRight: 10,
         // marginRight:40,
         color: 'white'
@@ -240,12 +245,12 @@ addOnName:(colors) => ({
 
     total: {
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
-        fontSize: 24,
+        fontSize: rfs(26),
         color: 'black',
-        marginTop: 40,
+        marginTop: rhp(50),
     },
-    emptyMessage:(colors)=> ({
-        fontSize: 18,
+    emptyMessage: (colors) => ({
+        fontSize: rfs(24),
         textAlign: 'center',
 
         // marginTop: 20,
@@ -259,20 +264,20 @@ addOnName:(colors) => ({
         alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
-    modalContainer:(colors) => ({
-        width: '95%',
-       
+    modalContainer: (colors) => ({
+        width: wp(95),
         borderRadius: 16,
-        padding: 20,
-        height: '25%',
+        paddingHorizontal:rwp(20),
+        paddingVertical:rhp(20),
+        height: hp(25),
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: colors.tabBackgroundColor 
+        backgroundColor: colors.tabBackgroundColor
     }),
-    modalText:(colors) => ({
-        fontSize: 18,
+    modalText: (colors) => ({
+        fontSize: rfs(20),
         color: colors.text,
-        marginBottom: 20,
+        marginBottom: rhp(20),
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
         textAlign: 'center',
     }),
@@ -282,14 +287,15 @@ addOnName:(colors) => ({
     },
     modalButton: {
         //backgroundColor: '#15BE77',
-        padding: 12,
+        paddingHorizontal:rwp(15),
+        paddingVertical:rhp(15),
         borderRadius: 5,
-        marginHorizontal: 10,
+        marginHorizontal: rwp(10),
 
     },
     modalButtonText: {
-        color: 'white',
-        fontSize: 16,
+        color: 'black',
+        fontSize: rfs(20),
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
     },
 

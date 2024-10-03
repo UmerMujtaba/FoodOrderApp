@@ -1,6 +1,7 @@
 import { useTheme } from '@react-navigation/native';
 import React,{forwardRef} from 'react';
 import { TextInput, StyleSheet, View, Image } from 'react-native';
+import { rhp, rwp } from '../constants/dimensions';
 
 const CustomTextInput = forwardRef(({
     placeholder, 
@@ -56,14 +57,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
 
-        marginTop: 5,
-        marginBottom: 10,
+        marginTop: rhp(5),
+        marginBottom: rhp(12),
         borderRadius: 15,
-        backgroundColor: colors.tabBackgroundColor, borderColor: colors.tabBackgroundColor, color: colors.text,
+        backgroundColor: colors.tabBackgroundColor, 
+        borderColor: colors.tabBackgroundColor, 
+        color: colors.text,
         //paddingHorizontal: 16,
-        height: 55,
+        height: rhp(65),
         // width:"80%",
-        paddingLeft: 10,
+        paddingLeft: rwp(10),
         //justifyContent: 'space-between',
         // alignItems: 'center',
         // marginBottom: 30

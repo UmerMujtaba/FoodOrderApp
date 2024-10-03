@@ -29,7 +29,7 @@ const StartScreen = ({navigation}) => {
             <GradientButton
                 onPress={() => navigate(ScreenNames.Login)}
                 buttonText="Next"
-                textStyle={{ fontSize: 18 }}
+               
             />
 
 

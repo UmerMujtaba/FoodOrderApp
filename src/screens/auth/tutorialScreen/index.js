@@ -29,7 +29,7 @@ const TutorialScreen = ({navigation}) => {
             <GradientButton
                 onPress={() => navigate(ScreenNames.Start)}
                 buttonText="Next"
-                textStyle={{ fontSize: 18 }}
+              
             />
 
         </View>

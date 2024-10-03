@@ -1,5 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet,Dimmensions } from "react-native";
 import fonts from "../../../constants/fonts";
+import { hp, rfs, rhp, rwp, wp } from "../../../constants/dimensions";
 
 
 
@@ -13,58 +14,60 @@ export default StyleSheet.create({
     }),
     bgImage: {
         resizeMode: 'cover',
-        width: 'auto',
-        height: 350,
+        width: wp(100),
+        height: rhp(400),
     },
 
 
     logoStyle:
     {
         resizeMode: 'contain',
-        height: 200,
-        width: 200,
+        height: rhp(220),
+        width: rwp(210),
         alignSelf: 'center',
         zIndex: 2,
-        top: '25%',
+        top: rhp(100),
 
     },
     mainText:(colors)=> ({
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
-        fontSize: 24,
+        fontSize: rfs(28),
         color: colors.text,
         alignSelf: 'center',
-        top: '35%'
+        top: rhp(145)
+
     }),
     body: {
-        height: 'auto',
-        width: 'auto',
-        marginLeft: 18,
-        marginRight: 18,
-        marginTop: 15
+        //backgroundColor:'red',
+        height: hp(42),
+        width:  wp(90),
+        marginLeft: rwp(20),
+        marginRight: rwp(20),
+        marginTop: rhp(15)
     },
     optText:(colors)=>( {
         alignSelf: 'center',
         color: colors.text,
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
-        fontSize: 16,
-        marginBottom: 5,
-        marginTop: 5
+        fontSize: rfs(20),
+        marginBottom: rhp(5),
+        marginTop: rhp(5)
     }),
     socialLoginContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        height: 60,
-        marginTop: 10
+        height: rhp(70),
+        marginTop: rhp(12)
     },
 
     forgotPswrdText: {
         textAlign: 'center',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
-        fontSize: 14,
-        marginTop: 10,
+        fontSize: rfs(16),
+        marginTop: rhp(10),
         marginBottom:5,
         color: '#15BE77',
-        marginBottom: 5,
+        marginBottom: rhp(5),
        // textDecorationLine: 'underline',
     },
 

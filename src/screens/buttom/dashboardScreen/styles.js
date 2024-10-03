@@ -1,7 +1,8 @@
 import { StyleSheet, Dimensions } from "react-native";
 import fonts from "../../../constants/fonts";
-const { width } = Dimensions.get('window'); // Get screen width
-const itemWidth = (width - 30) / 2; // Calculate width for each item (2 columns with 15px margin)
+import { hp, rfs, rhp, rwp, width, wp } from "../../../constants/dimensions";
+itemWidth = (width - 30) / 2;
+
 
 export default StyleSheet.create({
     container: {
@@ -9,39 +10,41 @@ export default StyleSheet.create({
     },
     advertiseBg: {
         resizeMode: 'contain',
-        width: 'auto',
-        height: 150,
-        marginTop: 10,
+        width: wp(100),
+        height: rhp(180),
+        marginTop: rhp(10),
     },
     containerRow: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
-        padding: 10,
-        marginTop:10,
+      
+        paddingHorizontal:rwp(10),
+        paddingVertical:rhp(10),
+        marginTop: rhp(10),
         //backgroundColor:'red',
-        
+
     },
     itemImageStyle: {
         width: itemWidth,
         borderRadius: 12,
-        padding: 10,
+        // padding: 10,
         alignItems: 'center',
-        marginBottom: 15,
-        height: 184,
-     
+        marginBottom: rhp(15),
+        height: rhp(210),
+
         elevation: 5,
         justifyContent: 'center',
     },
     itemImage: {
-        width: 90,
-        height: 90,
+        width: rwp(100),
+        height: rhp(100),
         resizeMode: 'contain',
-        
+
     },
     itemName: {
-        marginTop: 10,
-        fontSize: 18,
+        marginTop: rhp(10),
+        fontSize: rfs(22),
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
         // The text color will be dynamically set in the component using theme colors
     },

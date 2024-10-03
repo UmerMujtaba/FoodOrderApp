@@ -1,10 +1,11 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, Dimmensions } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'; // Ensure this package is installed
 import fonts from '../constants/fonts';
+import { rfs, rhp, rwp, hp, wp, height } from '../constants/dimensions';
 
-const GradientButton = ({ onPress, buttonText,style }) => (
-    <TouchableOpacity style={[styles.ctaStart,style]} onPress={onPress}>
+const GradientButton = ({ onPress, buttonText, style }) => (
+    <TouchableOpacity style={[styles.ctaStart, style]} onPress={onPress}>
         <LinearGradient
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}
@@ -19,15 +20,15 @@ const GradientButton = ({ onPress, buttonText,style }) => (
 
 const styles = StyleSheet.create({
     ctaStart: {
-        marginTop: 14,
-        width: 157,
-        height: 57,
+        marginTop: rhp(40),
+        width: rwp(165),
+        height: rhp(65),
         justifyContent: 'center',
         alignSelf: 'center'
     },
     buttonText: {
         color: '#FFFFFF',
-        fontSize: 18,
+        fontSize: rfs(22),
         textAlign: 'center',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold, // Make sure the font is correctly linked
     },
@@ -35,9 +36,9 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
-       // paddingVertical: 10,
-       // width: '100%',
-      height: '100%',
+        // paddingVertical: 10,
+        // width: '100%',
+        height: hp(9),
     },
 });
 

@@ -8,6 +8,7 @@ import Icons from 'react-native-vector-icons/MaterialIcons'
 import CustomTextInput from '../../../components/cutomTextInput'
 import GradientButton from '../../../components/gradientButton'
 import fonts from '../../../constants/fonts'
+import { height, hp, rfs, rhp, rwp, wp } from '../../../constants/dimensions'
 
 const OrderConfirmationScreen = ({ navigation }) => {
     const { colors } = useTheme();
@@ -81,13 +82,13 @@ const OrderConfirmationScreen = ({ navigation }) => {
                     autoCorrect={false}
                     rightIcon
                     imageSource={images.feedbackIcon}
-                    suffixIconStyle={{ width: 22, height: 26.4, }}
+                    suffixIconStyle={{ width: rwp(22), height: rhp(26.4), }}
                 />
 
                 <View style={styles.buttonContainer}>
                     <GradientButton
                         buttonText={'Submit'}
-                        style={{ marginTop: 0, width: '70%' }}
+                        style={{ marginTop: 0, width: wp(65) }}
                     // onPress={}
                     />
                     <TouchableOpacity style={styles.skipBtn}>

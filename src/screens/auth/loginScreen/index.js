@@ -129,7 +129,7 @@ const LoginScreen = () => {
 
                 <TouchableOpacity>
                     <Text
-                        style={[styles.forgotPswrdText, { marginTop: 10 }]}>
+                        style={[styles.forgotPswrdText]}>
                         {Strings.forgotPassword}
                     </Text>
                 </TouchableOpacity>
@@ -137,8 +137,8 @@ const LoginScreen = () => {
 
                 <TouchableOpacity onPress={()=> navigate(ScreenNames.Registeration)}>
                     <Text
-                        style={[styles.forgotPswrdText, { marginTop: 10 }]}>
-                        {Strings.dontHaveAnAccount}
+                        style={[styles.forgotPswrdText]}>
+                        {Strings.signUp}
                     </Text>
                 </TouchableOpacity>
 
@@ -154,7 +154,7 @@ const LoginScreen = () => {
                     style={{ marginTop: 10 }}
                     onPress={handleLogin}
                     buttonText="Next"
-                    textStyle={{ fontSize: 18 }}
+                  
                 />
             )}
         </View>

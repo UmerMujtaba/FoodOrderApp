@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import fonts from "../../../constants/fonts";
-
+import { height, hp, rfs, rhp, rwp, width, wp } from "../../../constants/dimensions";
 
 export default StyleSheet.create({
     container: (colors) => ({
@@ -10,42 +10,42 @@ export default StyleSheet.create({
     bgImage: {
         resizeMode: 'cover',
         width: 'auto',
-        height: 350,
+        height: rhp(400),
     },
     logoStyle:
     {
         // borderColor: 'lightgreen',
-        height: 150,
-        width: 150,
+        height: rhp(170),
+        width: rwp(180),
         // borderRadius: 75,
         // borderWidth: 4,
         alignSelf: 'center',
         zIndex: 2,
-        top: '35%',
+        top: hp(15),
         justifyContent: 'center',
         alignItems: 'center'
 
     },
     mainText: (colors) => ({
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
-        fontSize: 28,
+        fontSize: rfs(32),
         color: colors.text,
         alignSelf: 'center',
-        top: '45%'
+        top: hp(22)
     }),
     body: {
         // backgroundColor:'red',
-        height: 285,
-        width: 340,
-        marginTop: '10%',
+        // height: rhp(290),
+        width: rwp(360),
+        marginTop: hp(5),
         alignSelf: 'center',
         alignItems: 'center'
     },
     rateText: (colors) => ({
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
-        fontSize: 18,
+        fontSize: rfs(20),
         color: colors.text,
-        marginTop: 5,
+        marginTop: rhp(5),
 
 
     }),
@@ -53,8 +53,8 @@ export default StyleSheet.create({
     stars: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: '7%',
-        marginBottom: '10%'
+        marginTop: hp(3),
+        marginBottom: hp(5)
 
     },
     starUnselected: {
@@ -64,26 +64,26 @@ export default StyleSheet.create({
         color: '#ffb300',
     },
     buttonContainer: {
+        // backgroundColor:'red',
         flexDirection: 'row',
-        width: 340,
-        height: 55,
-        justifyContent: 'space-between',
-        marginTop: 20
-
+        width: wp(95),
+        justifyContent: 'space-around',
+        marginTop: rhp(20),
     },
     skipBtn: {
         backgroundColor: '#424242',
-        width: '25%',
-        marginTop: 0,
+        width: rwp(95),
         borderRadius: 15,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        height: rhp(75),
 
     },
     skipBtnText: {
         color: 'lightgreen',
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
-        fontSize: 18
+        fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
+        fontSize: rfs(20),
+
 
     }
 

@@ -3,8 +3,9 @@ import React from 'react';
 import { TouchableOpacity, View, Image, Text, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native'; // Assuming you are using React Navigation for theming
 import fonts from '../constants/fonts';
+import { hp, rfs, rhp, rwp, wp } from '../constants/dimensions';
 
-const ProfileMenuTile = ({ onPress,userIcon,name }) => {
+const ProfileMenuTile = ({ onPress, userIcon, name }) => {
   const { colors } = useTheme(); // Access current theme colors
 
   return (
@@ -19,7 +20,7 @@ const ProfileMenuTile = ({ onPress,userIcon,name }) => {
           style={styles.icon}
         />
         <Text style={[styles.text, { color: colors.text }]}>
-         {name}
+          {name}
         </Text>
       </View>
       <View style={[styles.separator(colors)]} />
@@ -29,39 +30,39 @@ const ProfileMenuTile = ({ onPress,userIcon,name }) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-  
-    height: 50,
+    //backgroundColor:'red',
+    height: rhp(55),
     alignItems: 'flex-start',
     justifyContent: 'center',
-    marginTop: 10,
-    marginBottom: 5,
-    marginLeft:10,
-    marginRight:10
+    marginTop: rhp(12),
+    marginBottom: rhp(5),
+    marginLeft: rwp(5),
+    marginRight: rwp(5)
   },
   row: {
     flexDirection: 'row',
   },
   icon: {
     resizeMode: 'contain',
-    width: 25,
-    height: 25,
-    marginLeft: 10,
-    opacity:0.8 ,
+    width: rwp(30),
+    height: rhp(30),
+    marginLeft: rwp(10),
+    opacity: 0.8,
   },
   text: {
-    fontSize: 18,
+    fontSize: rfs(20),
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
     alignSelf: 'center',
-    marginLeft: 20,
+    marginLeft: rwp(20),
   },
-  separator:(colors)=> ({
-    width: 270,
-    height: 1, // Add height for the separator
+  separator: (colors) => ({
+    width: rwp(320),
+    height: rhp(1), // Add height for the separator
     backgroundColor: colors.tabBackgroundColor, // Use a background color instead
     alignSelf: 'center',
-    marginTop: 10, // Add margin if needed
+    marginTop: rwp(12), // Add margin if needed
 
-    
+
   }),
 });
 

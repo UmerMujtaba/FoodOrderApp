@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import fonts from '../constants/fonts';
 import { Strings } from '../constants/string';
 import { useTheme } from '@react-navigation/native';
+import { rfs, rhp, rwp } from '../constants/dimensions';
 
 
 
@@ -35,17 +36,17 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 8,
+    marginVertical: rhp(8),
   },
   checkbox:(colors)=> ({
-    width: 22,
-    height: 22,
-    borderWidth: 1,
+    width: rwp(25),
+    height: rhp(25),
+    borderWidth: rwp(1),
     borderRadius: 20,
     borderColor: colors.text,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10,
+    marginRight: rwp(12),
   }),
   checked: {
     backgroundColor: '#4CAF50', // Change background when checked
@@ -53,11 +54,11 @@ const styles = StyleSheet.create({
   },
   tick: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: rfs(18),
     //ontWeight: 'bold',
   },
   label:(colors)=> ({
-    fontSize: 14,
+    fontSize: rfs(16),
     color: colors.text,
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular
   }),

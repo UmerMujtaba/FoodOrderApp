@@ -1,5 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet,Dimmensions } from "react-native";
 import fonts from "../../../constants/fonts";
+import { hp, rfs, rhp, rwp, wp } from "../../../constants/dimensions";
+
 
 
 
@@ -14,44 +16,44 @@ export default StyleSheet.create({
     bgImage: {
         resizeMode: 'cover',
         width: 'auto',
-        height: 350,
+        height: rhp(400),
     },
 
 
     logoStyle:
     {
         resizeMode: 'contain',
-        height: 200,
-        width: 200,
+        height: rhp(210),
+        width: rhp(200),
         alignSelf: 'center',
         zIndex: 2,
-        top: '25%',
+        top: hp(10),
 
     },
     mainText: (colors) => ({
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
-        fontSize: 24,
+        fontSize: rfs(28),
         color: colors.text,
         alignSelf: 'center',
-        top: '28%',
+        top: hp(15),
 
     }),
     body: {
-        height: 450,
-        width: 'auto',
-        //backgroundColor:'red',
-        marginLeft: 18,
-        marginRight: 18,
+        //height: rhp(470),
+        width: wp(90),
+       // backgroundColor:'red',
+        marginLeft: rwp(20),
+        marginRight: rwp(20),
         //  marginTop: 8
     },
     forgotPswrdText: {
         textAlign: 'center',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
-        fontSize: 14,
-        marginTop: 12,
-        marginBottom: 5,
+        fontSize: rfs(16),
+        marginTop: rhp(10),
+        marginBottom: rhp(10),
         color: '#15BE77',
-        marginBottom: 5,
+       
        // textDecorationLine: 'underline',
     },
 

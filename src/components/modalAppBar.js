@@ -2,6 +2,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 import { images } from '../assets/images'
 import fonts from '../constants/fonts'
+import { hp, rfs, rhp, rwp, wp } from '../constants/dimensions'
 
 const ModalAppBar = () => {
     return (
@@ -31,73 +32,68 @@ const ModalAppBar = () => {
 
 const styles = StyleSheet.create({
     containerRow: {
-        width: '100%',
-        height: 34,
+        width: wp(100),
+        height: rwp(36),
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: 10,
+        marginTop: rhp(12),
         // backgroundColor:'red'
     },
     textContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 76,
-        marginLeft: 10
+        width: rwp(76),
+        marginLeft: rwp(15)
     },
-    popularContainerImage: {
-        resizeMode: 'contain',
-        height: 34,
-        width: 76,
-        marginLeft: 10,
-    },
+  
     popText: {
-        fontSize: 16,
+        fontSize: rfs(18),
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
         textAlign: 'center',
-        left: '18%',
+        left: wp(3),
         color: '#15BE77'
     },
     popularText: {
         position: 'absolute',
-        top: 6,
+        top: rhp(7),
         left: 0,
 
     },
     container2: {
-        width: 100,
-        height: 34,
+        width: rwp(110),
+        height: rwp(36),
         justifyContent: 'center'
     },
     containerRow2: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginRight: 10
+        marginRight: rwp(12)
     },
     circularContainer: {
-        height: 38,
-        width: 38,
+        height: rhp(42),
+        width: rwp(42),
         borderRadius: 18.5,
         justifyContent: 'center',
         backgroundColor: 'rgba(83, 232, 139, 0.15)'
     },
     circularContainer2: {
-        height: 38,
-        width: 38,
+        height: rhp(42),
+        width: rwp(42),
         borderRadius: 18.5,
         justifyContent: 'center',
         backgroundColor: 'rgba(255, 29, 29, 0.15)'
     },
     iconImage: {
-        height: 21,
-        width: 18,
+        height: rhp(22),
+        width: rwp(18),
         alignSelf: 'center',
         resizeMode: 'cover'
     },
 
     iconImage2: {
         resizeMode: 'contain',
-        height: 22,
-        width: 22,
+        height: rhp(24),
+        width: rwp(24),
         alignSelf: 'center'
     },
 });

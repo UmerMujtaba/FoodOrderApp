@@ -8,6 +8,7 @@ import fonts from '../constants/fonts';
 import { useTheme } from '@react-navigation/native'; // Import useTheme to access theme colors
 import { supabase } from '../utils/supabase';
 import { incrementCount } from '../redux/slices/itemCountSlice';
+import { hp, rfs, rhp, rwp, width, wp } from '../constants/dimensions';
 
 const MenuCategoryComponent = ({ category, searchQuery,filter}) => {
   const dispatch = useDispatch();
@@ -163,21 +164,21 @@ const styles = StyleSheet.create({
   },
   row: {
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: rhp(20),
   },
   itemContainer: {
     //backgroundColor: colors.tab,
     paddingTop: 0,
-    paddingBottom: 10,
+    paddingBottom: rhp(15),
     // marginVertical: 8,
-    marginHorizontal: 8,
+    marginHorizontal: rwp(10),
     alignItems: 'center',
     borderRadius: 8,
-    width: '45%', // Adjust width for grid layout
+    width: wp(45), // Adjust width for grid layout
   },
   image: {
-    width: 162,
-    height: 170,
+    width: rwp(175.5),
+    height: rhp(210),
     // marginBottom: 10,
     resizeMode: 'stretch',
 
@@ -185,12 +186,12 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 8,
   },
   itemName: {
-    fontSize: 16,
+    fontSize: rfs(20),
     fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
     //fontWeight: 'bold',
     color: 'black',
     textAlign: 'center',
-    marginTop: 10,
+    marginTop: rhp(12),
   },
 
 

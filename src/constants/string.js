@@ -26,7 +26,7 @@ export const Strings ={
     alreadyHaveAnAccount: 'Already have an account?',
     keepMeSignedIn:'Keep me signed in',
     emailMeAboutSpecialPricing:'Email me about special pricing',
-    dontHaveAnAccount:'Sign up',
+    signUp:'Sign up',
     recommendations:'Recommendations',
     thankYou:'Thank You!',
     enjoyYourMeal:'Enjoy Your Meal',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, View, Image, Text, StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import { hp, rfs, rhp, rwp, wp } from '../constants/dimensions';
 
 
 
@@ -23,12 +24,11 @@ const SocialLoginTouchable = ({ onPress, imageSource, text }) => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFFFFF',
-        height: 'auto',
-        width: 130,
+        height: hp(8),
+        width: rwp(140),
         borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingHorizontal: 20,
         borderWidth: 2,
         borderColor: '#F4F4F4',
     },
@@ -37,15 +37,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     image: {
-        width: 30,
-        height: 30,
+        width: rwp(30),
+        height: rhp(30),
     },
     text: {
         textAlign: 'center',
-        marginLeft: 10,
+        marginLeft: rwp(10),
         fontFamily: 'SF Pro Text Medium', // Adjust fontFamily as needed
         color: 'black',
-        fontSize: 16,
+        fontSize: rfs(18),
     },
 });
 
