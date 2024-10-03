@@ -8,7 +8,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import { LinearGradientText } from 'react-native-linear-gradient-text';
 import styles from './styles';
 import { useTheme } from '@react-navigation/native'; 
-import { Strings } from '../../../constants/string';
+import { ScreenNames, Strings } from '../../../constants/string';
+import { navigate } from '../../../navigator/navigationRef';
 
 
 
@@ -197,9 +198,13 @@ const CartScreen = ({ navigation }) => {
                 </View>
               </View>
             </ImageBackground>
+
+            {/* button */}
+
             <TouchableOpacity
               activeOpacity={0.5}
-              style={styles.ctaBtn(colors)}>
+              style={styles.ctaBtn(colors)}
+              onPress={()=> navigate(ScreenNames.OrderConfirmation)}>
               <LinearGradientText
                 colors={['#15BE77', '#53E88B']}
                 text={'Place my Order'}
@@ -252,6 +257,8 @@ const CartScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
       </Modal>
+      {/* modal closing  */}
+
     </View>
   );
 };

@@ -8,8 +8,8 @@ import GradientButton from './gradientButton';
 
 const FilterComponent = ({ onSearch, onFilter, onApply, showPriceFilter }) => {
   const [filterVisible, setFilterVisible] = useState(false);
-  const [selectedType, setSelectedType] = useState(''); // Store the selected type
-  const [selectedPrice, setSelectedPrice] = useState(''); // Store the selected price
+  const [selectedType, setSelectedType] = useState(''); // Storing the selected type
+  const [selectedPrice, setSelectedPrice] = useState(''); // Storing  the selected price
   const { colors } = useTheme();
 
   const toggleFilterModal = () => {
@@ -17,8 +17,8 @@ const FilterComponent = ({ onSearch, onFilter, onApply, showPriceFilter }) => {
   };
 
   const handleTypeSelect = (type) => {
-    setSelectedType(type); // Set selected type but don’t apply yet
-    onFilter(type);        // Pass selected type to parent for temporary storage
+    setSelectedType(type);
+    onFilter(type);       
     console.log("🚀 ~ handleTypeSelect ~ setSelectedType:", type)
   };
 
@@ -110,7 +110,7 @@ const FilterComponent = ({ onSearch, onFilter, onApply, showPriceFilter }) => {
               </>
             )}
 
-            {/* Gradient Button to Apply Filter */}
+          
             <GradientButton onPress={applyFilterAndClose} buttonText={'Apply Filter'} />
           </View>
         </TouchableOpacity>

@@ -29,7 +29,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         marginBottom: 15,
         height: 184,
-      
+     
         elevation: 5,
         justifyContent: 'center',
     },
@@ -37,6 +37,7 @@ export default StyleSheet.create({
         width: 90,
         height: 90,
         resizeMode: 'contain',
+        
     },
     itemName: {
         marginTop: 10,

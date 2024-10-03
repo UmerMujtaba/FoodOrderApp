@@ -222,7 +222,7 @@ addOnName:(colors) => ({
 
         borderRadius: 16,
         height: 185,
-        width: 335
+        width: 330
     },
     deleteButton: {
         flexDirection: 'row',

@@ -2,9 +2,7 @@
 import React from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Tabs from '../../components/buttomTab';
 import { ScreenNames, Strings } from '../../constants/string';
-import { navigationOptions } from '../../services/animation';
 import { images } from '../../assets/images';
 import { View, Image, Text, StyleSheet } from 'react-native';
 import fonts from '../../constants/fonts';
@@ -14,6 +12,7 @@ import CartScreen from '../../screens/buttom/cartScreen';
 import { useSelector } from 'react-redux';
 import { useTheme } from '@react-navigation/native';
 import RecommendationScreen from '../../screens/buttom/recommendationScreen';
+import Cart from './cartStack';
 
 
 const Tab = createBottomTabNavigator();
@@ -120,7 +119,7 @@ const Bottom = () => {
       />
       <Tab.Screen
         name={ScreenNames.Cart}
-        component={CartScreen}
+        component={Cart}
         options={{
           headerShown: false,
 

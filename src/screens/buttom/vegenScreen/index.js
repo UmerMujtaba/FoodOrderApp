@@ -12,7 +12,7 @@ import { useFocusEffect } from '@react-navigation/native';
 const VeganScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState({ type: '', price: '' });
-  const [tempPriceFilter, setTempPriceFilter] = useState('');   // Store the type to apply after button click
+  const [tempPriceFilter, setTempPriceFilter] = useState('');   
 
 
   const handleSearch = (query) => {
@@ -30,11 +30,11 @@ const VeganScreen = () => {
 
 
   const handleFilter = (newFilter) => {
-    setTempPriceFilter(newFilter.price); // Set temp filter, not applying it yet
+    setTempPriceFilter(newFilter.price);
   };
 
   const handleApplyPriceFilter = () => {
-    setFilter((prev) => ({ ...prev, price: tempPriceFilter })); // Apply the filter on button click
+    setFilter((prev) => ({ ...prev, price: tempPriceFilter }));
   };
 
 

@@ -68,15 +68,15 @@ const Register = () => {
                     value={username}
                     onChangeText={setUserName}
                     keyboardType='default'
-                    rightIcon
-                    imageSource={images.profileIcon}
-                    suffixIconStyle={{ width: 24, height: 26.4, }}
                     autoFocus={true}
                     showSoftInputOnFocus={true}
                     returnKeyType='next'
                     blurOnSubmit={false}
                     autoCorrect={false}
                     onSubmitEditing={() => secondRef.current.focus()}
+                    rightIcon
+                    imageSource={images.profileIcon}
+                    suffixIconStyle={{ width: 24, height: 26.4, }}
                 />
 
                 <CustomTextInput
@@ -85,14 +85,14 @@ const Register = () => {
                     value={email}
                     onChangeText={setEmail}
                     keyboardType='email-address'
-                    rightIcon
-                    imageSource={images.emailIcon}
-                    suffixIconStyle={{ width: 24, height: 26.4, }}
                     returnKeyType='next'
                     blurOnSubmit={false}
                     autoCorrect={false}
                     onSubmitEditing={() => thirdRef.current.focus()}
-
+                    rightIcon
+                    imageSource={images.emailIcon}
+                    suffixIconStyle={{ width: 24, height: 26.4, }}
+                    
                 />
                 <CustomTextInput
                     ref={thirdRef}

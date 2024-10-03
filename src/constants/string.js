@@ -27,8 +27,10 @@ export const Strings ={
     keepMeSignedIn:'Keep me signed in',
     emailMeAboutSpecialPricing:'Email me about special pricing',
     dontHaveAnAccount:'Sign up',
-    recommendations:'Recommendations'
-    
+    recommendations:'Recommendations',
+    thankYou:'Thank You!',
+    enjoyYourMeal:'Enjoy Your Meal',
+    pleaseRateYourFood:'Please rate your Food',
 }
 
 export const ScreenNames={
@@ -50,6 +52,6 @@ export const ScreenNames={
     Cart:'Cart',
     Chat:'Chat',
     Recommendation:'Recommendation',
-
+    OrderConfirmation: 'OrderConfirmationScreen'
 
 }

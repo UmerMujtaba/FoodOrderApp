@@ -6,3 +6,5 @@ export * from './fastFoodScreen';
 export * from './sidesScreen';
 export * from './vegenScreen';
 export * from './drinkScreen';
+export * from './recommendationScreen';
+export * from './orderConfirmationScreen';
