@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { useTheme } from '@react-navigation/native';
 import RecommendationScreen from '../../screens/buttom/recommendationScreen';
 import Cart from './cartStack';
+import { hp, rfs, rhp, rwp, wp } from '../../constants/dimensions';
 
 
 const Tab = createBottomTabNavigator();
@@ -31,7 +32,7 @@ const Bottom = () => {
         styles.iconContainer,
         {
           backgroundColor: focused ? 'rgba(21, 190, 119, 0.5)' : 'transparent',
-          width: focused ? 78 : 50
+          width: focused ? rwp(80) : rwp(55)
         }
       ]}>
 
@@ -73,8 +74,10 @@ const Bottom = () => {
           borderRadius: 20,
           borderTopWidth: 0,
           backgroundColor: colors.tabBackgroundColor,
-          height: 75,
+          height: rhp(85),
           margin: 10,
+          marginHorizontal:rwp(10),
+          marginVertical: rhp(10),
           flexDirection: 'row', // Ensure horizontal layout
           justifyContent: 'space-between', // Space between tabs
           animation: 'shift',
@@ -166,42 +169,42 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 12,
-    paddingTop: 14,
-    paddingBottom: 14,
-    width: 78,
+    paddingTop: rhp(16),
+    paddingBottom: rhp(16),
+   
     justifyContent: 'center',
   },
   icon: {
-    width: 20,
-    height: 20,
+    width: rwp(25),
+    height: rhp(25),
   },
   label: (colors) => ({
-    marginLeft: 8,
+    marginLeft: rwp(5),
     color: colors.text,
-    fontSize: 13,
+    fontSize: rfs(16),
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
   }),
   cartBadge: {
     position: 'absolute',
-    top: -5,
-    right: -10,
+    top: rhp(-5),
+    right: rwp(-10),
     justifyContent: 'center',
     alignItems: 'center',
   },
   cartBadgeText: {
     color: 'white',
-    fontSize: 12,
+    fontSize: rfs(12),
     fontWeight: 'bold',
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
     backgroundColor: 'red',
     borderRadius: 12,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
+    paddingHorizontal: rwp(6),
+    paddingVertical: rhp(2),
   },
   redDot: {
     backgroundColor: 'red',
-    width: 8,
-    height: 8,
+    width: rwp(8),
+    height: rhp(8),
     borderRadius: 4, // Make it a circle
   },
 });

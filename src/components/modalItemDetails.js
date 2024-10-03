@@ -91,7 +91,7 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
                         style={[
                           styles.addOnContainer(colors),
                           {
-                            width: availableAddons.length <= 3 ? 'auto' : '45%',
+                            width: availableAddons.length <= 3 ? rwp(110) : wp(42),
                             marginBottom: availableAddons.length > 3 ? 10 : 0,
                             justifyContent: availableAddons.length <= 3 ? 'space-evenly' : 'center',
                           },

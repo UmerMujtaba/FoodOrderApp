@@ -217,23 +217,24 @@ export default StyleSheet.create({
 
 
 
-    hiddenItem: {
+    hiddenItem:(isExpanded)=> ({
         //alignItems: 'flex-end',
-        backgroundColor: '#FB8C00',
+       // backgroundColor: '#FB8C00',
         //width:350,
         justifyContent: 'center',
         flexDirection: 'column',
-        alignSelf: 'flex-end',
-
+        alignSelf: 'center',
+        // backgroundColor: isExpanded ? 'red': 'blue',
         borderRadius: 16,
-        height: rhp(210),
+       height: isExpanded? rhp(280): rhp(160),
         width: rwp(350)
-    },
+    }),
     deleteButton: {
         flexDirection: 'row',
         // alignItems: 'center',
         alignSelf: 'flex-end',
         marginRight: rwp(45),
+       
     },
     deleteImg: {
         width: rwp(30),

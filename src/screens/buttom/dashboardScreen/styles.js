@@ -12,7 +12,7 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: wp(100),
         height: rhp(180),
-        marginTop: rhp(10),
+        marginTop: rhp(15),
     },
     containerRow: {
         flexDirection: 'row',
@@ -20,7 +20,7 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
       
         paddingHorizontal:rwp(10),
-        paddingVertical:rhp(10),
+        paddingVertical:rhp(15),
         marginTop: rhp(10),
         //backgroundColor:'red',
 

@@ -21,6 +21,7 @@ const CartScreen = ({ navigation }) => {
     ...item,
     totalPrice: item.price + (item.selectedAddon ? item.selectedAddon.price : 0), // Calculate total price with selected add-on
   }))
+  console.log("🚀 ~ cartItems ~ cartItems:", cartItems)
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [expandedItemId, setExpandedItemId] = useState(null);
@@ -134,15 +135,16 @@ const CartScreen = ({ navigation }) => {
     )
   }
 
-  const renderHiddenItem = (data) => {
+  const renderHiddenItem = ({ item }) => {
+    const isExpanded = expandedItemId === item.id;
 
     return (
-      <View style={styles.hiddenItem}>
-        <TouchableOpacity style={styles.deleteButton} onPress={() => handleRemoveItem(data.item.id)}>
+      <View style={styles.hiddenItem(isExpanded)}>
+        <TouchableOpacity style={styles.deleteButton} onPress={() => handleRemoveItem(item.id)}>
           <Image source={images.deleteIcon} style={styles.deleteImg} />
         </TouchableOpacity>
       </View>
-    )
+    );
   };
 
   return (
