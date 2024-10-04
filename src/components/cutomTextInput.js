@@ -1,22 +1,22 @@
 import { useTheme } from '@react-navigation/native';
-import React,{forwardRef} from 'react';
+import React, { forwardRef } from 'react';
 import { TextInput, StyleSheet, View, Image } from 'react-native';
 import { rhp, rwp } from '../constants/dimensions';
 
 const CustomTextInput = forwardRef(({
-    placeholder, 
-    value, 
-    onChangeText, 
-    keyboardType, 
-    secureTextEntry, 
-    rightIcon, 
-    imageSource, 
-    suffixIconStyle, 
-    style, 
-    showSoftInputOnFocus, 
-    autoFocus, 
-    returnKeyType, 
-    blurOnSubmit, 
+    placeholder,
+    value,
+    onChangeText,
+    keyboardType,
+    secureTextEntry,
+    rightIcon,
+    imageSource,
+    suffixIconStyle,
+    style,
+    showSoftInputOnFocus,
+    autoFocus,
+    returnKeyType,
+    blurOnSubmit,
     autoCorrect,
     onSubmitEditing
 }, ref) => {
@@ -31,7 +31,7 @@ const CustomTextInput = forwardRef(({
                 />
             )}
             <TextInput
-            ref={ref} 
+                ref={ref}
                 placeholder={placeholder}
                 placeholderTextColor={dark ? '#FFFFFF' : '#3B3B3B'} // Adjust color based on theme
                 onChangeText={onChangeText}
@@ -49,32 +49,23 @@ const CustomTextInput = forwardRef(({
             />
 
         </View>
-     );
-    });
+    );
+});
 
 const styles = StyleSheet.create({
     container: (colors) => ({
         flexDirection: 'row',
         alignItems: 'center',
-
         marginTop: rhp(5),
         marginBottom: rhp(12),
         borderRadius: 15,
-        backgroundColor: colors.tabBackgroundColor, 
-        borderColor: colors.tabBackgroundColor, 
+        backgroundColor: colors.tabBackgroundColor,
+        borderColor: colors.tabBackgroundColor,
         color: colors.text,
-        //paddingHorizontal: 16,
-        height: rhp(65),
-        // width:"80%",
+        height: rhp(60),
         paddingLeft: rwp(10),
-        //justifyContent: 'space-between',
-        // alignItems: 'center',
-        // marginBottom: 30
     }),
-    icon: {
 
-
-    }
 
 });
 

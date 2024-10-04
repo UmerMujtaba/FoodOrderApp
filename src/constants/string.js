@@ -31,6 +31,7 @@ export const Strings ={
     thankYou:'Thank You!',
     enjoyYourMeal:'Enjoy Your Meal',
     pleaseRateYourFood:'Please rate your Food',
+    placeMyOrder:'Place My Order',
 }
 
 export const ScreenNames={
@@ -49,9 +50,10 @@ export const ScreenNames={
     BottomStack:'BottomStack',
     Home:'Home',
     Profile:'Profile',
-    Cart:'Cart',
+    Cart:'cart',
     Chat:'Chat',
     Recommendation:'Recommendation',
-    OrderConfirmation: 'OrderConfirmationScreen'
+    OrderConfirmation: 'OrderConfirmationScreen',
+    CartScreen: 'CartScreen'
 
 }

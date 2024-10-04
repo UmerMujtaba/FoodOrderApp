@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useCallback} from 'react';
 import { Modal, View, Text, Image, Pressable, TouchableOpacity, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemToCart } from '../redux/slices/cartSlice'; // Import the action
 import { addClickedItem } from '../redux/slices/clickedItemSlice';
 import fonts from '../constants/fonts';
-import { useTheme } from '@react-navigation/native';
+import { useFocusEffect, useTheme } from '@react-navigation/native';
 import ModalAppBar from './modalAppBar';
 import GradientButton from './gradientButton';
 import { Strings } from '../constants/string';
@@ -19,7 +19,13 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
   const { colors } = useTheme();
 
 
-
+  useFocusEffect(
+    useCallback(() => {
+      // Reset filter states when navigating to the screen
+      setSelectedAddon('');
+     
+    }, [])
+  );
 
   const handleAddToCart = () => {
     const itemToAdd = {
@@ -154,7 +160,7 @@ const styles = StyleSheet.create({
   }),
   modalImage: {
     width: wp(100),
-    height: hp(80),
+    height: hp(70),
     position: 'absolute',
     top: 0,
     left: 0,

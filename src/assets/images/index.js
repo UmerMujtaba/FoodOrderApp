@@ -19,7 +19,9 @@ export const images = {
     drinkImage: require('./drink.png'),
     addOnsImage: require('./addons.png'),
     crossIcon: require('./cross.png'),
-    deleteIcon: require('./delete.png'),
+
+    deleteIconWhite: require('./deletewhite.png'),
+    deleteIconBlack: require('./deleteblack.png'),
 
     burger1: require('./burgers/burger1.jpeg'),
     burger2: require('./burgers/burger2.jpeg'),

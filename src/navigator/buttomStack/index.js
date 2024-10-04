@@ -119,7 +119,7 @@ const Bottom = () => {
             />
           ),
         }}
-      />
+      /> 
       <Tab.Screen
         name={ScreenNames.Cart}
         component={Cart}

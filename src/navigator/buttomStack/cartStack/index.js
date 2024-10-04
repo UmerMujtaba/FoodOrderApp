@@ -25,7 +25,7 @@ const Cart = () => {
         headerShown: false,  // Hide headers globally
       }}
     >
-      <CartStack.Screen name={ScreenNames.Cart} component={CartScreen} options={navigationOptions} />
+      <CartStack.Screen name={ScreenNames.CartScreen} component={CartScreen} options={navigationOptions} />
       <CartStack.Screen name={ScreenNames.OrderConfirmation} component={OrderConfirmationScreen} options={navigationOptions} />
       
     </CartStack.Navigator>

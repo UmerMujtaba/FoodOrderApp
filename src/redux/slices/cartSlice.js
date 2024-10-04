@@ -30,10 +30,13 @@ const generateUniqueId = () => {
           item.quantity = action.payload.quantity; // Update quantity
         }
       },
+      clearCart: (state) => {
+        state.cartItems = []; // Clear all items from cart
+      },
     },
   });
   
-  export const { addItemToCart, removeFromCart, updateQuantity } = cartSlice.actions;
+  export const { addItemToCart, removeFromCart, updateQuantity,clearCart } = cartSlice.actions;
   
   export default cartSlice.reducer;
   

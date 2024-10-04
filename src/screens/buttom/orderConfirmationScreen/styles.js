@@ -50,19 +50,7 @@ export default StyleSheet.create({
 
     }),
 
-    stars: {
-        display: 'flex',
-        flexDirection: 'row',
-        marginTop: hp(3),
-        marginBottom: hp(5)
-
-    },
-    starUnselected: {
-        color: '#aaa',
-    },
-    starSelected: {
-        color: '#ffb300',
-    },
+   
     buttonContainer: {
         // backgroundColor:'red',
         flexDirection: 'row',

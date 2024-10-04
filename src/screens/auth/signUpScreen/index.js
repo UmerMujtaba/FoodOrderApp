@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, TextInput, Button, Text, StatusBar, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, StatusBar, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { registerUser } from '../../../services/authServices';
 import GradientButton from '../../../components/gradientButton';
 import { images } from '../../../assets/images';
@@ -52,6 +52,7 @@ const Register = () => {
 
     return (
         <View style={styles.container(colors)}>
+            <ScrollView showsVerticalScrollIndicator={false}>
             <StatusBar translucent backgroundColor="transparent" />
             <ImageBackground source={images.BackgroundImage} style={styles.bgImage}>
                 <Image source={images.appLogo} style={styles.logoStyle} />
@@ -140,6 +141,7 @@ const Register = () => {
                     </Text>
                 </TouchableOpacity> */}
             </View>
+            </ScrollView>
         </View>
     );
 };

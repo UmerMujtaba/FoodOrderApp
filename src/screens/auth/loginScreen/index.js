@@ -6,7 +6,7 @@ import styles from './styles';
 import { ScreenNames, Strings } from '../../../constants/string';
 import { images } from '../../../assets/images';
 import CustomTextInput from '../../../components/cutomTextInput';
-import SocialLoginTouchable from '../../../components/touchableComponents';
+import SocialLoginTouchable from '../../../components/socialLoginTouchableComponent';
 import { loginUser } from '../../../services/authServices';
 import GradientButton from '../../../components/gradientButton';
 import { navigateReset,navigate } from '../../../navigator/navigationRef';

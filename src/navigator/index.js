@@ -49,11 +49,11 @@ export const NavigationCheck = () => {
     return (
       <View style={[styles.loaderContainer, { backgroundColor: scheme === 'dark' ? 'black' : 'white' }]}>
         {/* App logo */}
-        <Image
+        {/* <Image
           source={images.appLogo} // Ensure this path is correct in your project
           style={styles.logo}
           resizeMode="contain"
-        />
+        /> */}
         {/* Loader */}
         <ActivityIndicator size="large" color={scheme === 'dark' ? '#ffffff' : '#0000ff'} /> 
       </View>

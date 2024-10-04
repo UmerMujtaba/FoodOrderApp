@@ -30,6 +30,7 @@ export const registerUser = async (email, password) => {
   const { data, error } = await supabase.auth.signUp({
       email,
       password,
+     
   });
 
   if (error) {
@@ -38,7 +39,6 @@ export const registerUser = async (email, password) => {
 
   return { user: data.user, error: null }; // Return user object on success
 };
-
 
 // Function to log out a user
 export const logoutUser = async () => {
