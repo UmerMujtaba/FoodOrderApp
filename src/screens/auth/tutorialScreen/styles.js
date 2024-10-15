@@ -13,8 +13,10 @@ export default StyleSheet.create({
     illustrationImage: {
         resizeMode: 'contain',
         alignSelf: 'center',
-        width: rwp(400),
-        marginTop: rhp(5)
+        width: wp(100),
+        height:rhp(500),
+        marginTop: rhp(5),
+       // backgroundColor:'red'
     },
     mainText: {
         fontSize: rfs(28),

@@ -3,56 +3,57 @@ import fonts from "../../../constants/fonts";
 import { height, hp, rfs, rhp, rwp, width, wp } from "../../../constants/dimensions";
 
 export default StyleSheet.create({
-    container: (colors) => ({
+    // Modal specific styles
+    modalOverlay: {
         flex: 1,
-        backgroundColor: colors.background,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    modalContainer: (colors) => ({
+        // width: wp(100),  // Modal container width
+        backgroundColor: colors.modalColor,
+        borderTopRightRadius: 10,
+        borderTopLeftRadius: 10,
+        // alignItems: 'center',
+        height: hp(90)
     }),
     bgImage: {
-        resizeMode: 'cover',
-        width: 'auto',
-        height: rhp(400),
+        resizeMode:"contain",
+        width: wp(100),
+
+        height: rhp(380),
     },
     logoStyle:
     {
-        // borderColor: 'lightgreen',
         height: rhp(170),
         width: rwp(180),
-        // borderRadius: 75,
-        // borderWidth: 4,
         alignSelf: 'center',
         zIndex: 2,
-        top: hp(15),
+        top: hp(10),
         justifyContent: 'center',
         alignItems: 'center'
-
     },
     mainText: (colors) => ({
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
         fontSize: rfs(32),
         color: colors.text,
         alignSelf: 'center',
-        top: hp(22)
+        top: hp(15),
     }),
     body: {
-        // backgroundColor:'red',
-        // height: rhp(290),
         width: rwp(360),
         marginTop: hp(5),
         alignSelf: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     rateText: (colors) => ({
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
         fontSize: rfs(20),
         color: colors.text,
         marginTop: rhp(5),
-
-
     }),
-
-   
     buttonContainer: {
-        // backgroundColor:'red',
         flexDirection: 'row',
         width: wp(95),
         justifyContent: 'space-around',
@@ -65,14 +66,11 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: rhp(75),
-
     },
     skipBtnText: {
         color: 'lightgreen',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
         fontSize: rfs(20),
+    },
 
-
-    }
-
-})
+});

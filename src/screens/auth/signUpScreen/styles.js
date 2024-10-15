@@ -16,7 +16,8 @@ export default StyleSheet.create({
     bgImage: {
         resizeMode: 'cover',
         width: 'auto',
-        height: rhp(400),
+        height: rhp(370),
+       // backgroundColor:'green'
     },
 
 
@@ -27,7 +28,7 @@ export default StyleSheet.create({
         width: rhp(200),
         alignSelf: 'center',
         zIndex: 2,
-        top: hp(10),
+        top: hp(8),
 
     },
     mainText: (colors) => ({
@@ -35,7 +36,7 @@ export default StyleSheet.create({
         fontSize: rfs(28),
         color: colors.text,
         alignSelf: 'center',
-        top: hp(15),
+        top: hp(10),
 
     }),
     body: {
@@ -50,7 +51,7 @@ export default StyleSheet.create({
         textAlign: 'center',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
         fontSize: rfs(16),
-        marginTop: rhp(10),
+        marginTop: rhp(8),
         marginBottom: rhp(10),
         color: '#15BE77',
        

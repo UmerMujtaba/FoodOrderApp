@@ -9,6 +9,8 @@ import { navigationRef } from './navigationRef';
 import { ScreenNames } from '../constants/string';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { images } from '../assets/images';
+import { getFCMToken } from '../utils/helper/firebaseServies';
+import UserDetailScreen from '../screens/buttom/userDetailScreen';
 
 const NavigationStack = createNativeStackNavigator();
 
@@ -21,11 +23,19 @@ export const NavigationCheck = () => {
     const checkSession = async () => {
       try {
         const sessionString = await AsyncStorage.getItem('session');
-        console.log("🚀 ~ checkSession ~ sessionString:", sessionString);
 
+        //    console.log("🚀 ~ checkSession ~ sessionString:", sessionString?.user?.email)
         if (sessionString) {
           const session = JSON.parse(sessionString);
-          if (session) {
+          // console.log("🚀 ~ checkSession ~ session:", session)
+          const email = session.user?.email;
+          console.log("🚀 ~ checkSession ~ email:", email)
+
+          await AsyncStorage.setItem('active_email', email);
+
+      
+
+          if (session && session.is_logged_in) {
             setIsAuthenticatedLocally(true);  // User is authenticated
           } else {
             setIsAuthenticatedLocally(false); // No valid session found
@@ -35,7 +45,7 @@ export const NavigationCheck = () => {
         }
       } catch (error) {
         console.error('Error checking session:', error);
-        setIsAuthenticatedLocally(false);    
+        setIsAuthenticatedLocally(false);
       } finally {
         setIsLoading(false); // Session check complete, hide the loader
       }
@@ -55,7 +65,7 @@ export const NavigationCheck = () => {
           resizeMode="contain"
         /> */}
         {/* Loader */}
-        <ActivityIndicator size="large" color={scheme === 'dark' ? '#ffffff' : '#0000ff'} /> 
+        <ActivityIndicator size="large" color={scheme === 'dark' ? '#ffffff' : '#0000ff'} />
       </View>
     );
   }
@@ -65,6 +75,10 @@ export const NavigationCheck = () => {
       <NavigationStack.Navigator initialRouteName={isAuthenticatedLocally ? ScreenNames.BottomStack : ScreenNames.AuthStack}>
         <NavigationStack.Screen name={ScreenNames.AuthStack} component={Auth} options={{ headerShown: false }} />
         <NavigationStack.Screen name={ScreenNames.BottomStack} component={Bottom} options={{ headerShown: false }} />
+
+
+        <NavigationStack.Screen name={ScreenNames.UserScreen} component={UserDetailScreen} options={{ headerShown: false }} />
+     
       </NavigationStack.Navigator>
     </NavigationContainer>
   );
