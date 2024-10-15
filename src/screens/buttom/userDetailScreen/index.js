@@ -1,4 +1,4 @@
-import { View, Text, StatusBar, StyleSheet, ImageBackground, Image, TouchableOpacity, useColorScheme, Alert, PermissionsAndroid } from 'react-native';
+import { View, Text, StatusBar, StyleSheet, ImageBackground, Image, TouchableOpacity, useColorScheme, ToastAndroid, PermissionsAndroid } from 'react-native';
 import React, { useEffect, useState,useCallback } from 'react';
 import { images } from '../../../assets/images';
 import { useFocusEffect, useTheme } from '@react-navigation/native';
@@ -105,8 +105,12 @@ const UserDetailScreen = ({ navigation }) => {
 
     const saveImagePath = async () => {
         if (!imagePath) {
-            // Show alert if imagePath is empty
-            Alert.alert('Error', 'Please select or capture an image before proceeding.');
+            // Show toast if imagePath is empty
+            ToastAndroid.show(
+                'Please select or capture an image before proceeding.',
+                ToastAndroid.SHORT, // Duration of the toast
+                ToastAndroid.BOTTOM // Position of the toast
+            );
             return;
         }
     
@@ -120,13 +124,21 @@ const UserDetailScreen = ({ navigation }) => {
     
                 if (error) {
                     console.error('Error updating imagePath:', error.message);
-                    Alert.alert('Error', 'Failed to save image path.');
+                    ToastAndroid.show(
+                        'Failed to save image path.',
+                        ToastAndroid.SHORT,
+                        ToastAndroid.BOTTOM
+                    );
                 } else {
                     console.log('Image path updated successfully:', data);
                     
                     // Check if the imagePath is not empty
                     if (imagePath) {
-                        Alert.alert('Success', 'Image path saved successfully!');
+                        ToastAndroid.show(
+                            'Image path saved successfully!',
+                            ToastAndroid.SHORT,
+                            ToastAndroid.BOTTOM
+                        );
                     }
     
                     // Optionally navigate back after saving
@@ -136,10 +148,14 @@ const UserDetailScreen = ({ navigation }) => {
             }
         } catch (error) {
             console.error("Error retrieving active email:", error);
-            Alert.alert('Error', 'Failed to retrieve active email.');
+            ToastAndroid.show(
+                'Failed to retrieve active email.',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
         }
     };
-
+    
    
     
   
