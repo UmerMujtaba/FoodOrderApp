@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, ActivityIndicator, useColorScheme, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ActivityIndicator, useColorScheme, Alert, ImageBackground } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart, removeFromCart, updateQuantity } from '../../../redux/slices/cartSlice';
 import { images } from '../../../assets/images';
@@ -100,9 +100,14 @@ const CartScreen = ({ navigation }) => {
 
       {/* appbar */}
       <View style={styles.appBar}>
-        <TouchableOpacity style={styles.backIconContainer(colors)} onPress={() => navigation.goBack()}>
-          <Image source={images.backIcon} style={styles.backImage} />
-        </TouchableOpacity>
+
+        <ImageBackground source={images.userScreenBgImage} style={styles.imgStyle}>
+
+          <TouchableOpacity style={styles.backIconContainer(colors)} onPress={() => navigation.goBack()}>
+            <Image source={images.backIcon} style={styles.backImage} />
+          </TouchableOpacity>
+        </ImageBackground>
+
 
         {/* Show loading indicator or delete icon */}
         {cartItems.length > 0 && (
@@ -113,7 +118,7 @@ const CartScreen = ({ navigation }) => {
           ) : (
             <TouchableOpacity style={styles.backIconContainer(colors)} onPress={handleClearCart}>
               <Image
-                source={scheme === 'dark' ? images.deleteIconWhite : images.deleteIconBlack}
+                source={images.deleteIcon}
                 style={styles.deleteImg}
               />
             </TouchableOpacity>
@@ -123,8 +128,8 @@ const CartScreen = ({ navigation }) => {
       {/* ending of app bar */}
 
 
-{/* body */}
-      <Text style={styles.title(colors)}>{Strings.myCart}</Text>
+      {/* body */}
+      <Text style={styles.title(colors)}>{Strings.orderDetails}</Text>
       {cartItems.length === 0 ? (
         <View style={styles.displayMsg}>
           <Text style={styles.emptyMessage(colors)}>{Strings.cartEmptyMsg}</Text>

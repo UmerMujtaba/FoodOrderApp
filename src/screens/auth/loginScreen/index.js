@@ -1,80 +1,42 @@
 import React, { useState, useRef } from 'react';
 import { View, Text, Image, StatusBar, ImageBackground, ActivityIndicator, TouchableOpacity, ToastAndroid } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@react-navigation/native';
 import styles from './styles';
 import { ScreenNames, Strings } from '../../../constants/string';
 import { images } from '../../../assets/images';
 import CustomTextInput from '../../../components/cutomTextInput';
 import SocialLoginTouchable from '../../../components/socialLoginTouchableComponent';
-import { loginUser } from '../../../services/authServices';
 import GradientButton from '../../../components/gradientButton';
-import { navigateReset,navigate } from '../../../navigator/navigationRef';
-
-
+import { navigateReset, navigate } from '../../../navigator/navigationRef';
+import { login } from '../../../redux/slices/authSlice';
 
 const LoginScreen = () => {
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
     const { colors } = useTheme();
+    const dispatch = useDispatch();
+    const { loading, error } = useSelector((state) => state.auth);
 
     const firstRef = useRef(null);
     const secondRef = useRef(null);
 
-    const handleLogin = async () => {
-        setLoading(true);
-        try {
-            const loginSuccess = await loginUser(Email, Password);
-            setLoading(false);
-    
-            if (loginSuccess.user) {
-                // Extract session and access token
-                const { access_token } = loginSuccess; // Access the token directly from loginSuccess
-                console.log("🚀 ~ handleLogin ~ access_token:", access_token)
-                
-    
-                if (access_token) {
-                    // Store user session and token
-                    await AsyncStorage.setItem('session', JSON.stringify(loginSuccess.user)); // Store user session
-                    await AsyncStorage.setItem('access_token', access_token); // Store the access token
-    
-                    // Navigate to Home screen
-                    navigateReset('BottomStack', { screen: ScreenNames.Home });
-                } else {
-                    console.log('Access token is undefined');
-                    setErrorMessage('Failed to retrieve access token.');
-                    ToastAndroid.showWithGravity(
-                        'Failed to retrieve access token.',
-                        ToastAndroid.LONG,
-                        ToastAndroid.TOP
-                    );
-                }
-    
-            } else {
-                const errorMessage = loginSuccess.error?.message || 'Login failed';
-                setErrorMessage(errorMessage);
-    
+    const handleLogin = () => {
+        dispatch(login({ email: Email, password: Password }))
+        .then((result) => {
+            if (result.type === 'auth/login/fulfilled') {
+                // Login successful, navigate to home screen
+
+                navigateReset('BottomStack', { screen: ScreenNames.Home });
+            } else if (result.type === 'auth/login/rejected') {
                 ToastAndroid.showWithGravity(
-                    errorMessage,
+                    result.payload || 'Login failed',
                     ToastAndroid.LONG,
                     ToastAndroid.TOP
                 );
-                console.log('Login failed:', errorMessage);
             }
-        } catch (err) {
-            setLoading(false); // Stop loading on error
-            console.error('Error during login:', err);
-    
-            ToastAndroid.showWithGravity(
-                'An unexpected error occurred. Please try again.',
-                ToastAndroid.LONG,
-                ToastAndroid.TOP
-            );
-        }
+        });
     };
-    
 
     return (
         <View style={styles.container(colors)}>
@@ -128,21 +90,16 @@ const LoginScreen = () => {
                 </View>
 
                 <TouchableOpacity>
-                    <Text
-                        style={[styles.forgotPswrdText]}>
+                    <Text style={[styles.forgotPswrdText]}>
                         {Strings.forgotPassword}
                     </Text>
                 </TouchableOpacity>
 
-
-                <TouchableOpacity onPress={()=> navigate(ScreenNames.Registeration)}>
-                    <Text
-                        style={[styles.forgotPswrdText]}>
+                <TouchableOpacity onPress={() => navigate(ScreenNames.Registeration)}>
+                    <Text style={[styles.forgotPswrdText]}>
                         {Strings.signUp}
                     </Text>
                 </TouchableOpacity>
-
-                
             </View>
 
             {loading ? (
@@ -151,10 +108,9 @@ const LoginScreen = () => {
                 </View>
             ) : (
                 <GradientButton
-                    style={{ marginTop: 10 }}
+                    style={{ marginTop: 5 }}
                     onPress={handleLogin}
                     buttonText="Next"
-                  
                 />
             )}
         </View>

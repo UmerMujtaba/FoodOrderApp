@@ -52,7 +52,8 @@ const OrderSummary = ({ cartItems, subTotal, calculateTotal, navigate }) => {
       <TouchableOpacity
         activeOpacity={0.5}
         style={styles.ctaBtn(colors)}
-        onPress={() => navigate(ScreenNames.OrderConfirmation)}
+       // onPress={() => navigate(ScreenNames.OrderConfirmation)}
+        onPress={() => navigate(ScreenNames.ReceiptScren)}
       >
         <LinearGradientText
           colors={['#15BE77', '#53E88B']}
@@ -72,7 +73,7 @@ const styles=StyleSheet.create({
         alignSelf: 'center',
     },
     bgImageStyle: {
-        resizeMode: 'contain',
+        resizeMode: 'cover',
         height: rhp(186),
         width: rwp(370),
         marginRight: rwp(2),

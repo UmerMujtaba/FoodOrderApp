@@ -26,7 +26,7 @@ export default StyleSheet.create({
         width: rwp(210),
         alignSelf: 'center',
         zIndex: 2,
-        top: rhp(100),
+        top: rhp(70),
 
     },
     mainText:(colors)=> ({
@@ -34,7 +34,7 @@ export default StyleSheet.create({
         fontSize: rfs(28),
         color: colors.text,
         alignSelf: 'center',
-        top: rhp(145)
+        top: rhp(110)
 
     }),
     body: {
@@ -43,7 +43,7 @@ export default StyleSheet.create({
         width:  wp(90),
         marginLeft: rwp(20),
         marginRight: rwp(20),
-        marginTop: rhp(15)
+       // marginTop: rhp(15)
     },
     optText:(colors)=>( {
         alignSelf: 'center',
@@ -57,7 +57,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         height: rhp(70),
-        marginTop: rhp(12)
+        marginTop: rhp(5 )
     },
 
     forgotPswrdText: {

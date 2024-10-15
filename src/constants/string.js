@@ -18,7 +18,7 @@ export const Strings ={
     confirmationMsg: 'Are you sure you want to remove this item?',
     addOn:'Add-On: ',
     cartEmptyMsg:'Cart is empty.',
-    myCart:'My Cart',
+    orderDetails:'Order Details',
     subTotal:'Sub Total:',
     deliveryCharges:'Delivery Charges:',
     discount:'Discount',
@@ -32,6 +32,14 @@ export const Strings ={
     enjoyYourMeal:'Enjoy Your Meal',
     pleaseRateYourFood:'Please rate your Food',
     placeMyOrder:'Place My Order',
+    deliveryIsInProgress:'Delivery is in Progress!',
+    thankYouForYourOrder:'Thank You for your Order!',
+    estimatedDeliveryTimeIs: 'Estimated Delivery time is:',
+    totalItems:'Total Items: ',
+    totalPrice: 'Total Price: ',
+    hereIsYourReceipt:'Here\'s your receipt',
+    noItemsInCart: 'No items in the cart',
+    uploadYourPhotoProfile: 'Upload Your Photo Profile',
 }
 
 export const ScreenNames={
@@ -54,6 +62,10 @@ export const ScreenNames={
     Chat:'Chat',
     Recommendation:'Recommendation',
     OrderConfirmation: 'OrderConfirmationScreen',
-    CartScreen: 'CartScreen'
-
+    CartScreen: 'CartScreen',
+    CallScreen: 'CallScreen',
+    ReceiptScren: 'ReceiptScreen',
+    ProfileScreen:'ProfileScreen',
+    //UserDetailScreen:'UserDetailScreen',
+    UserScreen:'UserScreen',
 }

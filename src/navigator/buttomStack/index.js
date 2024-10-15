@@ -14,6 +14,11 @@ import { useTheme } from '@react-navigation/native';
 import RecommendationScreen from '../../screens/buttom/recommendationScreen';
 import Cart from './cartStack';
 import { hp, rfs, rhp, rwp, wp } from '../../constants/dimensions';
+import Profile from './profileStack';
+import StackProfile from './profileStack';
+import ReceiptScreen from '../../screens/buttom/receiptScreen';
+import UserDetailScreen from '../../screens/buttom/userDetailScreen';
+
 
 
 const Tab = createBottomTabNavigator();
@@ -105,7 +110,7 @@ const Bottom = () => {
       />
       <Tab.Screen
         name={ScreenNames.Profile}
-        component={ProfileScreen}
+        component={StackProfile}
         options={{
           headerShown: false,
           animationEnabled: true,
@@ -139,6 +144,8 @@ const Bottom = () => {
         }}
       />
       <Tab.Screen
+
+      //recommendartion screen to be filled here
         name={ScreenNames.Recommendation}
         component={RecommendationScreen}
         options={{
@@ -156,7 +163,7 @@ const Bottom = () => {
         }}
         
       />
-       
+
     </Tab.Navigator>
   );
 

@@ -1,4 +1,4 @@
-import { View, Text, Image, ImageBackground, TouchableOpacity, StatusBar } from 'react-native'
+import { View, Text, Image, ImageBackground, TouchableOpacity, StatusBar, ScrollView } from 'react-native'
 import React from 'react'
 import styles from './styles'
 import LinearGradient from "react-native-linear-gradient";
@@ -14,6 +14,7 @@ const StartScreen = ({navigation}) => {
     const { colors } = useTheme();
     return (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
+          
             {/* <StatusBar translucent backgroundColor="transparent" /> */}
             <View>
                 <Image source={images.IllustrationImage2} style={styles.illustrationImage} />
@@ -29,9 +30,8 @@ const StartScreen = ({navigation}) => {
             <GradientButton
                 onPress={() => navigate(ScreenNames.Login)}
                 buttonText="Next"
-               
+                style={{marginTop: 30}}
             />
-
 
         </View>
         

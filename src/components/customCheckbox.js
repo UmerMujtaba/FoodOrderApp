@@ -36,11 +36,11 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: rhp(8),
+    marginVertical: rhp(5),
   },
   checkbox:(colors)=> ({
-    width: rwp(25),
-    height: rhp(25),
+    width: rwp(20),
+    height: rhp(20),
     borderWidth: rwp(1),
     borderRadius: 20,
     borderColor: colors.text,
@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
   },
   tick: {
     color: '#fff',
-    fontSize: rfs(18),
+    fontSize: rfs(14),
+   textAlignVertical:'center'
     //ontWeight: 'bold',
   },
   label:(colors)=> ({

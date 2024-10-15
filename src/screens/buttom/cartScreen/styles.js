@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import fonts from "../../../constants/fonts";
-import { height, hp, rfs, rhp, rwp, wp } from "../../../constants/dimensions";
+import { height, hp, rfs, rhp, rwp, width, wp } from "../../../constants/dimensions";
 
 export default StyleSheet.create({
 
@@ -14,19 +14,26 @@ export default StyleSheet.create({
     },
     appBar: {
         // backgroundColor:'red',
-        height: 60,
-        width: 330,
+        height: rhp(70),
+        width: wp(90),
         marginTop: 30,
         flexDirection: 'row',
         justifyContent: 'space-between'
 
     },
+    imgStyle: {
+        width: width,
+        height: rhp(250),
+        resizeMode: 'cover'
+    },
+
     backIconContainer: (colors) => ({
         backgroundColor: colors.backContainer,
         height: rhp(55),
         width: rwp(50),
         justifyContent: 'center',
-        alignSelf: 'center',
+        marginTop: hp(1),
+        marginLeft: wp(2),
         borderRadius: 16,
     }),
     backImage: {
@@ -40,11 +47,14 @@ export default StyleSheet.create({
         height: rhp(25),
         width: rwp(25),
         alignSelf: 'center',
+       // color:'#2596be'
     },
     title: (colors) => ({
         fontSize: rfs(28),
         marginBottom: rhp(20),
-        textAlign: 'center',
+        marginTop: hp(1),
+        marginLeft: wp(2),
+        //textAlign: 'center',
         color: colors.text,
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
 

@@ -23,6 +23,9 @@ export const images = {
     deleteIconWhite: require('./deletewhite.png'),
     deleteIconBlack: require('./deleteblack.png'),
 
+    deleteIcon: require('./deleteicon.png'),
+
+
     burger1: require('./burgers/burger1.jpeg'),
     burger2: require('./burgers/burger2.jpeg'),
     burger3: require('./burgers/burger3.jpeg'),
@@ -60,6 +63,7 @@ export const images = {
     lockIcon: require('./lock.png'),
     emailIcon: require('./message.png'),
     profileIcon: require('./profile.png'),
+    smartPhoneIcon:require('./smartphone.png'),
 
     confirmationImage: require('./illustration.png'),
 
@@ -68,9 +72,20 @@ export const images = {
     helpIcon:require('./helpicon.png'),
     notificationIcon2: require('./notification2.png'),
     logoutIcon:require('./logouticon.png'),
+    callIcon:require('./callicon.png'),
+    phoneCall:require('./phonecall.png'),
+    userIcon2: require('./usericons.png'),
+    messageIcon: require('./messageicon.png'),
 
     manIcon:require('./man.png'),
     feedbackIcon: require('./feedbackicon.png'),
+
+    userScreenBgImage: require('./userscreenbgimage.png'),
+    dataTextWhite: require('./datatextwhite.png'),
+    dataTextBlack: require('./datatextblack.png'),
+
+    galleryIcon:require('./galleryicon.png'),
+    cameraIcon:require('./cameraicon.png'),
 }
 
 // 

@@ -8,14 +8,14 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal:rwp(20),
-        paddingVertical:rhp(20),
+        paddingVertical:rhp(15),
         flex: 1
     },
     avatar:(colors)=> ({
         height: rhp(110),
         width: rwp(110),
         alignSelf: 'center',
-        marginTop: hp(8),
+        marginTop: hp(5),
         borderRadius: 50,
         borderColor: colors.tabBackgroundColor,
         borderWidth: 2,
@@ -34,7 +34,7 @@ export default StyleSheet.create({
         width: rwp(100),
         height: rhp(100),
         resizeMode: 'cover',
-        
+        borderRadius: 50,
     },
     body: {
         height: 400,

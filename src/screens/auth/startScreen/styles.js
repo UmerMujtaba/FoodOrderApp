@@ -12,7 +12,8 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         alignSelf: 'center',
         marginTop: rhp(5),
-        width: rwp(400),
+        width: wp(100),
+        height:rhp(500),
     },
     mainText: {
         fontSize: rfs(28),
