@@ -57,7 +57,7 @@ const CartScreen = ({ navigation }) => {
             setTimeout(() => {
               dispatch(clearCart()); // Dispatch clearCart action
               setLoading(false); // Reset loading state
-            }, 2000); // 2 seconds delay
+            }, 1000); // 2 seconds delay
           },
         },
       ],
@@ -102,10 +102,17 @@ const CartScreen = ({ navigation }) => {
       <View style={styles.appBar}>
 
         <ImageBackground source={images.userScreenBgImage} style={styles.imgStyle}>
+          <View style={{ height: 50, marginTop: 10, flexDirection: 'row', justifyContent: 'space-between',marginRight: 30 }}>
+            <TouchableOpacity style={styles.backIconContainer(colors)} onPress={() => navigation.goBack()}>
+              <Image source={images.backIcon} style={styles.backImage} />
+            </TouchableOpacity>
 
-          <TouchableOpacity style={styles.backIconContainer(colors)} onPress={() => navigation.goBack()}>
-            <Image source={images.backIcon} style={styles.backImage} />
-          </TouchableOpacity>
+
+            <TouchableOpacity style={styles.backIconContainer(colors)} onPress={handleClearCart}>
+              <Image source={scheme === 'dark' ? images.deleteIconWhite : images.deleteIconBlack} style={styles.deleteImg} />
+            </TouchableOpacity>
+
+          </View>
         </ImageBackground>
 
 

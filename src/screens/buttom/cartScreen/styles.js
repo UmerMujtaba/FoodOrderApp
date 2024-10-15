@@ -32,8 +32,8 @@ export default StyleSheet.create({
         height: rhp(55),
         width: rwp(50),
         justifyContent: 'center',
-        marginTop: hp(1),
-        marginLeft: wp(2),
+        //marginTop: hp(1),
+       // marginLeft: wp(2),
         borderRadius: 16,
     }),
     backImage: {
