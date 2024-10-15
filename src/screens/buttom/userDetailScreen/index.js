@@ -1,7 +1,7 @@
 import { View, Text, StatusBar, StyleSheet, ImageBackground, Image, TouchableOpacity, useColorScheme, Alert, PermissionsAndroid } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useCallback } from 'react';
 import { images } from '../../../assets/images';
-import { useTheme } from '@react-navigation/native';
+import { useFocusEffect, useTheme } from '@react-navigation/native';
 import { Strings } from '../../../constants/string';
 import styles from './styles';
 import GradientButton from '../../../components/gradientButton';
@@ -123,22 +123,26 @@ const UserDetailScreen = ({ navigation }) => {
                     Alert.alert('Error', 'Failed to save image path.');
                 } else {
                     console.log('Image path updated successfully:', data);
-                    if(imagePath='')
-                        {Alert.alert('Success', 'Image path saved successfully!');
-                        }
+                    
+                    // Check if the imagePath is not empty
+                    if (imagePath) {
+                        Alert.alert('Success', 'Image path saved successfully!');
+                    }
+    
                     // Optionally navigate back after saving
+                    // You can call a function here to reload the image
                     // navigation.goBack();
                 }
             }
         } catch (error) {
             console.error("Error retrieving active email:", error);
+            Alert.alert('Error', 'Failed to retrieve active email.');
         }
     };
+
+   
     
-    useEffect(() => {
-        // Reset imagePath when component mounts
-        setImagePath('');
-    }, []);
+  
 
     return (
         <View style={styles.container}>

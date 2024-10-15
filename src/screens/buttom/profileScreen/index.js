@@ -1,7 +1,7 @@
 import { View, ActivityIndicator, Text, Image, StyleSheet } from 'react-native';
 import { logoutUser } from '../../../services/authServices';
 import React, { useEffect, useState } from 'react';
-import { useNavigation, useTheme } from '@react-navigation/native';
+import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { navigate, navigateReset } from '../../../navigator/navigationRef';
 import { images } from '../../../assets/images';
@@ -61,37 +61,39 @@ const ProfileScreen = () => {
   };
 
 
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const active = await AsyncStorage.getItem('active_email');
-        console.log("🚀 ~ checkSession ~ activeEmail:", active);
+  const fetchUserData = async () => {
+    try {
+      const active = await AsyncStorage.getItem('active_email');
+      console.log("🚀 ~ checkSession ~ activeEmail:", active);
 
-        if (active) {
-          // Fetch user data from 'registered_user' using the email
-          const { data, error } = await supabase
-            .from('registered_user')
-            .select('*')  // Fetch all columns
-            .eq('email', active)
-            .single();
+      if (active) {
+        const { data, error } = await supabase
+          .from('registered_user')
+          .select('*')
+          .eq('email', active)
+          .single();
 
-          if (error) {
-            console.error('Error fetching user data:', error.message);
-          } else {
-            console.log('Fetched user data:', data);
-            setUsername(data?.username || '');
-            setImagePath(data?.imagePath || '');
-          }
+        if (error) {
+          console.error('Error fetching user data:', error.message);
+        } else {
+          console.log('Fetched user data:', data);
+          setUsername(data?.username || '');
+          setImagePath(data?.imagePath || '');
         }
-      } catch (err) {
-        console.error('Error checking session:', err);
-      } finally {
-        setFetchLoading(false); // Hide loader when data is fetched or error occurs
       }
-    };
+    } catch (err) {
+      console.error('Error checking session:', err);
+    } finally {
+      setFetchLoading(false);
+    }
+  };
 
-    checkSession();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      setFetchLoading(true); // Reset loading state before fetching data
+      fetchUserData(); // Fetch user data every time the screen comes into focus
+    }, [])
+  );
 
 
 
