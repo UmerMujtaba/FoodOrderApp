@@ -40,6 +40,12 @@ export const Strings ={
     hereIsYourReceipt:'Here\'s your receipt',
     noItemsInCart: 'No items in the cart',
     uploadYourPhotoProfile: 'Upload Your Photo Profile',
+    promotionCoupons:'Promotion Coupons',
+    resetYourPassword: 'Reset your password here',
+    EnterYourPhoneNo:'Enter Your Phone Number',
+    EnterSixDigit:'Enter Verification Code',
+    OTPWWillBeSentTo:'OTP will be send to the\nfollowing number',
+    resendOtpText:'Resend OTP'
 }
 
 export const ScreenNames={
@@ -68,4 +74,9 @@ export const ScreenNames={
     ProfileScreen:'ProfileScreen',
     //UserDetailScreen:'UserDetailScreen',
     UserScreen:'UserScreen',
+    PromotionScreen:'PromotionScreen',
+    ForgotPasswordScreen:'ForgotPasswordScreen',
+    PhoneSignin:'PhoneSignin',
+    MapScreen:'MapScreen',
+    //OrderConfirmationScreenModal:'OrderConfirmationScreenModal'
 }

@@ -1,6 +1,6 @@
 import { useTheme } from '@react-navigation/native';
 import React, { forwardRef } from 'react';
-import { TextInput, StyleSheet, View, Image } from 'react-native';
+import { TextInput, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import { rhp, rwp } from '../constants/dimensions';
 
 const CustomTextInput = forwardRef(({
@@ -16,16 +16,19 @@ const CustomTextInput = forwardRef(({
     showSoftInputOnFocus,
     autoFocus,
     returnKeyType,
+    eyeSource,
+    eye,
     blurOnSubmit,
     autoCorrect,
-    onSubmitEditing
+    onSubmitEditing,
+    eyePress
 }, ref) => {
     const { colors, dark } = useTheme();
     return (
         <View style={[styles.container(colors), style]}>
             {rightIcon && (
                 <Image
-                    style={[styles.icon, { ...suffixIconStyle }]}
+                    style={[{ ...suffixIconStyle }]}
                     resizeMode="contain"
                     source={imageSource}
                 />
@@ -47,7 +50,15 @@ const CustomTextInput = forwardRef(({
                 autoCorrect={autoCorrect}
             //style={[styles.input, { backgroundColor: colors.tabBackgroundColor, borderColor: colors.tabBackgroundColor, color:colors.text }]}
             />
-
+            {eye && (
+                <TouchableOpacity onPress={eyePress}>
+                    <Image
+                        style={[styles.icon, suffixIconStyle]}
+                        resizeMode="contain"
+                        source={eyeSource}
+                    />
+                </TouchableOpacity>
+            )}
         </View>
     );
 });
@@ -65,7 +76,10 @@ const styles = StyleSheet.create({
         height: rhp(60),
         paddingLeft: rwp(10),
     }),
-
+    icon:{
+        marginRight: rwp(20),
+        opacity: 0.6
+    }
 
 });
 

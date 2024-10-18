@@ -79,7 +79,7 @@ const ItemDetailModal = ({ modalVisible, selectedItem, closeModal, images, statu
             <Text style={styles.modalPrice(colors)}>Price: ${selectedItem.price.toFixed(2)}</Text>
 
             <View style={styles.addOnContainerCol}>
-              <Text style={styles.modalAddons(colors)}>{Strings.availableAddOns}</Text>
+              <Text style={styles.modalAddons(colors)}>{Strings.availableAddOn}</Text>
 
               <View style={{ flexDirection: 'column' }}>
                 <View
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   }),
   nudge: (colors) => ({
     width: rwp(60),
-    height: rhp(4),
+    height: rhp(5),
     backgroundColor: colors.nudge,
     alignSelf: 'center',
     borderRadius: 8,

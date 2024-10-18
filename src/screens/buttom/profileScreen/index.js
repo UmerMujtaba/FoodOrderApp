@@ -12,6 +12,7 @@ import { ScreenNames } from '../../../constants/string';
 import messaging from '@react-native-firebase/messaging';
 import { supabase } from '../../../utils/supabase';
 import { useSelector } from 'react-redux';
+import { fetchUserData, getStoredToken, logout } from '../../../utils/helper/logoutHelper';
 
 
 
@@ -27,71 +28,11 @@ const ProfileScreen = () => {
   const { colors } = useTheme();
 
 
-  const getStoredToken = async () => {
-    try {
-      const token = await AsyncStorage.getItem('access_token'); // Retrieve access token
-      if (token !== null) {
-        // Token exists
-        console.log("🚀 ~ Retrieved ~ token:", token)
-        return token;
-      } else {
-        // Token doesn't exist
-        console.log('No token found');
-        return null;
-      }
-    } catch (error) {
-      console.error('Error retrieving token from AsyncStorage:', error);
-      return null;
-    }
-  };
-
-  const logout = async () => {
-    setLogoutLoading(true); // Start loading for logout
-
-    const { error: logoutError } = await logoutUser(); // Call the logout function
-
-    if (logoutError) {
-      setLogoutLoading(false); // Stop loading if there's an error
-      setErrorMessage(logoutError.message); // Show error message on logout failure
-    } else {
-      await AsyncStorage.removeItem('session'); // Clear session
-      console.log('Logout successful');
-      navigateReset('AuthStack', { screen: 'Login' }); // Navigate to login screen
-    }
-  };
-
-
-  const fetchUserData = async () => {
-    try {
-      const active = await AsyncStorage.getItem('active_email');
-      console.log("🚀 ~ checkSession ~ activeEmail:", active);
-
-      if (active) {
-        const { data, error } = await supabase
-          .from('registered_user')
-          .select('*')
-          .eq('email', active)
-          .single();
-
-        if (error) {
-          console.error('Error fetching user data:', error.message);
-        } else {
-          console.log('Fetched user data:', data);
-          setUsername(data?.username || '');
-          setImagePath(data?.imagePath || '');
-        }
-      }
-    } catch (err) {
-      console.error('Error checking session:', err);
-    } finally {
-      setFetchLoading(false);
-    }
-  };
 
   useFocusEffect(
     React.useCallback(() => {
       setFetchLoading(true); // Reset loading state before fetching data
-      fetchUserData(); // Fetch user data every time the screen comes into focus
+      fetchUserData(setUsername, setImagePath, setFetchLoading); // Fetch user data every time the screen comes into focus
     }, [])
   );
 
@@ -107,7 +48,7 @@ const ProfileScreen = () => {
         <>
           <View style={styles.avatar(colors)}>
             <Image
-              source={imagePath ? { uri: imagePath } : images.manIcon} // If imagePath exists, use it; else, use manIcon
+              source={imagePath ? { uri: imagePath } : images.manImage} // If imagePath exists, use it; else, use manIcon
               style={styles.imgStyle}
             />
           </View>
@@ -117,10 +58,10 @@ const ProfileScreen = () => {
       {/* <Text style={styles.name(colors)}>{activeEmail}</Text> */}
 
       <View style={styles.body}>
-        <ProfileMenuTile userIcon={images.userIcon} name='Account' />
+        <ProfileMenuTile userIcon={images.userIcon} name='Account' onPress={() => navigate(ScreenNames.UserScreen)} />
         <ProfileMenuTile userIcon={images.notificationIcon2} name='Notifications' />
-        <ProfileMenuTile userIcon={images.settingIcon} name='Settings' onPress={() => navigate(ScreenNames.UserScreen)} />
-        <ProfileMenuTile userIcon={images.helpIcon} name='Help' />
+        <ProfileMenuTile userIcon={images.promotionIcon} name='Promotions' onPress={() => navigate(ScreenNames.PromotionScreen)} />
+        <ProfileMenuTile userIcon={images.helpIcon} name='Help'  onPress={() => navigate(ScreenNames.MapScreen)}/>
 
         {/* <ProfileMenuTile userIcon={images.callIcon} name='Call' onPress={() => navigate(ScreenNames.CallScreen)} /> */}
 
@@ -132,8 +73,11 @@ const ProfileScreen = () => {
           <ProfileMenuTile
             userIcon={images.logoutIcon}
             name={logoutLoading ? 'Logging Out...' : 'Logout'}
-            onPress={!logoutLoading ? logout : null} // Disable the button while loading
+            onPress={!logoutLoading ? () => logout(setLogoutLoading, setErrorMessage) : null}
+            style={styles.button}
+            disabled={logoutLoading}  // Disable button during loading
           />
+
         </View>
 
         <ProfileMenuTile userIcon={images.tokenIcon} name='Get Token' onPress={getStoredToken} />

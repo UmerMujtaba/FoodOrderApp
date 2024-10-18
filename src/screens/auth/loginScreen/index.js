@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, Image, StatusBar, ImageBackground, ActivityIndicator, TouchableOpacity, ToastAndroid } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, Text, Image, StatusBar, ImageBackground, ActivityIndicator, TouchableOpacity, ToastAndroid, Linking } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@react-navigation/native';
 import styles from './styles';
@@ -10,6 +10,9 @@ import SocialLoginTouchable from '../../../components/socialLoginTouchableCompon
 import GradientButton from '../../../components/gradientButton';
 import { navigateReset, navigate } from '../../../navigator/navigationRef';
 import { login } from '../../../redux/slices/authSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { rhp, rwp } from '../../../constants/dimensions';
+import { supabase } from '../../../utils/supabase';
 
 const LoginScreen = () => {
     const [Email, setEmail] = useState('');
@@ -17,27 +20,85 @@ const LoginScreen = () => {
     const { colors } = useTheme();
     const dispatch = useDispatch();
     const { loading, error } = useSelector((state) => state.auth);
-
+    const [isSecureCheck, setIsSecureCheck] = useState(true);
+    const [rememberMe, setRememberMe] = useState(false);
     const firstRef = useRef(null);
     const secondRef = useRef(null);
 
     const handleLogin = () => {
+        
         dispatch(login({ email: Email, password: Password }))
-        .then((result) => {
-            if (result.type === 'auth/login/fulfilled') {
-                // Login successful, navigate to home screen
+            .then((result) => {
+                if (result.type === 'auth/login/fulfilled') {
+                    // Login successful, navigate to home screen
+                    //AsyncStorage.setItem('email',Email);
 
-                navigateReset('BottomStack', { screen: ScreenNames.Home });
-            } else if (result.type === 'auth/login/rejected') {
-                ToastAndroid.showWithGravity(
-                    result.payload || 'Login failed',
-                    ToastAndroid.LONG,
-                    ToastAndroid.TOP
-                );
-            }
-        });
+                    navigateReset('BottomStack', { screen: ScreenNames.Home });
+                } else if (result.type === 'auth/login/rejected') {
+                    ToastAndroid.showWithGravity(
+                        result.payload || 'Login failed',
+                        ToastAndroid.LONG,
+                        ToastAndroid.TOP
+                    );
+                }
+            });
     };
+  
 
+    const handleGoogleLogin = async () => {
+        console.log("🚀 ~ handleLogin ~ handleGOOGLELogin:")
+       
+        const redirectUri = Linking.canOpenURL('login-callback');
+        const { error } = await supabase.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            redirectTo: redirectUri,  // Redirect URL for React Native app
+          }
+        });
+    
+        if (error) {
+          Alert.alert('Error', error.message);
+        } else {
+          Alert.alert('Success', 'You have successfully logged in!');
+        }
+      };
+
+      
+    useEffect(() => {
+        const loadCredentials = async () => {
+            try {
+
+                const savedEmail = await AsyncStorage.getItem('email');
+                console.log("🚀 ~ loadCredentials ~ savedEmail:", savedEmail)
+                const savedPassword = await AsyncStorage.getItem('password');
+
+                if (savedEmail) {
+                    const { data, error } = await supabase
+                        .from('registered_user')
+                        .select('remember_me_flag')
+                        .eq('email', savedEmail)
+                        .single();
+
+                    if (error) {
+                        console.error('Error fetching user data from Supabase:', error);
+                        return;
+                    }
+                    if (data && data.remember_me_flag) {
+                        setEmail(savedEmail);
+                        setPassword(savedPassword);
+                    } else {
+                        console.log('rememberMeFlag is false, not setting email and password.');
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading saved credentials:', error);
+            }
+        }
+
+        loadCredentials();
+    }, []);
+
+    
     return (
         <View style={styles.container(colors)}>
             <StatusBar translucent backgroundColor="transparent" />
@@ -55,9 +116,12 @@ const LoginScreen = () => {
                     value={Email}
                     onChangeText={setEmail}
                     keyboardType='email-address'
-                    autoFocus={true}
+                    //autoFocus={true}
                     showSoftInputOnFocus={true}
                     returnKeyType='next'
+                    rightIcon
+                    imageSource={images.emailIcon}
+                    suffixIconStyle={{ width: 24, height: 26.4 }}
                     blurOnSubmit={false}
                     autoCorrect={false}
                     onSubmitEditing={() => secondRef.current.focus()}
@@ -68,30 +132,48 @@ const LoginScreen = () => {
                     value={Password}
                     onChangeText={setPassword}
                     keyboardType='default'
-                    secureTextEntry={true}
+                    secureTextEntry={isSecureCheck}
                     autoCapitalize='none'
+                    rightIcon
+                    imageSource={images.lockIcon}
                     returnKeyType='done'
                     autoCorrect={false}
+                    suffixIconStyle={{ width: 24, height: 26.4 }}
+                    eyeSource={
+                        isSecureCheck
+                            ? images.eyeOpenIcon
+                            : images.eyeHideIcon
+
+                    }
+                    eye
+                    eyePress={() => setIsSecureCheck(!isSecureCheck)}
                 />
 
-                <Text style={styles.optText(colors)}>{Strings.orContinueWith}</Text>
+                <TouchableOpacity onPress={() => navigate(ScreenNames.PhoneSignin)}>
+                    <Text style={styles.optText(colors)}>{Strings.orContinueWith}</Text>
+                </TouchableOpacity>
 
                 <View style={styles.socialLoginContainer}>
                     <SocialLoginTouchable
                         onPress={() => { /* handle press */ }}
                         imageSource={images.fbLogo}
                         text={Strings.Facebook}
+                        style={{
+                            width: rwp(35),
+                            height: rhp(35),
+                        }}
                     />
                     <SocialLoginTouchable
-                        onPress={() => { /* handle press */ }}
+                        onPress={handleGoogleLogin }
                         imageSource={images.gmailLogo}
                         text={Strings.Google}
                     />
                 </View>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigate(ScreenNames.ForgotPasswordScreen)}>
                     <Text style={[styles.forgotPswrdText]}>
                         {Strings.forgotPassword}
+
                     </Text>
                 </TouchableOpacity>
 

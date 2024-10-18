@@ -30,6 +30,8 @@ export const login = createAsyncThunk(
         is_logged_in: true, // Optional, for clarity
       }));
 
+
+      //AsyncStorage.setItem()
       // Update the user's login status in the database
       const { error } = await supabase
         .from('logged_in_user')
@@ -84,6 +86,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.userEmail = action.payload.email;
+        
         state.access_token = action.payload.access_token;
         state.fcm_token = action.payload.fcm_token;
         state.isLoggedIn = true;  // Set isLoggedIn to true on successful login

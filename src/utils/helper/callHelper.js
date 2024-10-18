@@ -1,5 +1,6 @@
 import { supabase } from '../supabase';
-import { sendCallDeclineInvitation, sendCallInvitation } from './sendCallInvitaiton';
+import { sendCallDeclineInvitation, sendCallInvitation } from './sendCallInvitaitonHelper';
+
 
 export const fetchRecipientToken = async (randomUser) => {
   if (randomUser && randomUser.email) {

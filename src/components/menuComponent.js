@@ -10,7 +10,7 @@ import { supabase } from '../utils/supabase';
 import { incrementCount } from '../redux/slices/itemCountSlice';
 import { hp, rfs, rhp, rwp, width, wp } from '../constants/dimensions';
 
-const MenuCategoryComponent = ({ category, searchQuery,filter}) => {
+const MenuCategoryComponent = ({ category, searchQuery, filter }) => {
   const dispatch = useDispatch();
   const { menuItems, loading, error } = useSelector((state) => state.menu);
   const [selectedItem, setSelectedItem] = useState(null);

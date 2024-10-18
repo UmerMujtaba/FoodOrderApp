@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
 
   }),
   itemName: (colors) => ({
-    fontSize: rfs(24),
+    fontSize: rfs(20),
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
     color: colors.text,
 
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   }),
 
   itemPrice: {
-    fontSize: rfs(24),
+    fontSize: rfs(20),
     color: '#15BE77',
     fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
   },

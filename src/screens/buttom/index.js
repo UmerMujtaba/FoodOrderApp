@@ -10,3 +10,6 @@ export * from './drinkScreen';
 export * from './recommendationScreen';
 export * from './orderConfirmationScreen';
 export * from './callScreen';
+export * from './receiptScreen';
+export * from './userDetailScreen';
+export * from './promotionScreen'

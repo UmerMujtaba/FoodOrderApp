@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import fonts from "../../../constants/fonts";
-import { hp, rfs, rhp, rwp, wp } from "../../../constants/dimensions";
+import { hp, rfs, rhp, rwp, width, wp } from "../../../constants/dimensions";
 
 export
     const styles = StyleSheet.create({
@@ -12,13 +12,27 @@ export
             marginLeft:rwp(5),
             marginRight:rwp(5),
         },
+        appBar: {
+            // backgroundColor:'red',
+            height: rhp(70),
+            width: wp(90),
+           // marginTop: rhp(30),
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+    
+        },
+        imgStyle: {
+            width: width,
+            height: rhp(250),
+            resizeMode: 'cover'
+        },
         backIconContainer: (colors) => ({
             backgroundColor: colors.backContainer,
             height: rhp(55),
             width: rwp(50),
             justifyContent: 'center',
             borderRadius: 16,
-            marginTop: rhp(40),
+            marginTop: hp(5),
             //marginLeft: 10
         }),
         backImage: {
@@ -32,8 +46,9 @@ export
             marginBottom: rhp(20),
             textAlign: 'center',
             color: colors.text,
+            marginTop: hp(5),
             fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
-
+    
         }),
         loaderContainer: {
             flex: 1,
@@ -47,7 +62,6 @@ export
             backgroundColor: colors.tabBackgroundColor,
             paddingHorizontal:rwp(15),
             paddingVertical:rhp(15),
-
             borderRadius: 10,
             elevation: 3,
         }),
@@ -62,7 +76,7 @@ export
             flex: 1,
         },
         itemName: (colors) => ({
-            fontSize: rfs(22),
+            fontSize: rfs(20),
             color: colors.text,
             fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold
         }),
@@ -76,7 +90,7 @@ export
         price: (colors) => ({
             fontSize: rfs(20),
             color: colors.text,
-            marginTop: rhp(10),
+           // marginTop: rhp(10),
             fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
 
         }),

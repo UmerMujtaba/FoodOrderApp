@@ -8,7 +8,7 @@ const ModalAppBar = () => {
     return (
         <View style={styles.containerRow}>
             <View style={styles.textContainer}>
-                <Image source={images.popularContainer}style={{width:76, height:34}} resizeMode='contain'/>
+                <Image source={images.popularContainer}style={{width:rwp(76), height:rhp(34)}} resizeMode='cover'/>
                 <Text style={[styles.popularText, styles.popText, { alignSelf: "center" }]}>Popular</Text>
             </View>
 
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     textContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: rwp(76),
+       // width: rwp(90),
         marginLeft: rwp(15)
     },
   
@@ -70,22 +70,22 @@ const styles = StyleSheet.create({
         marginRight: rwp(12)
     },
     circularContainer: {
-        height: rhp(42),
-        width: rwp(42),
-        borderRadius: 18.5,
+        height: rhp(45),
+        width: rwp(45),
+        borderRadius: 25,
         justifyContent: 'center',
         backgroundColor: 'rgba(83, 232, 139, 0.15)'
     },
     circularContainer2: {
-        height: rhp(42),
-        width: rwp(42),
-        borderRadius: 18.5,
+        height: rhp(45),
+        width: rwp(45),
+        borderRadius: 25,
         justifyContent: 'center',
         backgroundColor: 'rgba(255, 29, 29, 0.15)'
     },
     iconImage: {
-        height: rhp(22),
-        width: rwp(18),
+        height: rhp(24),
+        width: rwp(19),
         alignSelf: 'center',
         resizeMode: 'cover'
     },

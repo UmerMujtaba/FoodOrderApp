@@ -1,23 +1,17 @@
 // bottomStack.js
 import React from 'react';
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { ScreenNames, Strings } from '../../constants/string';
+import { ScreenNames } from '../../constants/string';
 import { images } from '../../assets/images';
 import { View, Image, Text, StyleSheet } from 'react-native';
 import fonts from '../../constants/fonts';
 import Home from './homeStack';
-import ProfileScreen from '../../screens/buttom/profileScreen';
-import CartScreen from '../../screens/buttom/cartScreen';
 import { useSelector } from 'react-redux';
 import { useTheme } from '@react-navigation/native';
 import RecommendationScreen from '../../screens/buttom/recommendationScreen';
 import Cart from './cartStack';
-import { hp, rfs, rhp, rwp, wp } from '../../constants/dimensions';
-import Profile from './profileStack';
+import {  rfs, rhp, rwp, } from '../../constants/dimensions';
 import StackProfile from './profileStack';
-import ReceiptScreen from '../../screens/buttom/receiptScreen';
-import UserDetailScreen from '../../screens/buttom/userDetailScreen';
 
 
 
@@ -29,15 +23,14 @@ const Bottom = () => {
 
 
   const TabBarIconWithLabel = ({ focused, iconSource, label, cartCount }) => {
-    //const { colors } = useTheme(); // Use useTheme to access the current theme colors
-
+  
 
     return (
       <View style={[
         styles.iconContainer,
         {
           backgroundColor: focused ? 'rgba(21, 190, 119, 0.5)' : 'transparent',
-          width: focused ? rwp(80) : rwp(55)
+          width: focused ? rwp(87) : rwp(55)
         }
       ]}>
 
@@ -155,7 +148,7 @@ const Bottom = () => {
           tabBarIcon: ({ focused }) => (
             <TabBarIconWithLabel
               focused={focused}
-              iconSource={images.chatIcon}
+              iconSource={images.recommendationIcon}
               label="Liked"
 
             />

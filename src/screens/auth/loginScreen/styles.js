@@ -55,9 +55,9 @@ export default StyleSheet.create({
     }),
     socialLoginContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         height: rhp(70),
-        marginTop: rhp(5 )
+        marginTop: rhp(10)
     },
 
     forgotPswrdText: {
@@ -65,7 +65,7 @@ export default StyleSheet.create({
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
         fontSize: rfs(16),
         marginTop: rhp(10),
-        marginBottom:5,
+     
         color: '#15BE77',
         marginBottom: rhp(5),
        // textDecorationLine: 'underline',

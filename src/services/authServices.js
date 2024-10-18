@@ -1,7 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 import { supabase } from '../utils/supabase';
-import { getFCMToken } from '../utils/helper/firebaseServies';
-import { getMessaging } from '@react-native-firebase/messaging';
 
 // Function to log in a user
 export const loginUser = async (email, password) => {

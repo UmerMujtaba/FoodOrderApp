@@ -7,22 +7,23 @@ import { rfs, rhp, rwp, hp, wp, height } from '../constants/dimensions';
 const GradientButton = ({ onPress, buttonText, style }) => (
     <TouchableOpacity style={[styles.ctaStart, style]} onPress={onPress}>
         <LinearGradient
-            start={{ x: 0, y: 0.5 }}
-            end={{ x: 1, y: 0.5 }}
-            // locations={[0.1, 0.5,0.9]}
+            start={{ x: 0.1, y: 0.3 }}  // Adjusted for the 241-degree angle
+            end={{ x: 1, y: 1 }}       // Adjusted direction for the gradient
             colors={['#53E88B', '#15BE77']}
             style={styles.linearGradient}
         >
+            {/* Your content here */}
             <Text style={styles.buttonText}>{buttonText}</Text>
         </LinearGradient>
+
     </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
     ctaStart: {
         marginTop: rhp(40),
-        width: rwp(165),
-        height: rhp(65),
+        width: wp(88),
+        // height: rhp(20),
         justifyContent: 'center',
         alignSelf: 'center'
     },
@@ -38,8 +39,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // paddingVertical: 10,
         // width: '100%',
-        height: hp(9),
+        height: rhp(60),
     },
 });
 
 export default GradientButton;
+
