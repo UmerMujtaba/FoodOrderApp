@@ -12,6 +12,7 @@ const CustomCheckbox = ({ label, onPress, style }) => {
   const { colors } = useTheme();
 
 
+
   const toggleCheckbox = () => {
     setIsChecked(!isChecked); // Toggle checkbox state
     if (onPress) onPress(!isChecked); // Call the onPress callback if provided
@@ -20,13 +21,15 @@ const CustomCheckbox = ({ label, onPress, style }) => {
 
   return (
     <View style={[styles.checkboxContainer, style]}>
-      <TouchableOpacity onPress={toggleCheckbox}>
+       <TouchableOpacity onPress={toggleCheckbox} activeOpacity={0.4}>
 
         <View style={[styles.checkbox(colors), isChecked && styles.checked]}>
           {isChecked && <Text style={styles.tick}>✓</Text>}
         </View>
       </TouchableOpacity>
-      <Text style={styles.label(colors)}>{label}</Text>
+      <TouchableOpacity onPress={toggleCheckbox} activeOpacity={0.4}>
+        <Text style={styles.label(colors)}>{label}</Text>
+      </TouchableOpacity>
     </View>
   )
 
@@ -38,7 +41,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: rhp(5),
   },
-  checkbox:(colors)=> ({
+  checkbox: (colors) => ({
     width: rwp(20),
     height: rhp(20),
     borderWidth: rwp(1),
@@ -54,11 +57,11 @@ const styles = StyleSheet.create({
   },
   tick: {
     color: '#fff',
-    fontSize: rfs(14),
-   textAlignVertical:'center'
+    fontSize: rfs(13),
+    textAlignVertical: 'center'
     //ontWeight: 'bold',
   },
-  label:(colors)=> ({
+  label: (colors) => ({
     fontSize: rfs(16),
     color: colors.text,
     fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular

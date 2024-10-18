@@ -12,10 +12,10 @@ import { images } from '../assets/images';
 
 
 const OrderSummary = ({ cartItems, subTotal, calculateTotal, navigate }) => {
-    const {colors} = useTheme();
+  const { colors } = useTheme();
 
-    
-      
+
+
 
   return (
     <LinearGradient
@@ -28,7 +28,7 @@ const OrderSummary = ({ cartItems, subTotal, calculateTotal, navigate }) => {
         <View style={styles.cardContainerRow}>
           <View style={styles.cardContainerCol}>
             <Text style={styles.headingText}>{Strings.subTotal}</Text>
-            {cartItems.length > 0 && ( 
+            {cartItems.length > 0 && (
               <>
                 <Text style={styles.headingText}>{Strings.deliveryCharges}</Text>
                 <Text style={styles.headingText}>{Strings.discount}</Text>
@@ -52,7 +52,7 @@ const OrderSummary = ({ cartItems, subTotal, calculateTotal, navigate }) => {
       <TouchableOpacity
         activeOpacity={0.5}
         style={styles.ctaBtn(colors)}
-       // onPress={() => navigate(ScreenNames.OrderConfirmation)}
+        // onPress={() => navigate(ScreenNames.OrderConfirmation)}
         onPress={() => navigate(ScreenNames.ReceiptScren)}
       >
         <LinearGradientText
@@ -66,64 +66,66 @@ const OrderSummary = ({ cartItems, subTotal, calculateTotal, navigate }) => {
     </LinearGradient>
   );
 };
-const styles=StyleSheet.create({
-    cardGradient: {
-        borderRadius: 16,
-        width: rwp(380),
-        alignSelf: 'center',
-    },
-    bgImageStyle: {
-        resizeMode: 'cover',
-        height: rhp(186),
-        width: rwp(370),
-        marginRight: rwp(2),
-        alignSelf: 'center',
-    },
-    cardContainerRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginLeft: rwp(5),
-        marginRight: rwp(5),
-        width: rwp(370),
-     
-    },
-    cardContainerCol: {
-        flexDirection: 'column',
-        paddingHorizontal:rwp(10),
-        paddingVertical:rhp(10),
-    },
-    headingText: {
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
-        fontSize: rfs(24),
-        color: 'black',
-        marginTop: rhp(5)
-    },
-    priceText: {
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
-        fontSize: rfs(26),
-        color: 'black',
-        marginTop: rhp(15)
-    },
+const styles = StyleSheet.create({
+  cardGradient: {
+    borderRadius: 16,
+    width: rwp(370),
+    alignSelf: 'center',
+    justifyContent: 'center',
 
-    ctaBtn: (colors) => ({
+  },
+  bgImageStyle: {
+    resizeMode: 'cover',
+    height: rhp(186),
+    width: rwp(370),
+    // marginRight: rwp(2),
+    alignSelf: 'center',
+  },
+  cardContainerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginLeft: rwp(5),
+    marginRight: rwp(5),
+    width: rwp(370),
 
-        height: rhp(50),
-        width: rwp(355),
-        borderRadius: 16,
-        marginBottom: rhp(5),
-        bottom: rhp(5),
-        alignSelf: 'center',
-        justifyContent: 'center',
-        backgroundColor: colors.tabBackgroundColor,
-    }),
+  },
+  cardContainerCol: {
+    flexDirection: 'column',
+    paddingHorizontal: rwp(10),
+    paddingVertical: rhp(10),
+  },
+  headingText: {
+    fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
+    fontSize: rfs(24),
+    color: 'black',
+    marginTop: rhp(5)
+  },
+  priceText: {
+    fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
+    fontSize: rfs(26),
+    color: 'black',
+    marginTop: rhp(15)
+  },
 
-    OrderText: {
-        fontSize: rfs(26),
-        color: '#15BE77',
-        fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
-        alignSelf: 'center',
+  ctaBtn: (colors) => ({
 
-    },
+    height: rhp(50),
+    width: rwp(355),
+    borderRadius: 16,
+    marginBottom: rhp(5),
+    bottom: rhp(5),
+    alignSelf: 'center',
+    justifyContent: 'center',
+    backgroundColor:'white',
+  }),
+
+  OrderText: {
+    fontSize: rfs(22),
+    color: '#53E88B',
+    fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
+    alignSelf: 'center',
+
+  },
 
 
 })

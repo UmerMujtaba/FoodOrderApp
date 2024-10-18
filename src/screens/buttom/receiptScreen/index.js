@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, Modal } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Modal, ImageBackground } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { images } from '../../../assets/images';
 import styles from './styles';
@@ -8,7 +8,6 @@ import { ScreenNames, Strings } from '../../../constants/string';
 import { supabase } from '../../../utils/supabase';
 import RoundedContainer from '../../../components/roundedContainer';
 import { navigate } from '../../../navigator/navigationRef';
-import OrderConfirmationScreen from '../orderConfirmationScreen';
 import OrderConfirmationScreenModal from '../orderConfirmationScreen';
 
 const ReceiptScreen = ({ navigation }) => {
@@ -16,16 +15,12 @@ const ReceiptScreen = ({ navigation }) => {
     const { colors } = useTheme();
     const now = new Date();
     const dispatch = useDispatch();
-
     const [randomUser, setRandomUser] = useState(null);
     const cartItemsFromStore = useSelector((state) => state.cart.cartItems);
-    // Format the date as 'YYYY-MM-DD'
     const date = now.toISOString().split('T')[0];
     const hours = now.getHours();
     const minutes = now.getMinutes();
     const formattedTime = `${hours % 12 || 12}:${String(minutes).padStart(2, '0')} ${hours >= 12 ? 'PM' : 'AM'}`;
-
-    // Add 45 minutes to the current time
     let estimatedHours = hours;
     let estimatedMinutes = minutes + 45;
 
@@ -109,17 +104,18 @@ const ReceiptScreen = ({ navigation }) => {
         <View style={styles.container}>
             {/* App bar */}
 
-
-
             {/* Reuse the OrderConfirmationScreen inside the modal */}
             <OrderConfirmationScreenModal navigation={navigation} />
             {/* Button to close modal */}
 
-
             <View style={styles.appBar}>
-                <TouchableOpacity style={styles.backIconContainer(colors)} onPress={() => navigate(ScreenNames.CartScreen)}>
-                    <Image source={images.backIcon} style={styles.backImage} />
-                </TouchableOpacity>
+
+
+                <ImageBackground source={images.userScreenBgImage} style={styles.imgStyle}>
+                    <TouchableOpacity style={styles.backIconContainer(colors)} onPress={() => navigate(ScreenNames.CartScreen)}>
+                        <Image source={images.backIcon} style={styles.backImage} />
+                    </TouchableOpacity>
+                </ImageBackground>
             </View>
             <Text style={styles.title(colors)}>{Strings.deliveryIsInProgress}</Text>
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

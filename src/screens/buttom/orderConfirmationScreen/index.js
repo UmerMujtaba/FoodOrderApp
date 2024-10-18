@@ -19,7 +19,7 @@ const OrderConfirmationScreenModal = ({ navigation }) => {
         <Modal
             visible={isModalVisible}
             transparent={true}
-            animationType="fade"
+            animationType="slide"
             onRequestClose={() => setIsModalVisible(false)} // Handle modal close
         >
             <View style={styles.modalOverlay}>

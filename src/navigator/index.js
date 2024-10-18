@@ -4,13 +4,14 @@ import { ActivityIndicator, View, StyleSheet, useColorScheme, Image } from 'reac
 import Auth from './authStack';
 import Bottom from './buttomStack';
 import { NavigationContainer } from '@react-navigation/native';
-import { lightTheme, darkTheme } from '../theme/themes';
 import { navigationRef } from './navigationRef';
 import { ScreenNames } from '../constants/string';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { images } from '../assets/images';
 import { getFCMToken } from '../utils/helper/firebaseServies';
 import UserDetailScreen from '../screens/buttom/userDetailScreen';
+import PromotionsScreen from '../screens/buttom/promotionScreen';
+import { darkTheme, lightTheme } from '../utils/theme/themes';
 
 const NavigationStack = createNativeStackNavigator();
 
@@ -33,38 +34,30 @@ export const NavigationCheck = () => {
 
           await AsyncStorage.setItem('active_email', email);
 
-      
+
 
           if (session && session.is_logged_in) {
-            setIsAuthenticatedLocally(true);  // User is authenticated
+            setIsAuthenticatedLocally(true);
           } else {
-            setIsAuthenticatedLocally(false); // No valid session found
+            setIsAuthenticatedLocally(false);
           }
         } else {
-          setIsAuthenticatedLocally(false);   // No session found
+          setIsAuthenticatedLocally(false);
         }
       } catch (error) {
         console.error('Error checking session:', error);
         setIsAuthenticatedLocally(false);
       } finally {
-        setIsLoading(false); // Session check complete, hide the loader
+        setIsLoading(false);
       }
     };
 
     checkSession();
   }, []);
 
-  // Show logo and loading spinner while checking session
   if (isLoading) {
     return (
       <View style={[styles.loaderContainer, { backgroundColor: scheme === 'dark' ? 'black' : 'white' }]}>
-        {/* App logo */}
-        {/* <Image
-          source={images.appLogo} // Ensure this path is correct in your project
-          style={styles.logo}
-          resizeMode="contain"
-        /> */}
-        {/* Loader */}
         <ActivityIndicator size="large" color={scheme === 'dark' ? '#ffffff' : '#0000ff'} />
       </View>
     );
@@ -75,10 +68,9 @@ export const NavigationCheck = () => {
       <NavigationStack.Navigator initialRouteName={isAuthenticatedLocally ? ScreenNames.BottomStack : ScreenNames.AuthStack}>
         <NavigationStack.Screen name={ScreenNames.AuthStack} component={Auth} options={{ headerShown: false }} />
         <NavigationStack.Screen name={ScreenNames.BottomStack} component={Bottom} options={{ headerShown: false }} />
-
-
         <NavigationStack.Screen name={ScreenNames.UserScreen} component={UserDetailScreen} options={{ headerShown: false }} />
-     
+        <NavigationStack.Screen name={ScreenNames.PromotionScreen} component={PromotionsScreen} options={{ headerShown: false }} />
+
       </NavigationStack.Navigator>
     </NavigationContainer>
   );

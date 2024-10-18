@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, ActivityIndicator, useColorScheme, Alert, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ActivityIndicator, useColorScheme, Alert, ImageBackground, StatusBar } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart, removeFromCart, updateQuantity } from '../../../redux/slices/cartSlice';
 import { images } from '../../../assets/images';
@@ -11,8 +11,6 @@ import ConfirmationModal from '../../../components/confirmationModal';
 import CartItem from '../../../components/cartItem';
 import HiddenCartItem from '../../../components/hiddendCartItem';
 import OrderSummary from '../../../components/orderSummary';
-import { navigate } from '../../../navigator/navigationRef';
-
 
 
 const CartScreen = ({ navigation }) => {
@@ -31,13 +29,13 @@ const CartScreen = ({ navigation }) => {
 
 
 
-  const confirmDelete = () => {
-    if (selectedItem) {
-      dispatch(removeFromCart(selectedItem));
-      setModalVisible(false);
-      setSelectedItem(null);
+  const confirmDelete = (id) => {
+    if (id) {
+        dispatch(removeFromCart(id)); // Use the id to remove the specific item from the cart
+        setModalVisible(false); // Optionally hide the modal if you have one
+        setSelectedItem(null); // Clear the selected item
     }
-  };
+};
 
 
   const handleClearCart = () => {
@@ -71,12 +69,33 @@ const CartScreen = ({ navigation }) => {
     }
   };
 
-
   const handleRemoveItem = (id) => {
     setSelectedItem(id);
-    setModalVisible(true);
-  };
-
+    Alert.alert(
+        'Delete Item',
+        'Are you sure you want to delete this item from the cart?',
+        [
+            {
+                text: 'Cancel',
+                style: 'cancel',
+            },
+            {
+                text: 'OK',
+                onPress: async () => {
+                    setLoading(true); // Set loading to true
+                    try {
+                        confirmDelete(id); // Pass the id to confirmDelete
+                    } catch (error) {
+                        console.error('Error deleting item:', error);
+                    } finally {
+                        setLoading(false); // Reset loading state after the operation
+                    }
+                },
+            },
+        ],
+        { cancelable: true }
+    );
+};
 
 
   const subTotal = () => {
@@ -97,20 +116,21 @@ const CartScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-
+      <StatusBar translucent backgroundColor='transparent' />
       {/* appbar */}
       <View style={styles.appBar}>
 
         <ImageBackground source={images.userScreenBgImage} style={styles.imgStyle}>
-          <View style={{ height: 50, marginTop: 10, flexDirection: 'row', justifyContent: 'space-between',marginRight: 30 }}>
+          <View style={styles.appBarContainer}>
             <TouchableOpacity style={styles.backIconContainer(colors)} onPress={() => navigation.goBack()}>
               <Image source={images.backIcon} style={styles.backImage} />
             </TouchableOpacity>
 
-
-            <TouchableOpacity style={styles.backIconContainer(colors)} onPress={handleClearCart}>
-              <Image source={scheme === 'dark' ? images.deleteIconWhite : images.deleteIconBlack} style={styles.deleteImg} />
-            </TouchableOpacity>
+            {cartItems.length >= 1 && (
+              <TouchableOpacity style={styles.backIconContainer(colors)} onPress={handleClearCart}>
+                <Image source={images.deleteIconOrange} style={styles.deleteImg} />
+              </TouchableOpacity>
+            )}
 
           </View>
         </ImageBackground>
@@ -125,7 +145,7 @@ const CartScreen = ({ navigation }) => {
           ) : (
             <TouchableOpacity style={styles.backIconContainer(colors)} onPress={handleClearCart}>
               <Image
-                source={images.deleteIcon}
+                source={images.deleteIconOrange}
                 style={styles.deleteImg}
               />
             </TouchableOpacity>

@@ -5,6 +5,7 @@ import { ScreenNames } from '../../../constants/string';
 import ProfileScreen from '../../../screens/buttom/profileScreen';
 import CallScreen from '../../../screens/buttom/callScreen';
 import UserDetailScreen from '../../../screens/buttom/userDetailScreen';
+import MapScreen from '../../../screens/buttom/mapScreen';
 
 
 const ProfileStack = createNativeStackNavigator();
@@ -26,7 +27,7 @@ const StackProfile = () => {
       }}
     >
       <ProfileStack.Screen name={ScreenNames.ProfileScreen} component={ProfileScreen} options={navigationOptions} />
-     
+      <ProfileStack.Screen name={ScreenNames.MapScreen} component={MapScreen} options={navigationOptions} />
     </ProfileStack.Navigator>
   );
 };

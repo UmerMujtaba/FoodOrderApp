@@ -1,4 +1,6 @@
 
+
+//getting response from backend for notification service
 export const sendCallInvitation = async (recipientToken, channelName, recipientEmail) => {
     try {
         const response = await fetch('http://10.2.2.170:3000/send-notification', {

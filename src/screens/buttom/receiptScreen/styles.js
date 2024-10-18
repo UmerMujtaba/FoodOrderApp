@@ -15,18 +15,24 @@ export default styles = StyleSheet.create({
         // backgroundColor:'red',
         height: rhp(70),
         width: wp(90),
-        marginTop: 30,
+       // marginTop: rhp(30),
         flexDirection: 'row',
         justifyContent: 'space-between'
 
+    },
+    imgStyle: {
+        width: width,
+        height: rhp(250),
+        resizeMode: 'cover'
     },
     backIconContainer: (colors) => ({
         backgroundColor: colors.backContainer,
         height: rhp(55),
         width: rwp(50),
         justifyContent: 'center',
-        alignSelf: 'center',
         borderRadius: 16,
+        marginTop: hp(5),
+        //marginLeft: 10
     }),
     backImage: {
         resizeMode: 'contain',
@@ -34,9 +40,11 @@ export default styles = StyleSheet.create({
         width: rwp(14),
         alignSelf: 'center',
     },
+   
     title: (colors) => ({
         fontSize: rfs(28),
-        marginBottom: rhp(20),
+        marginBottom: rhp(5),
+        marginTop: hp(5),
         textAlign: 'center',
         color: colors.text,
         fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,

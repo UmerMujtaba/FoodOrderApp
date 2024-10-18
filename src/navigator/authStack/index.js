@@ -9,6 +9,8 @@ import Register from '../../screens/auth/signUpScreen';
 import ConfirmationScreen from '../../screens/auth/confimationScreen';
 import { ScreenNames } from '../../constants/string';
 import { LayoutAnimationType } from 'react-native-reanimated';
+import ForgotPasswordScreen from '../../screens/auth/forgotPasswordScreen';
+import SMSLogin from '../../screens/auth/phoneScreen';
 
 const AuthStack = createNativeStackNavigator();
 
@@ -28,6 +30,8 @@ const Auth = () => {
       <AuthStack.Screen name={ScreenNames.Registeration} component={Register} options={navigationOptions} />
       <AuthStack.Screen name={ScreenNames.Login} component={LoginScreen} options={navigationOptions} />
       <AuthStack.Screen name={ScreenNames.Confirmation} component={ConfirmationScreen} options={navigationOptions} />
+      <AuthStack.Screen name={ScreenNames.ForgotPasswordScreen} component={ForgotPasswordScreen} options={navigationOptions} />
+      <AuthStack.Screen name={ScreenNames.PhoneSignin} component={SMSLogin} options={navigationOptions} />
 
     </AuthStack.Navigator>
   );

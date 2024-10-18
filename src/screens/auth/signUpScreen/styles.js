@@ -47,11 +47,11 @@ export default StyleSheet.create({
         marginRight: rwp(20),
         //  marginTop: 8
     },
-    forgotPswrdText: {
+    HaveAnAccText: {
         textAlign: 'center',
         fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
         fontSize: rfs(16),
-        marginTop: rhp(8),
+        marginTop: rhp(12),
         marginBottom: rhp(10),
         color: '#15BE77',
        

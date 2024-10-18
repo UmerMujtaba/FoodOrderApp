@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Text, View,Alert, } from 'react-native';
-import {  Platform } from 'react-native';
+import { Text, View, Alert, } from 'react-native';
+import { Platform } from 'react-native';
 import { ClientRoleType, createAgoraRtcEngine, ChannelProfileType, } from 'react-native-agora';
 import { agoraAppId, agoraToken } from '../../../constants/key';
 import GradientButton from '../../../components/gradientButton';
 import messaging from '@react-native-firebase/messaging';
 import styles from './styles';
-import { useTheme } from '@react-navigation/native';
+import { useFocusEffect, useTheme } from '@react-navigation/native';
 import CustomTextInput from '../../../components/cutomTextInput';
 import { checkUserLoggedInStatus, handleDeclineSendCallInvitation, handleSendCallInvitation } from '../../../utils/helper/callHelper';
 import { requestAudioPermission } from '../../../utils/permissions/permissions';
@@ -32,7 +32,7 @@ const CallScreen = ({ route }) => {
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       if (remoteMessage.data && remoteMessage.data.channel) {
-        
+
         const { channel, callerId } = remoteMessage.data;
         setIncomingCall({ channel, callerId }); // Set incoming call data
         showMessage(`Incoming call from ${callerId}`);
@@ -45,9 +45,14 @@ const CallScreen = ({ route }) => {
   useEffect(() => {
     // Initialize Agora engine when the app starts
     setupVoiceSDKEngine();
-    //subscribeToCallInvitations(); 
-    requestAudioPermission();
+  
+   requestAudioPermission()
   }, []);
+
+
+
+
+
 
   useEffect(() => {
     // Check login status on component mount
@@ -95,7 +100,7 @@ const CallScreen = ({ route }) => {
   const setupVoiceSDKEngine = async () => {
     try {
       if (Platform.OS === 'android') {
-        await requestAudioPermission();
+       // await requestAudioPermission();
       }
       agoraEngineRef.current = createAgoraRtcEngine();
       const agoraEngine = agoraEngineRef.current;
@@ -187,14 +192,15 @@ const CallScreen = ({ route }) => {
             }
           }}
           buttonText={"Call User"}
-          style={{ marginRight: 20 }}
+          style={{ marginRight: 20, width: 100 }}
         />
         <GradientButton
+
           onPress={() => {
             leave();
             handleDeclineSendCallInvitation(recipientEmail, channelName, randomUser);
           }}
-
+          style={{ width: 140 }}
           buttonText={"Leave Channel"}
         />
       </View>

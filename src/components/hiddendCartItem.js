@@ -5,8 +5,8 @@ import { hp, rfs, rhp, rwp, wp } from '../constants/dimensions';
 
 
 const HiddenCartItem = ({ item, handleRemoveItem, scheme, images }) => {
-    
-  
+
+
     return (
         <TouchableOpacity style={styles.deleteButton} onPress={() => handleRemoveItem(item.id)}>
             <Image source={scheme === 'dark' ? images.deleteIconWhite : images.deleteIconBlack} style={styles.deleteImg} />
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         alignSelf: 'flex-end',
-      
+        //backgroundColor: 'red'
     },
 
     deleteImg: {

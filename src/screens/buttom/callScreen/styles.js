@@ -74,10 +74,10 @@ export default styles = StyleSheet.create({
     marginBottom: 10,
     color: 'red'
   },
-  userStatusText:(colors)=> ({
-    color: colors.text,
+  userStatusText: (colors) => ({
+    color:colors.text,
     fontSize: 18,
-   marginTop:20
+    marginTop: 20
   })
 
 })

@@ -9,7 +9,7 @@ export const lightTheme = {
     secondary: '#f5f5f5',
     modalColor: 'white',
     backContainer: '#FFE0B5',
-    nudge: '#f5f5f5',
+    nudge: '#FEF6ED',
     selected: '#53E88B', // Green for selected
     unselected: '#C4C4C4', // Gray for unselected
   }
@@ -26,8 +26,8 @@ export const darkTheme = {
     secondary:'#f5f5f5',
     modalColor: '#0E1110',
     backContainer: '#252525',
-     nudge: 'white',
-     selected: '#53E88B', // Green for selected
-     unselected: '#C4C4C4', // Gray for unselected
+    nudge: 'grey', 
+    selected: '#53E88B', // Green for selected
+    unselected: '#C4C4C4', // Gray for unselected
   },
 };

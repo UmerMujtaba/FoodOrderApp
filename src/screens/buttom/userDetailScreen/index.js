@@ -1,5 +1,5 @@
-import { View, Text, StatusBar, StyleSheet, ImageBackground, Image, TouchableOpacity, useColorScheme, ToastAndroid, PermissionsAndroid } from 'react-native';
-import React, { useEffect, useState,useCallback } from 'react';
+import { View, Text, StatusBar, Alert, ImageBackground, Image, TouchableOpacity, useColorScheme, ToastAndroid, PermissionsAndroid,Linking } from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
 import { images } from '../../../assets/images';
 import { useFocusEffect, useTheme } from '@react-navigation/native';
 import { Strings } from '../../../constants/string';
@@ -8,104 +8,49 @@ import GradientButton from '../../../components/gradientButton';
 import { hp, rhp } from '../../../constants/dimensions';
 import { supabase } from '../../../utils/supabase';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { openCamera, openGallery } from '../../../utils/helper/cameraHelper';
 
 const UserDetailScreen = ({ navigation }) => {
     const { colors } = useTheme();
     const scheme = useColorScheme();
     const [imagePath, setImagePath] = useState('');
-    const [activeEmail,setActiveEmail] = useState('');
-  
+    const [savedEmail, setSavedEmail] = useState('');
+
+
+
     useEffect(() => {
         const checkSession = async () => {
-         
-                const active = await AsyncStorage.getItem('active_email');
-                console.log("🚀 ~ checkSession ~ activeEmail:", active);
 
-                //setActiveEmail(active);
-                // console.log("🚀 ~ UserDetailScreen ~ activeEmail:", activeEmail)
+            const active = await AsyncStorage.getItem('email');
+            console.log("🚀 ~ checkSession ~ savedEmail:", active)
 
 
-                if (activeEmail) {
-                    // Fetch current imagePath if needed
-                   // const imagePath = '';
-                    const { data, error } = await supabase
-                        .from('registered_user')
-                        .select('imagePath')
-                        .eq('email', activeEmail)
-                        .single();
 
-                    if (error) {
-                        console.error('Error fetching image path:', error.message);
-                    } else {
-                        setImagePath(data?.imagePath || ''); // Set existing image path if available
-                    }
+            if (savedEmail) {
+                const { data, error } = await supabase
+                    .from('registered_user')
+                    .select('imagePath')
+                    .eq('email', savedEmail)
+                    .single();
+
+                if (error) {
+                    console.error('Error fetching image path:', error.message);
+                } else {
+                    setImagePath(data?.imagePath || ''); // Set existing image path if available
                 }
-          
+            }
+
         };
 
         checkSession();
     }, []);
 
-    const openGallery = () => {
-        launchImageLibrary(
-            {
-                mediaType: 'photo',
-                includeBase64: false, // Change this if you want base64
-            },
-            (response) => {
-                if (response.didCancel) {
-                    console.log('User cancelled image picker');
-                } else if (response.error) {
-                    console.error('ImagePicker Error: ', response.error);
-                } else {
-                    const uri = response.assets[0].uri;
-                    //setImagePath(uri); // Set the selected image path
-                    setImagePath(uri);
-                }
-            }
-        );
-    };
 
 
-    const openCamera = async () => {
-        // Check and request camera permission
-        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            // Permission granted, proceed to launch camera
-            launchCamera(
-                {
-                    mediaType: 'photo',
-                    includeBase64: false,
-                    quality: 1,
-                },
-                (response) => {
-                    console.log("Camera Response:", response); // Log the response
-
-                    // Check if response is valid
-                    if (response && !response.didCancel && !response.error) {
-                        // Make sure assets exist in the response
-                        if (response.assets && response.assets.length > 0) {
-                            const uri = response.assets[0].uri;
-                            setImagePath(uri); // Set the captured image path
-                        } else {
-                            console.error('No assets found in camera response:', response);
-                        }
-                    } else if (response.didCancel) {
-                        console.log('User cancelled camera');
-                    } else if (response.error) {
-                        console.error('Camera Error: ', response.error);
-                    }
-                }
-            );
-        } else {
-            console.log('Camera permission denied');
-        }
-    };
 
     const saveImagePath = async () => {
         if (!imagePath) {
-            // Show toast if imagePath is empty
+
             ToastAndroid.show(
                 'Please select or capture an image before proceeding.',
                 ToastAndroid.SHORT, // Duration of the toast
@@ -113,15 +58,15 @@ const UserDetailScreen = ({ navigation }) => {
             );
             return;
         }
-    
+
         try {
-            const activeEmail = await AsyncStorage.getItem('active_email');
-            if (activeEmail) {
+            const active = await AsyncStorage.getItem('email');
+            if (active) {
                 const { data, error } = await supabase
                     .from('registered_user')
                     .update({ imagePath })
-                    .eq('email', activeEmail);
-    
+                    .eq('email', active);
+
                 if (error) {
                     console.error('Error updating imagePath:', error.message);
                     ToastAndroid.show(
@@ -131,7 +76,7 @@ const UserDetailScreen = ({ navigation }) => {
                     );
                 } else {
                     console.log('Image path updated successfully:', data);
-                    
+                    navigation.goBack();
                     // Check if the imagePath is not empty
                     if (imagePath) {
                         ToastAndroid.show(
@@ -140,7 +85,7 @@ const UserDetailScreen = ({ navigation }) => {
                             ToastAndroid.BOTTOM
                         );
                     }
-    
+
                     // Optionally navigate back after saving
                     // You can call a function here to reload the image
                     // navigation.goBack();
@@ -155,17 +100,20 @@ const UserDetailScreen = ({ navigation }) => {
             );
         }
     };
-    
-   
-    
-  
+
+
+    const removeImage = () => {
+        setImagePath(''); // Clear the image path
+    };
+
 
     return (
         <View style={styles.container}>
+            <StatusBar translucent backgroundColor="transparent" />
             <View style={styles.appBar}>
-                <StatusBar translucent backgroundColor="transparent" />
 
-                <ImageBackground source={images.userScreenBgImage} style={styles.imgStyle}>
+
+                <ImageBackground source={images.userScreenBgImage} style={styles.imgBgStyle}>
                     <TouchableOpacity style={styles.backIconContainer(colors)} onPress={() => navigation.goBack()}>
                         <Image source={images.backIcon} style={styles.backImage} />
                     </TouchableOpacity>
@@ -177,21 +125,26 @@ const UserDetailScreen = ({ navigation }) => {
             <Image source={scheme === 'dark' ? images.dataTextWhite : images.dataTextBlack} style={styles.descriptionImg} />
 
             <View style={styles.body}>
-               {/* <View  style={styles.previewImage}>
-               {imagePath && (
-                <Image
-                    source={{ uri: imagePath }}
-                    style={styles.previewImage} // Add styles for the preview image
-                />
-            )}
-               </View> */}
-                <TouchableOpacity activeOpacity={0.7} style={[styles.containerStyle(colors), { marginBottom: rhp(20) }]} onPress={openGallery}>
-                    <Image source={images.galleryIcon} style={styles.imgStyle} />
-                </TouchableOpacity>
+                {imagePath ? (
+                    <View>
+                        <Image source={{ uri: imagePath }} style={styles.previewImage} />
+                        <TouchableOpacity style={styles.crossIcon} onPress={removeImage}>
+                            <Image source={images.crossIcon} style={styles.crossImage} />
+                        </TouchableOpacity>
+                    </View>
+                ) : (
+                    <>
+                        <TouchableOpacity activeOpacity={0.7} style={[styles.containerStyle(colors), { marginBottom: rhp(20) }]} onPress={() => openGallery(setImagePath)}>
+                            <Image source={images.galleryIcon} style={styles.imgStyle} />
+                        </TouchableOpacity>
 
-                <TouchableOpacity activeOpacity={0.7} style={styles.containerStyle(colors)} onPress={openCamera}>
-                    <Image source={images.cameraIcon} style={styles.imgStyle} />
-                </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.7} style={styles.containerStyle(colors)} onPress={() => openCamera(setImagePath)}>
+                            <Image source={images.cameraIcon} style={styles.imgStyle} />
+                        </TouchableOpacity>
+                    </>
+                )}
+
+
             </View>
 
             <GradientButton

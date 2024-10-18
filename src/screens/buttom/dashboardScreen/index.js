@@ -58,7 +58,7 @@ const DashboardScreen = () => {
       <HeaderWithSearch />
       <ScrollView showsVerticalScrollIndicator={false}>
         <FilterComponent onSearch={handleSearch} onFilter={handleFilter} onApply={applyFilter} showPriceFilter={false} />
-        <TouchableOpacity>
+        <TouchableOpacity >
           <Image source={images.advertiseImage} style={styles.advertiseBg} />
         </TouchableOpacity>
         <View style={styles.containerRow}>
