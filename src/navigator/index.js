@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ActivityIndicator, View, StyleSheet, useColorScheme, Image } from 'react-native';
+import { ActivityIndicator, View, StyleSheet, useColorScheme } from 'react-native';
 import Auth from './authStack';
 import Bottom from './buttomStack';
 import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from './navigationRef';
 import { ScreenNames } from '../constants/string';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { images } from '../assets/images';
-import { getFCMToken } from '../utils/helper/firebaseServies';
 import UserDetailScreen from '../screens/buttom/userDetailScreen';
 import PromotionsScreen from '../screens/buttom/promotionScreen';
 import { darkTheme, lightTheme } from '../utils/theme/themes';
+import ChoosePaymentScreen from '../screens/buttom/choosePaymentScreen';
+import CardPaymentScreen from '../screens/buttom/cardPaymentScreen';
+import JazzCashForm from '../screens/buttom/jazzCashScreen';
 
 const NavigationStack = createNativeStackNavigator();
 
@@ -30,7 +31,7 @@ export const NavigationCheck = () => {
           const session = JSON.parse(sessionString);
           // console.log("🚀 ~ checkSession ~ session:", session)
           const email = session.user?.email;
-          console.log("🚀 ~ checkSession ~ email:", email)
+          console.log("🚀 ~ email checking from session ~ email:", email)
 
           await AsyncStorage.setItem('active_email', email);
 
@@ -70,6 +71,12 @@ export const NavigationCheck = () => {
         <NavigationStack.Screen name={ScreenNames.BottomStack} component={Bottom} options={{ headerShown: false }} />
         <NavigationStack.Screen name={ScreenNames.UserScreen} component={UserDetailScreen} options={{ headerShown: false }} />
         <NavigationStack.Screen name={ScreenNames.PromotionScreen} component={PromotionsScreen} options={{ headerShown: false }} />
+        <NavigationStack.Screen name={ScreenNames.ChoosePaymentScreen} component={ChoosePaymentScreen} options={{ headerShown: false }} />
+        <NavigationStack.Screen name={ScreenNames.CardPaymentScreen} component={CardPaymentScreen} options={{ headerShown: false }} />
+        <NavigationStack.Screen name={ScreenNames.JazzCashScreen} component={JazzCashForm} options={{ headerShown: false }} />
+
+
+
 
       </NavigationStack.Navigator>
     </NavigationContainer>

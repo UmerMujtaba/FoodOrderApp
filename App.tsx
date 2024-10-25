@@ -8,6 +8,11 @@ import store from './src/redux/store';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import messaging from '@react-native-firebase/messaging';
 import { displayNotification } from './src/utils/helper/notifierHelper';
+import { StripeProvider } from '@stripe/stripe-react-native';
+
+
+
+const PUBLISHABLE_KEY = 'pk_test_51QAq8RK1kXItCSo2ahkx6MQj2Q85q4MuHbdR2wVIgTCJcOQWuvUFDfzYm327S6u5dF8xCBGDoiB6SIWeJJf5Ims800JZIYR1pf';
 
 const App = () => {
   const scheme = useColorScheme();
@@ -30,9 +35,11 @@ const App = () => {
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
+       <StripeProvider publishableKey={PUBLISHABLE_KEY}>
       <Provider store={store}>
         <NavigationCheck />
       </Provider>
+      </StripeProvider>
     </GestureHandlerRootView>
   );
 };

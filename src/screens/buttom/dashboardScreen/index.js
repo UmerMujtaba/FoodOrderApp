@@ -44,6 +44,7 @@ const DashboardScreen = () => {
     { id: 2, imageSource: images.fastFoodImage, text: 'Fast Food', type: 'Fast Food', screen: ScreenNames.Fastfood },
     { id: 3, imageSource: images.drinkImage, text: 'Drinks', type: 'Drinks', screen: ScreenNames.Drink },
     { id: 4, imageSource: images.addOnsImage, text: 'Sides', type: 'Sides', screen: ScreenNames.Sides },
+    { id: 5, imageSource: images.dessertImage, text: 'Desserts', type: 'Desserts', screen: ScreenNames.Desserts },
   ];
 
   // Filter items based on applied type and search query

@@ -3,6 +3,8 @@ import { loginUser } from '../../services/authServices';
 import { getFCMToken } from '../../utils/helper/firebaseServies';
 import { supabase } from '../../utils/supabase';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Keychain from 'react-native-keychain';
+
 
 // Async thunk to handle login
 export const login = createAsyncThunk(
@@ -10,7 +12,7 @@ export const login = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const loginSuccess = await loginUser(email, password);
-
+      await Keychain.setGenericPassword('user', email);
       if (!loginSuccess.user) {
         throw new Error(loginSuccess.error?.message || 'Login failed');
       }

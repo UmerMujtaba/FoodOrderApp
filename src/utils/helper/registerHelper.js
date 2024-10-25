@@ -5,17 +5,19 @@ import { ToastAndroid } from "react-native";
 import { getFCMToken } from "./firebaseServies";
 import { navigate } from "../../navigator/navigationRef";
 import { ScreenNames } from "../../constants/string";
-
+import * as Keychain from 'react-native-keychain'
 
 
 
 //funcs for sign up screen
 const saveCredentials = async (email, password, rememberMe) => {
     try {
-        if (rememberMe) {
-            await AsyncStorage.setItem('email', email);
-            await AsyncStorage.setItem('password', password);
-            await AsyncStorage.setItem('rememberMe', 'true');
+       
+            if (rememberMe) {
+                await AsyncStorage.setItem('active_email', email);
+                await Keychain.setGenericPassword(email, password); // Store securely
+                await AsyncStorage.setItem('rememberMe', 'true');
+            
         } else {
             await AsyncStorage.setItem('email', email);
             await AsyncStorage.setItem('password', password);

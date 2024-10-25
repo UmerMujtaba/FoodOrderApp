@@ -21,7 +21,8 @@ const CustomTextInput = forwardRef(({
     blurOnSubmit,
     autoCorrect,
     onSubmitEditing,
-    eyePress
+    eyePress,
+    maxLength
 }, ref) => {
     const { colors, dark } = useTheme();
     return (
@@ -48,6 +49,7 @@ const CustomTextInput = forwardRef(({
                 onSubmitEditing={onSubmitEditing}
                 blurOnSubmit={blurOnSubmit}
                 autoCorrect={autoCorrect}
+                maxLength={maxLength}
             //style={[styles.input, { backgroundColor: colors.tabBackgroundColor, borderColor: colors.tabBackgroundColor, color:colors.text }]}
             />
             {eye && (

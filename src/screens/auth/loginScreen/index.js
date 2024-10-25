@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, Image, StatusBar, ImageBackground, ActivityIndicator, TouchableOpacity, ToastAndroid, Linking } from 'react-native';
+import { View, Text, Image, StatusBar, ImageBackground, ActivityIndicator, TouchableOpacity, ToastAndroid, Linking, useColorScheme } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@react-navigation/native';
 import styles from './styles';
@@ -13,6 +13,8 @@ import { login } from '../../../redux/slices/authSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { rhp, rwp } from '../../../constants/dimensions';
 import { supabase } from '../../../utils/supabase';
+import * as Keychain from 'react-native-keychain';
+
 
 const LoginScreen = () => {
     const [Email, setEmail] = useState('');
@@ -24,14 +26,14 @@ const LoginScreen = () => {
     const [rememberMe, setRememberMe] = useState(false);
     const firstRef = useRef(null);
     const secondRef = useRef(null);
-
+    const {scheme}= useColorScheme();
     const handleLogin = () => {
         
         dispatch(login({ email: Email, password: Password }))
             .then((result) => {
                 if (result.type === 'auth/login/fulfilled') {
                     // Login successful, navigate to home screen
-                    //AsyncStorage.setItem('email',Email);
+                    AsyncStorage.setItem('active_email',Email);
 
                     navigateReset('BottomStack', { screen: ScreenNames.Home });
                 } else if (result.type === 'auth/login/rejected') {
@@ -67,7 +69,13 @@ const LoginScreen = () => {
     useEffect(() => {
         const loadCredentials = async () => {
             try {
+                if (rememberMe) {
+                    await Keychain.setGenericPassword(Email, Password);
+                } else {
+                    await Keychain.resetGenericPassword();
+                }
 
+                
                 const savedEmail = await AsyncStorage.getItem('email');
                 console.log("🚀 ~ loadCredentials ~ savedEmail:", savedEmail)
                 const savedPassword = await AsyncStorage.getItem('password');
@@ -84,8 +92,12 @@ const LoginScreen = () => {
                         return;
                     }
                     if (data && data.remember_me_flag) {
-                        setEmail(savedEmail);
-                        setPassword(savedPassword);
+                        const credentials = await Keychain.getGenericPassword();
+                        if (credentials) {
+                            setEmail(credentials.username); // Email
+                            setPassword(credentials.password); // Password
+                        }
+                
                     } else {
                         console.log('rememberMeFlag is false, not setting email and password.');
                     }
@@ -186,7 +198,7 @@ const LoginScreen = () => {
 
             {loading ? (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <ActivityIndicator size="large" color="#0000ff" />
+                  <ActivityIndicator size="large" color={scheme === 'dark' ? '#ffffff' : '#0000ff'} />
                 </View>
             ) : (
                 <GradientButton

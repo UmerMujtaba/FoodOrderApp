@@ -1,4 +1,4 @@
-import { View, Text, Image, ActivityIndicator, StyleSheet, TouchableOpacity, ScrollView, StatusBar, ImageBackground } from 'react-native'
+import { View, Text, Image, ActivityIndicator, StyleSheet, TouchableOpacity, ScrollView, StatusBar, ImageBackground, useColorScheme } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../../../utils/supabase';
 import { Strings } from '../../../constants/string';
@@ -15,14 +15,14 @@ const RecommendationScreen = ({ navigation }) => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
   const { recommendations, isLoading } = useSelector((state) => state.recommendations);
-
+const {scheme}= useColorScheme();
   // Subscribe to real-time updates
   useRecommendations();
 
   if (isLoading) {
     return (
       <View style={styles.loaderContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
+      <ActivityIndicator size="large" color={scheme === 'dark' ? '#ffffff' : '#0000ff'} />
       </View>
     );
   } if (recommendations.length === 0) {
@@ -44,7 +44,7 @@ const RecommendationScreen = ({ navigation }) => {
           alignItems: 'center',
           paddingHorizontal: 10
         }}>
-          <Text style={{ textAlign: 'center' }}>No recommendations available.</Text>
+          <Text style={styles.noDataStyle(colors)}>No recommendations available.</Text>
         </View>
       </View>
 

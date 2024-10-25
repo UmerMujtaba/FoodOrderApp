@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { logoutUser } from "../../services/authServices";
 import { supabase } from "../supabase";
 import { navigateReset } from "../../navigator/navigationRef";
+import { url } from "../../constants/key";
 
 
 
@@ -33,7 +34,7 @@ export const logout = async (setLogoutLoading, setErrorMessage) => {
         setErrorMessage(logoutError.message); // Show error message on logout failure
     } else {
         await AsyncStorage.removeItem('session'); // Clear session
-        await AsyncStorage.removeItem('active_email'); // Clear session
+        //await AsyncStorage.removeItem('active_email'); // Clear session
         await AsyncStorage.removeItem('email'); // Clear session
         //await AsyncStorage.clear(); // Clear session
         console.log('Logout successful');
@@ -41,43 +42,71 @@ export const logout = async (setLogoutLoading, setErrorMessage) => {
     }
 };
 
-export const fetchUserData = async (setUsername, setImagePath, setFetchLoading) => {
+export const fetchUserName = async (setUsername, setFetchLoading) => {
     try {
-        setFetchLoading(true); // Set loading to true at the start
+        setFetchLoading(true);
+        const sessionEmail = await AsyncStorage.getItem('active_email');
+        console.log("🚀 ~ fetchUserName ~ sessionEmail:", sessionEmail)
 
-        const sessionString = await AsyncStorage.getItem('session');
-        if (sessionString) {
-            const session = JSON.parse(sessionString);
-            const savedEmail = session.user?.email;
+        if (sessionEmail) {
+            const { data, error } = await supabase
+                .from('registered_user')
+                .select('username')
+                .eq('email', sessionEmail);
 
-            console.log("🚀 ~ checkSession ~ email:", savedEmail);
-
-            // Store active email in AsyncStorage
-            await AsyncStorage.setItem('active_email', savedEmail);
-
-            if (savedEmail) {
-                const { data, error } = await supabase
-                    .from('registered_user')
-                    .select('*')
-                    .eq('email', savedEmail)
-                    .single();
-
-                if (error) {
-                    console.error('Error fetching user data:', error.message);
-                } else {
-                    console.log('Fetched user data:', data);
-                    setUsername(data?.username || '');
-                    setImagePath(data?.imagePath || '');
-                }
+            if (error) {
+                console.error('Error fetching user data:', error.message);
             } else {
-                console.warn('No saved email found.');
+                if (data.length > 0) {
+                    const username = data[0]?.username || '';
+
+                    setUsername(username);
+                } else {
+                    console.warn('No user found for the given email.');
+                    setUsername('');
+                    setImagePath('');
+                }
             }
+            return data;
+
         } else {
-            console.warn('No session string found.');
+            console.warn('🚀 ~ No saved email found.');
         }
+
     } catch (err) {
-        console.error('Error checking session:', err);
+        console.error('🚀 ~ Error checking session:', err);
     } finally {
-        setFetchLoading(false); // Ensure loading is set to false at the end
+        setFetchLoading(false);
     }
+};
+
+
+export const fetchUserImagePath = async () => {
+    const sessionEmail = await AsyncStorage.getItem('active_email');
+    try {
+        const { data, error } = await supabase
+            .from('registered_user')
+            .select('imagePath')
+            .eq('email', sessionEmail)
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
+        console.log('🚀 ~ Fetched User Image Path from profile screen:', data?.imagePath); // Log the fetched image path
+        return data?.imagePath; // Return the image path
+    } catch (error) {
+        console.error('🚀 ~ Error fetching user image path from profile screen:', error.message);
+        return null; // Return null if an error occurs
+    }
+};
+
+
+
+export const constructImageUrl = (imagePath) => {
+    const baseUrl = 'https://ypaznvsmysiuhdwhlkux.supabase.co/storage/v1/object/public/userprofileimages/';
+    const fullUrl = baseUrl + imagePath; // Ensure the base URL is correct
+    console.log('🚀 ~ Constructed Image URL:', fullUrl); // Log the full URL for verification
+    return fullUrl;
 };
