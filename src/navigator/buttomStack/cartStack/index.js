@@ -1,7 +1,5 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import DashboardScreen from '../../../screens/buttom/dashboardScreen';
-import { TransitionPresets } from '@react-navigation/stack';
 import { ScreenNames } from '../../../constants/string';
 import CartScreen from '../../../screens/buttom/cartScreen';
 import OrderConfirmationScreen from '../../../screens/buttom/orderConfirmationScreen';
@@ -31,6 +29,12 @@ const Cart = () => {
     >
       <CartStack.Screen name={ScreenNames.CartScreen} component={CartScreen} options={navigationOptions} />
       <CartStack.Screen name={ScreenNames.OrderConfirmation} component={OrderConfirmationScreen} options={navigationOptions} />
+      {/* <CartStack.Screen name={ScreenNames.ChoosePaymentScreen} component={ChoosePaymentScreen} options={navigationOptions} />
+
+
+
+      <CartStack.Screen name={ScreenNames.CardPaymentScreen} component={CardPaymentScreen} options={navigationOptions}/> */}
+
       <CartStack.Screen name={ScreenNames.ReceiptScren} component={ReceiptScreen} options={navigationOptions} />
       <CartStack.Screen name={ScreenNames.CallScreen} component={CallScreen} options={navigationOptions} />
 

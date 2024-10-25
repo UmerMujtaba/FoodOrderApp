@@ -17,7 +17,7 @@ export default StyleSheet.create({
         marginTop: hp(5),
         width: rwp(110),
         height: rhp(110),
-
+       
         justifyContent: 'center',
         alignItems: 'center'
     }),

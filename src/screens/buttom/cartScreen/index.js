@@ -140,7 +140,7 @@ const CartScreen = ({ navigation }) => {
         {cartItems.length > 0 && (
           loading ? (
             <View style={styles.backIconContainer(colors)}>
-              <ActivityIndicator size="large" color="#15BE77" />
+            <ActivityIndicator size="large" color={scheme === 'dark' ? '#ffffff' : '#0000ff'} />
             </View>
           ) : (
             <TouchableOpacity style={styles.backIconContainer(colors)} onPress={handleClearCart}>

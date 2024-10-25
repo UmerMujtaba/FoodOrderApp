@@ -10,3 +10,6 @@
 # Add any project specific keep options here:
 -keep class io.agora.**{*;}
 -dontwarn io.agora.**
+
+-keep class com.stripe.** { *; }
+-dontwarn com.stripe.**

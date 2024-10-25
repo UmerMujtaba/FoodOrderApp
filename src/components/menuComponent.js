@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, ActivityIndicator, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
+import { View, FlatList, ActivityIndicator, TouchableOpacity, Text, Image, StyleSheet, useColorScheme } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchMenu } from '../redux/slices/menuSlice';
 import { images } from '../assets/images';
@@ -17,7 +17,7 @@ const MenuCategoryComponent = ({ category, searchQuery, filter }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { colors } = useTheme(); // Use useTheme to access current theme colors
   const generateId = () => Math.random().toString(36).substr(2, 9); // 
-
+  const {scheme}= useColorScheme();
 
   useEffect(() => {
     dispatch(fetchMenu());
@@ -108,7 +108,7 @@ const MenuCategoryComponent = ({ category, searchQuery, filter }) => {
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+       <ActivityIndicator size="large" color={scheme === 'dark' ? '#ffffff' : '#0000ff'} />
       </View>
     );
   }
@@ -129,8 +129,8 @@ const MenuCategoryComponent = ({ category, searchQuery, filter }) => {
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={[styles.itemContainer, { backgroundColor: colors.tabBackgroundColor }]}
-      onPress={() => openModal(item)}
-    >
+      onPress={() => openModal(item)}> 
+      
       <Image source={images[item.imagePath]} style={styles.image} />
       <Text style={[styles.itemName, { color: colors.text }]}>{item.name}</Text>
     </TouchableOpacity>

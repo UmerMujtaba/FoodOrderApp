@@ -1,4 +1,4 @@
-import { View, Text, StatusBar, Alert, ImageBackground, Image, TouchableOpacity, useColorScheme, ToastAndroid, PermissionsAndroid,Linking } from 'react-native';
+import { View, Text, StatusBar, Alert, ImageBackground, Image, TouchableOpacity, useColorScheme, ToastAndroid, PermissionsAndroid, Linking } from 'react-native';
 import React, { useEffect, useState, useCallback } from 'react';
 import { images } from '../../../assets/images';
 import { useFocusEffect, useTheme } from '@react-navigation/native';
@@ -9,6 +9,8 @@ import { hp, rhp } from '../../../constants/dimensions';
 import { supabase } from '../../../utils/supabase';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { openCamera, openGallery } from '../../../utils/helper/cameraHelper';
+import { fetchUserImagePath } from '../../../utils/helper/logoutHelper';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 const UserDetailScreen = ({ navigation }) => {
     const { colors } = useTheme();
@@ -21,10 +23,8 @@ const UserDetailScreen = ({ navigation }) => {
     useEffect(() => {
         const checkSession = async () => {
 
-            const active = await AsyncStorage.getItem('email');
-            console.log("🚀 ~ checkSession ~ savedEmail:", active)
-
-
+            const sessionEmail = await AsyncStorage.getItem('active_email');
+            console.log("🚀 ~ fetchUserData ~ sessionEmail:", sessionEmail);
 
             if (savedEmail) {
                 const { data, error } = await supabase
@@ -34,72 +34,85 @@ const UserDetailScreen = ({ navigation }) => {
                     .single();
 
                 if (error) {
-                    console.error('Error fetching image path:', error.message);
+                    console.error('🚀 ~ Error fetching image path:', error.message);
                 } else {
                     setImagePath(data?.imagePath || ''); // Set existing image path if available
                 }
             }
-
         };
-
         checkSession();
     }, []);
 
 
+   
 
-
-    const saveImagePath = async () => {
-        if (!imagePath) {
-
+    const saveImagePath = async (path) => {
+        console.log("saveImagePath called");
+        const activeEmail = await AsyncStorage.getItem('active_email');
+    
+        if (!path) {
             ToastAndroid.show(
                 'Please select or capture an image before proceeding.',
-                ToastAndroid.SHORT, // Duration of the toast
-                ToastAndroid.BOTTOM // Position of the toast
-            );
-            return;
-        }
-
-        try {
-            const active = await AsyncStorage.getItem('email');
-            if (active) {
-                const { data, error } = await supabase
-                    .from('registered_user')
-                    .update({ imagePath })
-                    .eq('email', active);
-
-                if (error) {
-                    console.error('Error updating imagePath:', error.message);
-                    ToastAndroid.show(
-                        'Failed to save image path.',
-                        ToastAndroid.SHORT,
-                        ToastAndroid.BOTTOM
-                    );
-                } else {
-                    console.log('Image path updated successfully:', data);
-                    navigation.goBack();
-                    // Check if the imagePath is not empty
-                    if (imagePath) {
-                        ToastAndroid.show(
-                            'Image path saved successfully!',
-                            ToastAndroid.SHORT,
-                            ToastAndroid.BOTTOM
-                        );
-                    }
-
-                    // Optionally navigate back after saving
-                    // You can call a function here to reload the image
-                    // navigation.goBack();
-                }
-            }
-        } catch (error) {
-            console.error("Error retrieving active email:", error);
-            ToastAndroid.show(
-                'Failed to retrieve active email.',
                 ToastAndroid.SHORT,
                 ToastAndroid.BOTTOM
             );
+            return;
+        }
+    
+        const fileName = `image_${Date.now()}.jpg`;
+        const storagePath = `${activeEmail}/images/${fileName}`;
+    
+        // Update this section to use `path` for the file URI
+        const { data, error } = await supabase.storage
+            .from('userprofileimages') 
+            .upload(storagePath, {
+                uri: path,  // Use the `path` variable here
+                type: 'image/jpeg',  // Specify type as needed
+            });
+    
+        if (error) {
+            console.error('Error uploading image to storage:', error.message);
+            ToastAndroid.show(
+                'Failed to upload image to storage.',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
+            return;
+        }
+    
+        await saveImagePathInDatabase(data?.path);
+    };
+    
+    const saveImagePathInDatabase = async (path) => {
+        const activeEmail = await AsyncStorage.getItem('active_email');
+
+        const { data, error: updateError } = await supabase
+            .from('registered_user')
+            .update({ imagePath: path })
+            .eq('email', activeEmail);
+
+        if (updateError) {
+            console.error('Error updating imagePath in registered_user:', updateError.message);
+            ToastAndroid.show(
+                'Failed to save image path in database.',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
+        } else {
+            console.log('Image path updated successfully:', data);
+            ToastAndroid.show(
+                'Image path saved successfully!',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
+            navigation.goBack();
         }
     };
+
+
+
+
+
 
 
     const removeImage = () => {
@@ -149,7 +162,7 @@ const UserDetailScreen = ({ navigation }) => {
 
             <GradientButton
                 buttonText={'Next'}
-                onPress={saveImagePath}
+                onPress={()=>saveImagePath(imagePath)}
                 style={{ marginTop: hp(10) }}
             />
         </View>

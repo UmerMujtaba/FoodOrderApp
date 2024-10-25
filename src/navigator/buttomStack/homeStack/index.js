@@ -7,6 +7,7 @@ import SidesScreen from '../../../screens/buttom/sidesScreen';
 import DashboardScreen from '../../../screens/buttom/dashboardScreen';
 import { TransitionPresets } from '@react-navigation/stack';
 import { ScreenNames } from '../../../constants/string';
+import DessertScreen from '../../../screens/buttom/dessertScreen';
 
 
 const HomeStack = createNativeStackNavigator();
@@ -32,6 +33,7 @@ const Home = () => {
       <HomeStack.Screen name={ScreenNames.Fastfood} component={FastFoodScreen} options={navigationOptions} />
       <HomeStack.Screen name={ScreenNames.Drink} component={DrinkScreen} options={navigationOptions} />
       <HomeStack.Screen name={ScreenNames.Sides} component={SidesScreen} options={navigationOptions} />
+      <HomeStack.Screen name={ScreenNames.Desserts} component={DessertScreen} options={navigationOptions} />
     </HomeStack.Navigator>
   );
 };

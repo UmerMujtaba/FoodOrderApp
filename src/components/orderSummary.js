@@ -53,7 +53,7 @@ const OrderSummary = ({ cartItems, subTotal, calculateTotal, navigate }) => {
         activeOpacity={0.5}
         style={styles.ctaBtn(colors)}
         // onPress={() => navigate(ScreenNames.OrderConfirmation)}
-        onPress={() => navigate(ScreenNames.ReceiptScren)}
+        onPress={() => navigate(ScreenNames.ChoosePaymentScreen)}
       >
         <LinearGradientText
           colors={['#15BE77', '#53E88B']}

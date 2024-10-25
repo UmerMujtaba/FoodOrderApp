@@ -3,7 +3,7 @@
 //getting response from backend for notification service
 export const sendCallInvitation = async (recipientToken, channelName, recipientEmail) => {
     try {
-        const response = await fetch('http://10.2.2.170:3000/send-notification', {
+        const response = await fetch('http://10.2.2.163:3000/send-notification', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export const sendCallInvitation = async (recipientToken, channelName, recipientE
 
 export const sendCallDeclineInvitation = async (recipientToken, channelName, recipientEmail) => {
     try {
-        const response = await fetch('http://10.2.2.170:3000/send-notification', {
+        const response = await fetch('http://10.2.2.163:3000/send-notification', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

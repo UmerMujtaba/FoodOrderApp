@@ -154,7 +154,8 @@ const styles = StyleSheet.create({
     width: wp(100),
     height: rwp(350),
     backgroundColor: colors.modalColor,
-    borderRadius: 10,
+    borderTopRightRadius: 15,
+    borderTopLeftRadius: 15,
     paddingVertical: rhp(20), // Adjust as necessary
     paddingHorizontal: rwp(20),
     marginTop: rhp(15)

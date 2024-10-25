@@ -97,4 +97,45 @@ export const verifyOtp = async (setSession,value,phoneNumber) => {
 
 
 
+//fun to fetch order history for order History Screen
+export const fetchOrderHistory = async (setOrderHistory,setLoading) => {
+    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+    if (sessionError || !sessionData?.session) {
+        console.error("🚀 ~ Error fetching session or no session available:", sessionError);
+
+        setTimeout(() => {
+            navigateReset('AuthStack', { screen: ScreenNames.Login });
+        }, 2000);     
+        return;
+    }
+    setLoading(true);
+    try {
+        const { data: userData, error: userError } = await supabase.auth.getUser();
+
+        if (userError || !userData?.user) {
+            console.error("🚀 ~ Error fetching user:", userError);
+            return;
+        }
+
+        const userId = userData.user.id;
+
+        // Fetch order history for this specific user
+        const { data: orders, error } = await supabase
+            .from('order_history')
+            .select('*')
+            .eq('user_id', userId);
+
+        if (error) {
+            console.error("🚀 ~Error fetching order history:", error.message);
+        } else {
+            console.log("🚀 ~ HistoryOrderScreen ~ orderHistory:", orders)
+            setOrderHistory(orders);
+        }
+    } catch (err) {
+        console.error("🚀 ~ Unexpected error during order history fetch:", err);
+    }
+    setLoading(false);
+};
+
 

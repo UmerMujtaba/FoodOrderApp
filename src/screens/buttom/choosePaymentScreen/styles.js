@@ -2,20 +2,18 @@ import { StyleSheet } from "react-native";
 import fonts from "../../../constants/fonts";
 import { hp, rfs, rhp, rwp, width, wp } from "../../../constants/dimensions";
 
-export const styles = StyleSheet.create({
+export
+    const styles = StyleSheet.create({
         container: {
             flex: 1,
-
             paddingHorizontal: rwp(10),
             paddingVertical: rhp(10),
             marginLeft: rwp(5),
             marginRight: rwp(5),
         },
         appBar: {
-            // backgroundColor:'red',
             height: rhp(70),
             width: wp(90),
-            // marginTop: rhp(30),
             flexDirection: 'row',
             justifyContent: 'space-between'
 
@@ -32,7 +30,6 @@ export const styles = StyleSheet.create({
             justifyContent: 'center',
             borderRadius: 16,
             marginTop: hp(5),
-            //marginLeft: 10
         }),
         backImage: {
             resizeMode: 'contain',
@@ -49,55 +46,37 @@ export const styles = StyleSheet.create({
             fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold,
 
         }),
-        loaderContainer: {
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
+        optMainContainer: {
+            width: wp(90),
+            alignSelf: 'center',
+            marginTop: rhp(35),
+
         },
-        tile: (colors) => ({
+        optContainer: (colors) => ({
+            backgroundColor: colors.tabBackgroundColor,
+            height: rhp(65),
+            marginBottom: rhp(15),
+            borderRadius: 15,
+            justifyContent: 'space-between',
             flexDirection: 'row',
             alignItems: 'center',
-            marginBottom: rhp(25),
-            backgroundColor: colors.tabBackgroundColor,
-            paddingHorizontal: rwp(15),
-            paddingVertical: rhp(15),
-            borderRadius: 10,
-            elevation: 3,
+            paddingHorizontal: rwp(15)
         }),
-        image: {
-            width: rwp(100),
-            height: rhp(130),
-            resizeMode: 'cover',
-            borderRadius: 10,
-        },
-        textContainer: {
-            marginLeft: rwp(15),
-            flex: 1,
-        },
-        itemName: (colors) => ({
-            fontSize: rfs(20),
-            color: colors.text,
-            fontFamily: fonts.SF_PRO_TEXT.Spectral.Bold
-        }),
-        description: (colors) => ({
-            fontSize: rfs(16),
-            color: colors.text,
-            marginTop: rhp(6),
-            fontFamily: fonts.SF_PRO_TEXT.Spectral.Regular,
-            lineHeight: 20,
-        }),
-        price: (colors) => ({
-            fontSize: rfs(20),
-            color: colors.text,
-            // marginTop: rhp(10),
-            fontFamily: fonts.SF_PRO_TEXT.Spectral.SemiBold,
 
-        }),
-        noDataStyle:(colors)=> ({
-            textAlign: 'center',
+        optText: (colors) => ({
             fontFamily: fonts.SF_PRO_TEXT.Spectral.Medium,
-            fontSize: rfs(16),
-            color: colors.text
+            fontSize: rfs(19),
+            color: colors.text,
         }),
+        optImage: {
+            resizeMode: 'contain',
+            height: rhp(33),
+            width: rwp(33)
 
-    })
+        },
+        imgStyle2:{
+            resizeMode:'contain',
+            width:40,
+            height:40
+        }
+    });

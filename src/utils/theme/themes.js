@@ -2,7 +2,7 @@ export const lightTheme = {
   dark: false,
   colors: {
     background: '#fff',
-    text: '#000',
+    text: '#000000',
     tabBackgroundColor: '#f5f5f5',
     tabIconColor: 'green',
     primary: '#000',
@@ -19,7 +19,7 @@ export const darkTheme = {
   dark: true,
   colors: {
     background: '#000',
-    text: '#fff',
+    text: '#ffffff',
     tabBackgroundColor: '#3b3a3a',
     tabIconColor: 'lightgreen',
     primary: 'grey',
