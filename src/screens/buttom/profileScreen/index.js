@@ -15,7 +15,7 @@ const ProfileScreen = () => {
 
   const [errorMessage, setErrorMessage] = useState('');
   const [username, setUsername] = useState('Joseph');
-  const [fetchLoading, setFetchLoading] = useState(true); // Loading state for fetching user data
+  const [fetchLoading, setFetchLoading] = useState(true); 
   const [logoutLoading, setLogoutLoading] = useState(false);
   const { colors } = useTheme();
   const { scheme } = useColorScheme();
@@ -23,8 +23,8 @@ const ProfileScreen = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      setFetchLoading(true); // Reset loading state before fetching data
-      fetchUserName(setUsername, setFetchLoading); // Fetch user data every time the screen comes into focus
+      setFetchLoading(true); 
+      fetchUserName(setUsername, setFetchLoading); 
     }, [])
   );
 
@@ -38,7 +38,7 @@ const ProfileScreen = () => {
       if (imagePath) {
        
         const url = constructImageUrl(imagePath);
-        setImageUrl(url); // Set the image URL in state
+        setImageUrl(url); 
       }
     };
     
@@ -82,7 +82,7 @@ const ProfileScreen = () => {
             name={logoutLoading ? 'Logging Out...' : 'Logout'}
             onPress={!logoutLoading ? () => logout(setLogoutLoading, setErrorMessage) : null}
             style={styles.button}
-            disabled={logoutLoading}  // Disable button during loading
+            disabled={logoutLoading}  
           />
 
         </View>

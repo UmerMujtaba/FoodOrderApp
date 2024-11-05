@@ -56,15 +56,13 @@ const CardPaymentScreen = ({ navigation }) => {
 
   const saveOrderToSupabase = async () => {
     try {
-      // Check if a session exists
       const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
 
       if (sessionError || !sessionData?.session) {
         console.error("Error fetching session or no session available:", sessionError);
-        return; // Return or redirect to login if no session
+        return;
       }
 
-      // Fetch the current authenticated user
       const { data: userData, error: userError } = await supabase.auth.getUser();
 
       if (userError) {
@@ -78,7 +76,6 @@ const CardPaymentScreen = ({ navigation }) => {
         return;
       }
 
-      // Prepare cart items and insert into Supabase
       const orderItems = cartItems.map(item => ({
         user_id: userId,
         item_name: item.name,
@@ -135,10 +132,10 @@ const CardPaymentScreen = ({ navigation }) => {
 
   useEffect(() => {
     const initializeAndOpenSheet = async () => {
-      const initError = await initializePaymentSheet(); // Wait for the payment sheet to initialize
+      const initError = await initializePaymentSheet(); 
 
       if (!initError) {
-        await openPaymentSheet(); // Now, open the payment sheet
+        await openPaymentSheet();
       } else {
         console.log(`Error initializing payment sheet: ${initError.message}`);
         Alert.alert(`Error initializing payment sheet: ${initError.message}`);
@@ -181,15 +178,15 @@ const CardPaymentScreen = ({ navigation }) => {
       });
 
       if (error) {
-        return error; // Return the error to handle it in the useEffect
+        return error; 
       }
 
-      setLoading(true); // Set loading to true if initialization is successful
-      return null; // Return null if no error
+      setLoading(true); 
+      return null; 
 
     } catch (error) {
       Alert.alert(`Error initializing payment sheet: ${error.message}`);
-      return error; // Return the error to handle it in the useEffect
+      return error; 
     }
   };
 
@@ -208,7 +205,7 @@ const CardPaymentScreen = ({ navigation }) => {
         setTimeout(() => {
           dispatch(clearCart()); // Clear the cart
 
-        }, 5000); // Delay for 1 second
+        }, 3000); // Delay for 1 second
       }
 
     } catch (error) {
@@ -232,7 +229,7 @@ const CardPaymentScreen = ({ navigation }) => {
 
       <FlatList
         data={cartItems}
-        keyExtractor={(item, index) => index.toString()} // Assuming unique keys are provided by index
+        keyExtractor={(item, index) => index.toString()} 
         renderItem={renderItem}
         contentContainerStyle={styles.list}
       />

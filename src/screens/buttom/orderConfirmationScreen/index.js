@@ -13,14 +13,14 @@ import { navigate } from '../../../navigator/navigationRef';
 const OrderConfirmationScreenModal = ({ navigation }) => {
     const { colors } = useTheme();
     const [feedBack, setFeedBack] = useState(null);
-    const [isModalVisible, setIsModalVisible] = useState(true); // State for modal visibility
+    const [isModalVisible, setIsModalVisible] = useState(true); 
 
     return (
         <Modal
             visible={isModalVisible}
             transparent={true}
             animationType="slide"
-            onRequestClose={() => setIsModalVisible(false)} // Handle modal close
+            onRequestClose={() => setIsModalVisible(false)} 
         >
             <View style={styles.modalOverlay}>
 

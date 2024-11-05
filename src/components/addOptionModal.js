@@ -47,8 +47,8 @@ const AddOptionModal = ({ visible, onClose, onAddOption }) => {
     // Reset values when modal becomes visible
     useEffect(() => {
         if (visible) {
-            setSelectedPaymentMethod('Type'); // Reset dropdown to default
-            setSelectedIcon(null); // Reset icon selection to none
+            setSelectedPaymentMethod('Type'); 
+            setSelectedIcon(null); 
         }
     }, [visible]);
 
