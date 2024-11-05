@@ -11,7 +11,7 @@ import { useFocusEffect } from '@react-navigation/native';
 const SidesScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState({ type: '', price: '' });
-  const [tempPriceFilter, setTempPriceFilter] = useState('');   
+  const [tempPriceFilter, setTempPriceFilter] = useState('');
 
 
   const handleSearch = (query) => {
@@ -30,11 +30,11 @@ const SidesScreen = () => {
 
 
   const handleFilter = (newFilter) => {
-    setTempPriceFilter(newFilter.price); 
+    setTempPriceFilter(newFilter.price);
   };
 
   const handleApplyPriceFilter = () => {
-    setFilter((prev) => ({ ...prev, price: tempPriceFilter })); 
+    setFilter((prev) => ({ ...prev, price: tempPriceFilter }));
   };
 
 

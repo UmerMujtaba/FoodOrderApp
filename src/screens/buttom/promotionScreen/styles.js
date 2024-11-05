@@ -12,10 +12,8 @@ export default StyleSheet.create({
         marginRight: rwp(5),
     },
     appBar: {
-        // backgroundColor:'red',
         height: rhp(70),
         width: wp(90),
-        // marginTop: rhp(30),
         flexDirection: 'row',
         justifyContent: 'space-between'
 
@@ -32,7 +30,6 @@ export default StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 16,
         marginTop: hp(5),
-        //marginLeft: 10
     }),
     backImage: {
         resizeMode: 'contain',
